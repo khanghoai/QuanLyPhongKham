@@ -1,0 +1,92 @@
+.add-benhNhan-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", sans-serif;
+}
+
+.add-benhNhan-form h3 {
+  text-align: left;
+  margin-bottom: 25px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #2b3a67;
+}
+
+/* --- FORM GROUP --- */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+}
+
+.form-group input {
+  padding: 12px 14px;
+  font-size: 15px;
+  border: 1.4px solid #d0d7e2;
+  border-radius: 10px;
+  background: #fdfdfd;
+  transition: 0.2s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #4b7bec;
+  box-shadow: 0 0 5px rgba(75, 123, 236, 0.4);
+}
+
+/* --- BUTTON --- */
+.button {
+  width: 160px;
+  padding: 12px 15px;
+  margin: 10px auto;
+  display: block;
+
+  background: linear-gradient(135deg, #4b7bec, #3867d6);
+  border: none;
+  color: white;
+
+  font-size: 16px;
+  border-radius: 25px;
+  cursor: pointer;
+
+  transition: 0.25s;
+}
+
+.button:hover {
+  background: linear-gradient(135deg, #3867d6, #2d5dcc);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(56, 103, 214, 0.3);
+}
+
+.button:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+.nghi-viec{
+    background: #f00 !important;
+}
+
+.button-group {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.button-group .button {
+  flex: 1;
+  max-width: 180px;
+  margin: 0; 
+}

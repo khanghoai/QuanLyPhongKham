@@ -1,0 +1,117 @@
+.patient-container {
+  padding: 30px;
+  font-family: "Segoe UI", sans-serif;
+  background: #f5f7fb;
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.buttons input {
+  padding: 10px 15px;
+  border: 1px solid #d8dbe2;
+  background: white;
+  border-radius: 8px;
+  width: 260px;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.buttons input:focus {
+  border-color: #4b7cff;
+  box-shadow: 0 0 4px rgba(75, 124, 255, 0.5);
+}
+
+/* Buttons */
+.search-btn, .add-btn {
+  padding: 10px 18px;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 14px;
+  color: white;
+  transition: 0.2s;
+}
+
+.search-btn {
+  background: #4b7cff;
+}
+
+.search-btn:hover {
+  background: #2f63ff;
+}
+
+.add-btn {
+  background: #4ac76d;
+}
+
+.add-btn:hover {
+  background: #36b457;
+}
+
+/* Table */
+.table-container {
+  margin-top: 15px;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+thead tr {
+  background: #eef1f7;
+}
+
+thead th {
+  padding: 14px 10px;
+  text-align: left;
+  font-weight: 600;
+  color: #505a6b;
+}
+
+tbody tr {
+  border-bottom: 1px solid #f0f0f0;
+  transition: 0.15s;
+}
+
+tbody tr:hover {
+  background: #f9fbff;
+}
+
+tbody td {
+  padding: 14px 10px;
+  color: #333;
+}
+
+/* Action Button */
+.action-btn {
+  background: #4b7cff;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 14px;
+}
+
+.action-btn:hover {
+  background: #2f63ff;
+}

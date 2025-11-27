@@ -1,0 +1,106 @@
+.add-benhNhan-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", sans-serif;
+}
+
+.add-benhNhan-form h3 {
+  text-align: left;
+  margin-bottom: 25px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #2b3a67;
+}
+
+/* --- FORM GROUP --- */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+}
+
+.form-group input {
+  padding: 12px 14px;
+  font-size: 15px;
+  border: 1.4px solid #d0d7e2;
+  border-radius: 10px;
+  background: #fdfdfd;
+  transition: 0.2s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #4b7bec;
+  box-shadow: 0 0 5px rgba(75, 123, 236, 0.4);
+}
+
+/* --- BUTTON --- */
+.submit-btn {
+  width: 160px;
+  padding: 12px 15px;
+  margin: 10px auto;
+  display: block;
+
+  background: linear-gradient(135deg, #4b7bec, #3867d6);
+  border: none;
+  color: white;
+
+  font-size: 16px;
+  border-radius: 25px;
+  cursor: pointer;
+
+  transition: 0.25s;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(135deg, #3867d6, #2d5dcc);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(56, 103, 214, 0.3);
+}
+
+.submit-btn:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+/* --- BUTTON CONTAINER (2 NÚT DƯỚI) --- */
+button.submit-btn:nth-of-type(1) {
+  margin-top: 30px;
+}
+
+button.submit-btn:nth-of-type(2) {
+  background: linear-gradient(135deg, #20bf6b, #0fb64d);
+}
+
+button.submit-btn:nth-of-type(2):hover {
+  background: linear-gradient(135deg, #0fb64d, #0a9c3f);
+  box-shadow: 0 6px 14px rgba(15, 182, 77, 0.25);
+}
+
+.add-benhNhan-form textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  font-family: inherit;
+  background: #fafafa;
+}
+
+.add-benhNhan-form textarea:focus {
+  outline: none;
+  border-color: #6a8dff;
+  background: #fff;
+  box-shadow: 0 0 4px rgba(106, 141, 255, 0.4);
+}
