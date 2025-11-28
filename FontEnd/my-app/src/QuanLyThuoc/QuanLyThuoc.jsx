@@ -31,8 +31,8 @@ export default function QuanLyThuoc() {
     navigate("/ThemThuoc");
   };
 
-  const handleEdit = (nhanVien) =>{
-    navigate("/UpdateEmployee", {state : nhanVien})
+  const handleEdit = (medicine) =>{
+    navigate("/UpdateMedicine", {state : medicine})
   }
 
   const handleSearch = () => {

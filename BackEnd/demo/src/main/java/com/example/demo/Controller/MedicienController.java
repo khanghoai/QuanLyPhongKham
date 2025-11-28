@@ -28,6 +28,16 @@ public class MedicienController {
     @PostMapping("/addMedicine")
     public Thuoc addMedicine(@RequestBody Thuoc medicine) {
         return medicineService.addMedicine(medicine);
-    }    
+    }
     
+    @PostMapping("/updateMedicine")
+    public Thuoc updateMedicine(@RequestBody Thuoc medicine) {
+        return medicineService.updateMedicine(medicine);
+    }
+
+    @PostMapping("/deleteMedicine")
+    public Thuoc deleteMedicine(@RequestBody Thuoc medicine) {
+        return medicineService.deleteMedicine(medicine);
+    }
+
 }

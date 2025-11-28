@@ -89,14 +89,14 @@ export default function QuanLyLichHen() {
                 <td>{p.benhNhan.sdtBN}</td>
                 <td>{p.benhNhan.cccdBN}</td>
                 <td className="action-cell">
-                  {p.benh_an == null && (
+                  {p.benhNhan.xuatVien == 0 ? (
                     <button
                       className="patient-edit-btn"
                       onClick={() => handleAction("Sua", p)}
                     >
                       Cập Nhật
                     </button>
-                  )}
+                  ) : (<p>Đã xuất viện</p>) }
                 </td>
               </tr>
             ))}
