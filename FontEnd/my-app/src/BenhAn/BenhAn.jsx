@@ -7,6 +7,7 @@ export default function BenhAn() {
   const navigate = useNavigate();
   const location = useLocation();
   const [BenhAn, setBenhAn] = useState(location.state);
+
   const handleChange = (e) => {
     e.preventDefault();
     setBenhAn({ ...BenhAn, [e.target.name]: e.target.value });
@@ -20,7 +21,7 @@ export default function BenhAn() {
 
   const thanhToan = async (e) =>{
     e.preventDefault();
-    console.log("thanh toan") 
+    navigate("/ThanhToan", {state : BenhAn});
   }
 
   return (

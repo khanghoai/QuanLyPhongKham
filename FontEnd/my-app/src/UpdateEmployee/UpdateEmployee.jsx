@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./updateEmployee.css";
 import { postData } from "../api/api";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -7,8 +7,16 @@ export default function UpdateEmployee() {
   const navigate = useNavigate();
   const location = useLocation();
   const [nhanVien, setNhanVien] = useState(location.state);
+  const [checkaccount, setCheckAccount] = useState("");
 
-  const checkaccount = postData("http://localhost:8080/api/Account/checkAccount",nhanVien);
+  useEffect(() => {
+      const fetchCheckAccount = async () => {
+      const result = await postData("http://localhost:8080/api/Account/checkAccount", nhanVien);
+      setCheckAccount(result);
+    };
+    fetchCheckAccount();
+  })
+
 
   const handleChange = (e) => {
     e.preventDefault();

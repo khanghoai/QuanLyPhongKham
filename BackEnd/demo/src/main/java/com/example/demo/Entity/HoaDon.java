@@ -10,7 +10,9 @@ public class HoaDon {
     private int maHD;
     private double phiKham;
     private double tongTien;
-    private LocalDate ngayThanhToan;@ManyToOne
+    private LocalDate ngayThanhToan;
+    
+    @ManyToOne
     @JoinColumn(name = "MaBN")
     private BenhNhan benhNhan;
     
