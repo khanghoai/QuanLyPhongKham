@@ -1,117 +1,126 @@
 .patient-container {
-  padding: 30px;
-  font-family: "Segoe UI", sans-serif;
-  background: #f5f7fb;
-  min-height: 100vh;
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Header */
-.header {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 20px;
+.patient-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-.buttons {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.patient-search-input {
+    width: 260px;
+    padding: 10px 12px;
+    border: 1px solid #bbdefb;
+    border-radius: 6px;
+    outline: none;
+    font-size: 15px;
+    color: #1e3d59;
+    background: #f7fbff;
+    transition: 0.25s ease;
+    margin-right: 12px;
 }
 
-.buttons input {
-  padding: 10px 15px;
-  border: 1px solid #d8dbe2;
-  background: white;
-  border-radius: 8px;
-  width: 260px;
-  font-size: 14px;
-  transition: 0.2s;
+.patient-search-input:focus {
+    border-color: #42a5f5;
+    box-shadow: 0 0 6px rgba(66, 165, 245, 0.4);
 }
 
-.buttons input:focus {
-  border-color: #4b7cff;
-  box-shadow: 0 0 4px rgba(75, 124, 255, 0.5);
+.patient-search-btn {
+    padding: 10px 16px;
+    background: #0288d1;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    margin-right: 10px;
+    font-weight: 600;
+    transition: 0.25s ease;
 }
 
-/* Buttons */
-.search-btn, .add-btn {
-  padding: 10px 18px;
-  border: none;
-  cursor: pointer;
-  border-radius: 8px;
-  font-size: 14px;
-  color: white;
-  transition: 0.2s;
+.patient-search-btn:hover {
+    background: #0277bd;
 }
 
-.search-btn {
-  background: #4b7cff;
+.patient-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e3d59;
 }
 
-.search-btn:hover {
-  background: #2f63ff;
+.add-patient-btn {
+    padding: 10px 16px;
+    background: #1e88e5;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.25s ease;
+    font-weight: 600;
 }
 
-.add-btn {
-  background: #4ac76d;
+.add-patient-btn:hover {
+    background: #1565c0;
 }
 
-.add-btn:hover {
-  background: #36b457;
+.patient-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
 }
 
-/* Table */
-.table-container {
-  margin-top: 15px;
-  background: white;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+.patient-table th {
+    background: #e3f2fd;
+    color: #1e3d59;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid #bbdefb;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 15px;
+.patient-table td {
+    padding: 12px;
+    border-bottom: 1px solid #e0e0e0;
+    color: #333;
 }
 
-thead tr {
-  background: #eef1f7;
+.patient-table tbody tr:hover {
+    background: #f5faff;
 }
 
-thead th {
-  padding: 14px 10px;
-  text-align: left;
-  font-weight: 600;
-  color: #505a6b;
+.patient-edit-btn {
+    padding: 6px 12px;
+    background: #43a047;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.25s ease;
 }
 
-tbody tr {
-  border-bottom: 1px solid #f0f0f0;
-  transition: 0.15s;
+.patient-edit-btn:hover {
+    background: #2e7d32;
 }
 
-tbody tr:hover {
-  background: #f9fbff;
-}
-
-tbody td {
-  padding: 14px 10px;
-  color: #333;
-}
-
-/* Action Button */
-.action-btn {
-  background: #4b7cff;
-  color: white;
-  border: none;
-  padding: 8px 18px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.2s;
-  font-size: 14px;
-}
-
-.action-btn:hover {
-  background: #2f63ff;
+@media(max-width: 768px) {
+    .patient-container {
+        width: 92%;
+        padding: 15px;
+    }
+    .patient-table th, .patient-table td {
+        padding: 8px;
+    }
+    .patient-title {
+        font-size: 20px;
+    }
 }

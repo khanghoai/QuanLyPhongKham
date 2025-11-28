@@ -32,32 +32,35 @@ export default function Login() {
   };
 
   return (
-    <div className="login-container">
-      <form className="login-form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="username">Tài khoản</label>
-          <input
-            className="username"
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
+    <div className="login-wrapper">
+      <div className="login-container">
+        <form className="login-form" onSubmit={handleSubmit}>
+          <div className="login-form-group">
+            <label className="login-lable" htmlFor="username">Tài khoản</label>
+            <input
+              className="login-username login-input"
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
 
-        <div className="form-group">
-          <label htmlFor="password">Mật khẩu</label>
-          <input
-            className="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+          <div className="login-form-group">
+            <label className="login-lable" htmlFor="password">Mật khẩu</label>
+            <input
+              className="login-password login-input"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
 
-        <button type="submit" className="login-button">
-          Đăng nhập
-        </button>
-      </form>
+          <button type="submit" className="login-button">
+            Đăng nhập
+          </button>
+        </form>
+      </div>
     </div>
+    
   );
 }

@@ -53,30 +53,27 @@ export default function QuanLyLichHen() {
 
   return (
     <div className="patient-container">
-      <div className="header">
+      <div className="patient-header">
         <div className="buttons">
+          <h2 className="patient-title">Quản lý bệnh nhân</h2>
           <input
+            className="patient-search-input"
             type="text"
             placeholder="Nhập tên cần tìm..."
             value={searchText}
             onChange={e => setSearchText(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "8px",
-              marginBottom: "10px",
-              borderRadius: "4px",
-            }}/>
-          <button className="search-btn" onClick={handleSearch}>
+            />
+          <button className="patient-search-btn" onClick={handleSearch}>
             Tìm kiếm
           </button>
-          <button className="add-btn" onClick={handleAddAppointment}>
-            Tạo lịch hẹn
+          <button className="add-patient-btn" onClick={handleAddAppointment}>
+            Thêm bệnh nhân
           </button>
         </div>
       </div>
 
-      <div className="table-container">
-        <table>
+      <div className="patient-container">
+        <table className="patient-table">
           <thead>
             <tr>
               <th>Tên Bệnh Nhân</th>
@@ -94,7 +91,7 @@ export default function QuanLyLichHen() {
                 <td className="action-cell">
                   {p.benh_an == null && (
                     <button
-                      className="action-btn"
+                      className="patient-edit-btn"
                       onClick={() => handleAction("Sua", p)}
                     >
                       Cập Nhật
@@ -103,14 +100,6 @@ export default function QuanLyLichHen() {
                 </td>
               </tr>
             ))}
-
-            {benhNhans.length === 0 && (
-              <tr>
-                <td colSpan="6" style={{ textAlign: "center" }}>
-                  Không có dữ liệu nhân viên
-                </td>
-              </tr>
-            )}
           </tbody>
         </table>
       </div>

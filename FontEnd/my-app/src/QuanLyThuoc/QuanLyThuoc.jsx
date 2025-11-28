@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use, useContext } from "react";
 import "./QuanLyThuoc.css";
 import { useNavigate } from "react-router-dom";
 
@@ -6,6 +6,8 @@ export default function QuanLyThuoc() {
   const [medicine, setMedicine] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [filterMedicine, setfilterMedicine] = useState([]);
+  const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,6 +18,7 @@ export default function QuanLyThuoc() {
       })
       .then((data) => {
         setMedicine(data);
+        setfilterMedicine(data)
         setLoading(false);
       })
       .catch((err) => {
@@ -32,20 +35,47 @@ export default function QuanLyThuoc() {
     navigate("/UpdateEmployee", {state : nhanVien})
   }
 
+  const handleSearch = () => {
+    if(searchText == ""){
+      setfilterMedicine(medicine);
+    }
+    else{
+      const filtered = medicine.filter( p =>
+        searchText.includes(p.tenThuoc)
+      );
+      setfilterMedicine(filtered);
+    }
+  };
+
   if (loading) return <p>Đang tải dữ liệu...</p>;
   if (error) return <p style={{ color: "red" }}>Lỗi: {error}</p>;
 
   return (
-    <div className="employee-container">
-      <div className="header">
-        <h2>Danh Sách Nhân Viên</h2>
-        <button className="add-btn" onClick={handleAdd}>
+    <div className="medicine-container">
+      <div className="medicine-header">
+        <h2 className="medicine-title">Danh sách thuốc</h2>
+        <input
+          className="medicine-search-input "
+          type="text"
+          placeholder="Nhập tên cần tìm..."
+          value={searchText}
+          onChange={e => setSearchText(e.target.value)}
+          style={{
+            width: "100%",
+            padding: "8px",
+            marginBottom: "10px",
+            borderRadius: "4px",
+          }}/>
+        <button className="medicine-search-btn" onClick={handleSearch}>
+          Tìm kiếm
+        </button>
+        <button className="add-medicine-btn" onClick={handleAdd}>
           Thêm thuốc
         </button>
       </div>
 
-      <div className="table-container">
-        <table>
+      <div className="medicine-container">
+        <table className="medicine-table ">
           <thead>
             <tr>
               <th>Tên thuốc</th>
@@ -55,27 +85,19 @@ export default function QuanLyThuoc() {
             </tr>
           </thead>
           <tbody>
-            {medicine.map((med) => (
+            {filterMedicine.map((med) => (
               <tr key={med.maThuoc}>
                 <td>{med.tenThuoc}</td>
                 <td>{med.giaNhap}</td>
                 <td>{med.soLuong}</td>
                 <td>{med.noiNhap}</td>
                 <td>
-                  <button className="edit-btn" onClick={() => handleEdit(med)}>
+                  <button className="medicine-edit-btn" onClick={() => handleEdit(med)}>
                     Chỉnh sửa
                   </button>
                 </td>
               </tr>
             ))}
-
-            {medicine.length === 0 && (
-              <tr>
-                <td colSpan="6" style={{ textAlign: "center" }}>
-                  Không có thuốc
-                </td>
-              </tr>
-            )}
           </tbody>
         </table>
       </div>

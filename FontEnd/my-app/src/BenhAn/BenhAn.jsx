@@ -25,13 +25,14 @@ export default function BenhAn() {
   }
 
   return (
-    <div className="add-benhNhan-container">
-      <form className="add-benhNhan-form" onSubmit={handleSubmit}>
-        <h3>Bệnh án</h3>
+    <div className="benh-an-container">
+      <form className="benh-an-form" onSubmit={handleSubmit}>
+        <h3 className="benh-an-title">Bệnh án</h3>
 
-        <div className="form-group">
-          <label>Tên bệnh nhân</label>
+        <div className="benh-an-form-group">
+          <label className="benh-an-lable">Tên bệnh nhân</label>
           <input
+            className="benh-an-input"
             type="text"
             name="TenBN"
             value={BenhAn.benhNhan.hoTenBN || ""}
@@ -39,9 +40,10 @@ export default function BenhAn() {
           />
         </div>
 
-        <div className="form-group">
-          <label>Triệu chứng</label>
+        <div className="benh-an-form-group">
+          <label className="benh-an-lable">Triệu chứng</label>
           <input
+            className="benh-an-input"
             type="text"
             name="benhAn"
             value={BenhAn.benhAn || ""}
@@ -49,9 +51,10 @@ export default function BenhAn() {
           />
         </div>
 
-        <div className="form-group">
-          <label>Ngày khám</label>
+        <div className="benh-an-form-group">
+          <label className="benh-an-lable">Ngày khám</label>
           <input
+            className="benh-an-input"
             type="date"
             name="ngayKham"
             value={BenhAn.ngayKham || ""}
@@ -59,9 +62,10 @@ export default function BenhAn() {
           />
         </div>
 
-        <div className="form-group">
-          <label>Trị bệnh</label>
+        <div className="benh-an-form-group">
+          <label className="benh-an-lable">Trị bệnh</label>
           <textarea
+            className="benh-an-text-area"
             name="triBenh"
             value={BenhAn.triBenh || ""}
             onChange={handleChange}
@@ -70,9 +74,10 @@ export default function BenhAn() {
           />
         </div>
 
-        <div className="form-group">
-          <label>Bác sĩ</label>
+        <div className="benh-an-form-group">
+          <label className="benh-an-lable">Bác sĩ</label>
           <input
+            className="benh-an-input"
             type="text"
             name="maNV"
             value={BenhAn.maNV || ""}
@@ -80,10 +85,10 @@ export default function BenhAn() {
           />
         </div>
 
-        <button type="submit" className="submit-btn">
+        <button type="submit" className="benh-an-update benh-an-button">
           Cập Nhật
         </button>
-        <button className="submit-btn" onClick={thanhToan}>
+        <button className="benh-an-thanh-toan benh-an-button" onClick={thanhToan}>
           Thanh Toán
         </button>
       </form>
