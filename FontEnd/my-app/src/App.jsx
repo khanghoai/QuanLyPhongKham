@@ -13,6 +13,7 @@ import BenhAn from './BenhAn/BenhAn'
 import UpdateEmployee from './UpdateEmployee/UpdateEmployee'
 import CreateAccount from './CreateAccount/CreateAccount'
 import QuanLyThuoc from './QuanLyThuoc/QuanLyThuoc'
+import ThanhToan from './ThanhToan/ThanhToan'
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
       <Route path="/UpdateEmployee" element={<UpdateEmployee />} />
       <Route path="/CreateAccount" element={<CreateAccount />} />
       <Route path='/QuanLyThuoc' element={<QuanLyThuoc />} />
+      <Route path='/ThanhToan' element={<ThanhToan />} />
     </Routes>
   )
 }

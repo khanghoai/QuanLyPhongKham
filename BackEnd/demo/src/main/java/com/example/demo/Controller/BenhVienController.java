@@ -47,6 +47,4 @@ public class BenhVienController {
     public BenhAn updatePatient(@RequestBody BenhAn benhAn){
         return benhNhanService.updatePatient(benhAn); 
     }
-
-    
 }

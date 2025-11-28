@@ -1,4 +1,6 @@
 package com.example.demo.Entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -8,11 +10,14 @@ public class ChiTietHoaDon {
     private int maCTHD;
     private int soLuong;
     private double tien;
+
     @ManyToOne
     @JoinColumn(name = "MaHD")
+    @JsonIgnore
     private HoaDon hoaDon;
+
     @ManyToOne
-    @JoinColumn(name = "MaThuoc")
+    @JoinColumn(name = "maThuoc")
     private Thuoc thuoc;
 
     public int getSoLuong() {

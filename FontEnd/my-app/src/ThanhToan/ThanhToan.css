@@ -1,0 +1,95 @@
+.patient-container {
+    max-width: 900px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 25px 35px;
+    border-radius: 15px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.15);
+    font-family: "Segoe UI", Tahoma, sans-serif;
+
+    display: flex;
+    gap: 30px;
+}
+
+/* ===== BÊN TRÁI: BẢNG ===== */
+.table-container {
+    flex: 3;
+}
+
+.table-container h3 {
+    font-size: 26px;
+    margin-bottom: 15px;
+    color: #2d4a8a;
+    font-weight: 700;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+}
+
+thead tr {
+    background-color: #2d4a8a;
+    color: white;
+}
+
+thead th {
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.chiTietHoaDon tr {
+    background: #fafafa;
+}
+
+.chiTietHoaDon tr:nth-child(even) {
+    background: #f0f4ff;
+}
+
+.chiTietHoaDon td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* ===== BÊN PHẢI: TỔNG TIỀN + NÚT ===== */
+
+.bill-summary {
+    flex: 1;
+    background: #f7f9ff;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid #e0e6f8;
+}
+
+.bill-summary h4 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #2d4a8a;
+}
+
+.bill-total {
+    font-size: 28px;
+    font-weight: bold;
+    color: #d12f2f;
+    margin-bottom: 20px;
+}
+
+.pay-btn {
+    width: 100%;
+    padding: 15px 0;
+    border: none;
+    background: #5c7bff;
+    color: white;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.pay-btn:hover {
+    background: #3f5be0;
+}
