@@ -22,13 +22,13 @@ export default function AddEmployee() {
   };
 
   return (
-    <div className="add-employee-container">
-      <form className="add-employee-form" onSubmit={handleSubmit}>
-        <h3>Thêm nhân viên</h3>
-
-        <div className="form-group">
-          <label>Tên Nhân Viên</label>
+    <div className="add-emp-container">
+      <form className="add-emp-form" onSubmit={handleSubmit}>
+        <h3 className="add-emp-title">Thêm nhân viên</h3>
+        <div className="add-emp-form-group">
+          <label className="add-emp-lable">Tên Nhân Viên</label>
           <input
+            class="add-emp-input"
             type="text"
             name="hoTenNV"
             value={employee.hoTenNV}
@@ -36,9 +36,10 @@ export default function AddEmployee() {
           />
         </div>
 
-        <div className="form-group">
-          <label>Số điện thoại</label>
+        <div className="add-emp-form-group">
+          <label className="add-emp-lable">Số điện thoại</label>
           <input
+            class="add-emp-input"
             type="text"
             name="sdtNV"
             value={employee.sdtNV}
@@ -46,9 +47,10 @@ export default function AddEmployee() {
           />
         </div>
 
-        <div className="form-group">
-          <label>CCCD</label>
+        <div className="add-emp-form-group">
+          <label className="add-emp-lable">CCCD</label>
           <input
+            class="add-emp-input"
             type="text"
             name="cccdNV"
             value={employee.cccdNV}
@@ -56,9 +58,10 @@ export default function AddEmployee() {
           />
         </div>
 
-        <div className="form-group">
-          <label>Giới tính</label>
+        <div className="add-emp-form-group">
+          <label className="add-emp-lable">Giới tính</label>
           <input
+            class="add-emp-input"
             type="text"
             name="gioiTinhNV"
             value={employee.gioiTinhNV}
@@ -66,9 +69,10 @@ export default function AddEmployee() {
           />
         </div>
 
-        <div className="form-group">
-          <label>Ngày sinh</label>
+        <div className="add-emp-form-group">
+          <label className="add-emp-lable">Ngày sinh</label>
           <input
+            class="add-emp-input"
             type="date"
             name="ngaySinhNV"
             value={employee.ngaySinhNV}
@@ -76,19 +80,25 @@ export default function AddEmployee() {
           />
         </div>
 
-        <div className="form-group">
-          <label>Chức vụ</label>
-          <input
-            type="text"
+        <div className="add-emp-form-group">
+          <label className="add-emp-lable">Chức vụ</label>
+          <select
+            className="add-emp-input"
             name="chucVuNV"
             value={employee.chucVuNV}
-            onChange={handleChange}
-          />
+            onChange={handleChange}>
+            <option value="">Chọn chức vụ</option>
+            <option value="bacSi">Bác sĩ</option>
+            <option value="leTan">Lễ Tân</option>
+            <option value="nhaThuoc">Nhà thuốc</option>
+          </select>
         </div>
-
-        <button type="submit" className="submit-btn">
-          Thêm
-        </button>
+        <div className="add-emp-button-group">
+          <button type="submit" className="add-emp-button">
+            Thêm
+          </button>
+        </div>
+        
       </form>
     </div>
   );

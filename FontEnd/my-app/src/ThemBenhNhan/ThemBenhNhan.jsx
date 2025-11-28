@@ -24,13 +24,14 @@ export default function ThemBenhNhan() {
   };
 
   return (
-    <div className="add-benhNhan-container">
-      <form className="add-benhNhan-form" onSubmit={handleSubmit}>
-        <h3>Thêm bệnh nhân</h3>
+    <div className="add-patient-container">
+      <form className="add-patient-form" onSubmit={handleSubmit}>
+        <h3 className="add-patient-title">Thêm bệnh nhân</h3>
 
-        <div className="form-group">
-          <label>Họ Tên</label>
+        <div className="add-patient-form-group">
+          <label className="add-patient-lable">Họ Tên</label>
           <input
+            className="add-patient-input"
             type="text"
             name="hoTenBN"
             value={benhNhan.hoTenBN}
@@ -38,9 +39,10 @@ export default function ThemBenhNhan() {
           />
         </div>
 
-        <div className="form-group">
-          <label>Số điện thoại</label>
+        <div className="add-patient-form-group">
+          <label className="add-patient-lable">Số điện thoại</label>
           <input
+            className="add-patient-input"
             type="text"
             name="sdtBN"
             value={benhNhan.sdtBN}
@@ -48,9 +50,10 @@ export default function ThemBenhNhan() {
           />
         </div>
 
-        <div className="form-group">
-          <label>CCCD</label>
+        <div className="add-patient-form-group">
+          <label className="add-patient-lable">CCCD</label>
           <input
+            className="add-patient-input"
             type="text"
             name="cccdBN"
             value={benhNhan.cccdBN}
@@ -58,9 +61,10 @@ export default function ThemBenhNhan() {
           />
         </div>
 
-        <div className="form-group">
-          <label>Giới tính</label>
+        <div className="add-patient-form-group">
+          <label className="add-patient-lable">Giới tính</label>
           <input
+            className="add-patient-input"
             type="text"
             name="gioiTinhBN"
             value={benhNhan.gioiTinhBN}
@@ -68,19 +72,20 @@ export default function ThemBenhNhan() {
           />
         </div>
 
-        <div className="form-group">
-          <label>Ngày sinh</label>
+        <div className="add-patient-form-group">
+          <label className="add-patient-lable">Ngày sinh</label>
           <input
+            className="add-patient-input"
             type="date"
             name="ngaySinhBN"
             value={benhNhan.ngaySinhBN}
             onChange={handleChange}
           />
         </div>
-
-        <button type="submit" className="submit-btn">
+        <button type="submit" className="add-patient-button">
           Thêm
         </button>
+        
       </form>
     </div>
   );

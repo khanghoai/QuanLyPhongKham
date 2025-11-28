@@ -4,8 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 export default function EmployeeList() {
   const [employees, setEmployees] = useState([]);
+  const [filterEmp, setfilterEmp] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,6 +18,7 @@ export default function EmployeeList() {
       })
       .then((data) => {
         setEmployees(data);
+        setfilterEmp(data);
         setLoading(false);
       })
       .catch((err) => {
@@ -23,6 +26,18 @@ export default function EmployeeList() {
         setLoading(false);
       });
   }, []);
+
+  const handleSearch = () => {
+    if(searchText == ""){
+      setfilterEmp(employees);
+    }
+    else{
+      const filtered = employees.filter( p =>
+        p.cccdNV == searchText
+      );
+      setfilterEmp(filtered);
+    }
+  };
 
   const handleAdd = () => {
     navigate("/ThemNhanVien");
@@ -37,46 +52,53 @@ export default function EmployeeList() {
 
   return (
     <div className="employee-container">
-      <div className="header">
-        <h2>Danh Sách Nhân Viên</h2>
-        <button className="add-btn" onClick={handleAdd}>
+      <div className="employee-header">
+        <h2 className="employee-title">Danh Sách Nhân Viên</h2>
+        <input
+          className="emp-search-input"
+          type="text"
+          placeholder="Nhập tên cần tìm..."
+          value={searchText}
+          onChange={e => setSearchText(e.target.value)}
+          style={{
+            width: "100%",
+            padding: "8px",
+            marginBottom: "10px",
+            borderRadius: "4px",
+          }}/>
+        <button className="emp-search-btn" onClick={handleSearch}>
+          Tìm kiếm
+        </button>
+        <button className="add-employee-btn" onClick={handleAdd}>
           Thêm nhân viên
         </button>
       </div>
 
-      <div className="table-container">
-        <table>
+      <div className="employee-container">
+        <table className="employee-table">
           <thead>
             <tr>
               <th>Tên Nhân Viên</th>
               <th>Chức vụ</th>
               <th>SDT</th>
               <th>CCCD</th>
-              <th>Hành động</th>
+              <th>Cập nhật</th>
             </tr>
           </thead>
           <tbody>
-            {employees.map((emp) => (
+            {filterEmp.map((emp) => (
               <tr key={emp.maNV}>
                 <td>{emp.hoTenNV}</td>
                 <td>{emp.chucVuNV}</td>
                 <td>{emp.sdtNV}</td>
                 <td>{emp.cccdNV}</td>
                 <td>
-                  <button className="edit-btn" onClick={() => handleEdit(emp)}>
+                  <button className="employee-edit-btn" onClick={() => handleEdit(emp)}>
                     Chỉnh sửa
                   </button>
                 </td>
               </tr>
             ))}
-
-            {employees.length === 0 && (
-              <tr>
-                <td colSpan="6" style={{ textAlign: "center" }}>
-                  Không có dữ liệu nhân viên
-                </td>
-              </tr>
-            )}
           </tbody>
         </table>
       </div>

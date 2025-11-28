@@ -15,7 +15,7 @@ export default function UpdateEmployee() {
       setCheckAccount(result);
     };
     fetchCheckAccount();
-  })
+  },[])
 
 
   const handleChange = (e) => {
@@ -43,13 +43,14 @@ export default function UpdateEmployee() {
   }
 
   return (
-    <div className="add-benhNhan-container">
-      <form className="add-benhNhan-form" onSubmit={handleSubmit}>
-        <h3>Nhân Viên</h3>
+    <div className="up-emp-container">
+      <form className="up-emp-form" onSubmit={handleSubmit}>
+        <h3 className="up-emp-title">Nhân Viên</h3>
 
-        <div className="form-group">
-          <label>Họ tên</label>
+        <div className="up-emp-form-group">
+          <label className="up-emp-lable">Họ tên</label>
           <input
+            className="up-emp-input"
             type="text"
             name="hoTenNV"
             value={nhanVien.hoTenNV || ""}
@@ -57,9 +58,10 @@ export default function UpdateEmployee() {
           />
         </div>
 
-        <div className="form-group">
-          <label>Số điện thoại</label>
+        <div className="up-emp-form-group">
+          <label className="up-emp-lable">Số điện thoại</label>
           <input
+            className="up-emp-input"
             type="text"
             name="sdtNV"
             value={nhanVien.sdtNV || ""}
@@ -67,9 +69,10 @@ export default function UpdateEmployee() {
           />
         </div>
 
-        <div className="form-group">
-          <label>CCCD</label>
+        <div className="up-emp-form-group">
+          <label className="up-emp-lable">CCCD</label>
           <input
+            className="up-emp-input"
             type="text"
             name="cccdNV"
             value={nhanVien.cccdNV || ""}
@@ -77,9 +80,10 @@ export default function UpdateEmployee() {
           />
         </div>
 
-        <div className="form-group">
-          <label>Giới tính</label>
+        <div className="up-emp-form-group">
+          <label className="up-emp-lable">Giới tính</label>
           <input
+            className="up-emp-input"
             type="text"
             name="gioiTinhNV"
             value={nhanVien.gioiTinhNV || ""}
@@ -87,24 +91,25 @@ export default function UpdateEmployee() {
           />
         </div>
 
-        <div className="form-group">
-          <label>Ngày Sinh</label>
+        <div className="up-emp-form-group">
+          <label className="up-emp-lable">Ngày Sinh</label>
           <input
+            className="up-emp-input"
             type="date"
             name="ngaySinhNV"
             value={nhanVien.ngaySinhNV || ""}
             onChange={handleChange}
           />
         </div>
-        <div className="button-group">
-          <button type="submit" className="button">
+        <div className="up-emp-button-group">
+          <button type="submit" className="up-emp-update up-emp-button">
             Cập Nhật
           </button>
-          <button className="nghi-viec button" onClick={fireEmployee}>
+          <button className="up-emp-nghi-viec up-emp-button" onClick={fireEmployee}>
             Nghỉ việc
           </button>
           {!checkaccount ? (
-            <button className="button" onClick={createAccount}>
+            <button className="up-emp-create-account up-emp-button" onClick={createAccount}>
               Tạo tài khoản
             </button>
           ) : null}

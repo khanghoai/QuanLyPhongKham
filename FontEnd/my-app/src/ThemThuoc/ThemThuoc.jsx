@@ -25,54 +25,65 @@ export default function ThemThuoc() {
 
   return (
     <div className="add-medicine-container">
-      <h2>Thêm thuốc</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Tên thuốc</label>
-          <input type="text"
+      <form className="add-medicine-form" onSubmit={handleSubmit}>
+      <h2 className="add-medicine-title">Thêm thuốc</h2>
+        <div className="add-medicine-form-group">
+          <label className="add-medicine-lable">Tên thuốc</label>
+          <input
+            className="add-medicine-input"
+            type="text"
             placeholder="Nhập tên thuốc"
             onChange={handleChange}
             name="tenThuoc"
             value={medicine.tenThuoc} />
         </div>
 
-        <div className="form-group">
-          <label>Nhà cung cấp</label>
-          <input type="text"
+        <div className="add-medicine-form-group">
+          <label className="add-medicine-lable">Nhà cung cấp</label>
+          <input
+            className="add-medicine-input"
+            type="text"
             placeholder="Nhập tên nhà cung cấp"
             onChange={handleChange}
             name="noiNhap"
             value={medicine.noiNhap} />
         </div>
 
-        <div className="form-group">
-          <label>Giá Nhập</label>
-          <input type="number"
+        <div className="add-medicine-form-group">
+          <label className="add-medicine-lable">Giá Nhập</label>
+          <input
+            className="add-medicine-input"
+            type="number"
             placeholder="Nhập giá nhập"
             onChange={handleChange}
             name="giaNhap"
             value={medicine.giaNhap} />
         </div>
 
-        <div className="form-group">
-          <label>Giá Bán</label>
-          <input type="number"
+        <div className="add-medicine-form-group">
+          <label className="add-medicine-lable">Giá Bán</label>
+          <input
+            className="add-medicine-input"
+            type="number"
             placeholder="Nhập giá bán"
             onChange={handleChange}
             name="giaBan"
             value={medicine.giaBan} />
         </div>
 
-        <div className="form-group">
-          <label>Số lượng</label>
-          <input type="number"
+        <div className="add-medicine-form-group">
+          <label className="add-medicine-lable">Số lượng</label>
+          <input
+            className="add-medicine-input"
+            type="number"
             placeholder="Nhập số lượng"
             onChange={handleChange}
             name="soLuong"
-            value={medicine.soLuong} />
+            value={medicine.soLuong}/>
         </div>
-
-        <button type="submit" className="submit-btn">Thêm</button>
+        <div className="add-medicine-button-group">
+          <button type="submit" className="add-medicine-button">Thêm</button>
+        </div>
       </form>
     </div>
   );
