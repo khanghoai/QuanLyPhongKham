@@ -14,6 +14,7 @@ import UpdateEmployee from './UpdateEmployee/UpdateEmployee'
 import CreateAccount from './CreateAccount/CreateAccount'
 import QuanLyThuoc from './QuanLyThuoc/QuanLyThuoc'
 import ThanhToan from './ThanhToan/ThanhToan'
+import UpdateMedicine from './UpdateMedicine/UpdateMedicine'
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
       <Route path="/CreateAccount" element={<CreateAccount />} />
       <Route path='/QuanLyThuoc' element={<QuanLyThuoc />} />
       <Route path='/ThanhToan' element={<ThanhToan />} />
+      <Route path='/UpdateMedicine' element={<UpdateMedicine/>}></Route>
     </Routes>
   )
 }

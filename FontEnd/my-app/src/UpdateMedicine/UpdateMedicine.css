@@ -1,0 +1,86 @@
+.up-medicine-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+    background: #f5faff;
+    min-height: 100vh;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.up-medicine-form {
+    width: 450px;
+    background: #ffffff;
+    padding: 35px 40px;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(0, 120, 180, 0.15);
+    border-top: 4px solid #1e88e5;
+}
+
+.up-medicine-title {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #0d47a1;
+}
+
+.up-medicine-form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+}
+
+.up-medicine-lable {
+    margin-bottom: 6px;
+    font-size: 15px;
+    color: #0d47a1;
+    font-weight: 600;
+}
+
+.up-medicine-input {
+    padding: 10px 12px;
+    border: 1.8px solid #90caf9;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    transition: 0.25s ease;
+}
+
+.up-medicine-input:focus {
+    border-color: #1e88e5;
+    box-shadow: 0 0 6px rgba(30, 136, 229, 0.3);
+}
+
+.up-medicine-button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    gap: 10px;
+}
+
+.up-medicine-button {
+    flex: 1;
+    padding: 10px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s;
+    color: white;
+}
+
+.up-medicine-update {
+    background: #1e88e5;
+}
+.up-medicine-update:hover {
+    background: #1565c0;
+}
+
+.up-medicine-delete {
+    background: #e53935;
+}
+.up-medicine-delete:hover {
+    background: #c62828;
+}

@@ -18,80 +18,43 @@ export default function ThanhToan(){
         getThanhToan();
     }, []);
 
-    const handleAddAppointment = async () => {
+    const payHandle = async () =>{
         const res = await postData("http://localhost:8080/api/hoaDon/xuatVien",hoaDon.benhNhan)
-        navigate("/QuanLyBenhNhan");
-    };
-
-    const handleAction = (action,benhAn) => {
-        if(action == "Sua"){
-            navigate("/BenhAn",{state : benhAn})
-        }
-    };
+        navigate("/QuanLyLichHen")
+    }
 
     return (
-        // <div className="patient-container">
-        //     <div className="table-container">
-        //         <h3>Hóa đơn</h3>
-        //         {/* <p>{hoaDon?.benhNhan.hoTenBN}</p> */}
-        //         <table>
-        //         <thead>
-        //             <tr>
-        //             <th>Tên thuốc</th>
-        //             <th>Số lượng</th>
-        //             <th>Tổng</th>
-        //             </tr>
-        //         </thead>
-        //         <tbody>
-        //             {hoaDon?.chiTietHoaDons?.map((p) => (
-        //                 <tr key={p.maCTHD}>
-        //                     <td>{p.thuoc.tenThuoc}</td>
-        //                     <td>{p.soLuong}</td>
-        //                     <td>{p.tien}</td>
-        //                 </tr>
-        //             ))}
-        //         </tbody>
-        //         </table>
-        //         <p>Tổng tiền {hoaDon?.tongTien}</p>
-        //         <button className="edit-btn" onClick={() => handleEdit(emp)}>
-        //             Thanh toán
-        //         </button>
-        //     </div>
-        // </div>
-        <div className="patient-container">
-
-        <div className="table-container">
-            <h3>Hóa đơn</h3>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Tên thuốc</th>
-                        <th>Số lượng</th>
-                        <th>Tổng</th>
-                    </tr>
-                </thead>
-                <tbody className="chiTietHoaDon">
-                    {hoaDon?.chiTietHoaDons?.map((p, index) => (
-                        <tr key={index}>
-                            <td>{p.thuoc.tenThuoc}</td>
-                            <td>{p.soLuong}</td>
-                            <td>{p.tien}</td>
+        <div className="hoa-don-container">
+            <div className="hoa-don-table-container">
+                <h3 className="hoa-don-title">Hóa đơn</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tên thuốc</th>
+                            <th>Số lượng</th>
+                            <th>Tổng</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody className="chiTietHoaDon">
+                        {hoaDon?.chiTietHoaDons?.map((p, index) => (
+                            <tr key={index}>
+                                <td>{p.thuoc.tenThuoc}</td>
+                                <td>{p.soLuong}</td>
+                                <td>{p.tien}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+
+            <div className="bill-summary">
+                <h4>Tổng tiền</h4>
+                <div className="bill-total">{hoaDon?.tongTien}</div>
+
+                <button className="pay-btn" onClick={payHandle}>
+                    Thanh toán
+                </button>
+            </div>
         </div>
-
-        <div className="bill-summary">
-            <h4>Tổng tiền</h4>
-            <div className="bill-total">{hoaDon?.tongTien}</div>
-
-            <button className="pay-btn">
-                Thanh toán
-            </button>
-        </div>
-
-    </div>
     );
 }

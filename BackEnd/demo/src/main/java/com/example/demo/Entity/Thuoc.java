@@ -13,7 +13,14 @@ public class Thuoc {
     private String noiNhap;
     private int soLuong;
     private double giaNhap;
+    private double giaBan;
 
+    public double getGiaBan() {
+        return giaBan;
+    }
+    public void setGiaBan(double giaBan) {
+        this.giaBan = giaBan;
+    }
     public String getTenThuoc() {
         return tenThuoc;
     }
@@ -38,8 +45,6 @@ public class Thuoc {
     public void setGiaNhap(double giaNhap) {
         this.giaNhap = giaNhap;
     }
-    @OneToMany(mappedBy = "thuoc", cascade = CascadeType.ALL)
-    private List<ChiTietHoaDon> chiTietHoaDons;
 
     // Getter Setter
     public int getMaThuoc() { return maThuoc; }

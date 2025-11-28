@@ -20,4 +20,13 @@ public class MedicineService {
     public Thuoc addMedicine(Thuoc medicine){
         return medicineRepository.save(medicine);
     }
+
+    public Thuoc updateMedicine(Thuoc medicine){
+        return medicineRepository.save(medicine);
+    }
+
+    public Thuoc deleteMedicine(Thuoc medicine){
+        medicineRepository.delete(medicine);
+        return new Thuoc();
+    }
 }
