@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./ThanhToan.css";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
-import { postData } from "../api/api";
+import { postData } from "../api/apiMethod";
 
 export default function ThanhToan(){
     const [hoaDon, setHoaDon] = useState();

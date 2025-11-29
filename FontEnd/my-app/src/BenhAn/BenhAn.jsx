@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./BenhAn.css";
-import { postData } from "../api/api";
+import { postData } from "../api/apiMethod";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export default function BenhAn() {

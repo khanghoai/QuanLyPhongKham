@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "../api/api.js"
+import "../api/apiMethod.js"
 import "./Login.css"
-import { getData, postData } from "../api/api.js";
+import { getData, postData } from "../api/apiMethod.js";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Login() {

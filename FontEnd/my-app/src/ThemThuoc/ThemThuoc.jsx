@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./ThemThuoc.css";
-import { postData } from "../api/api";
+import { postData } from "../api/apiMethod";
 
 export default function ThemThuoc() {
   const [medicine, setMedicine] = useState({

@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.demo.Entity.Account;
 import com.example.demo.Entity.NhanVien;
+import com.example.demo.Entity.PhongKham;
 import com.example.demo.Repository.AccountRepository;
 import com.example.demo.Repository.NhanVienRepository;
+import com.example.demo.Repository.PhongKhamRepository;
 
 @Service
 public class AccountService {
@@ -17,6 +19,8 @@ public class AccountService {
     private AccountRepository AccountRepository;
     @Autowired
     private NhanVienRepository NhanVienRepository;
+    @Autowired
+    private PhongKhamRepository phongKhamRepository;
 
     public Account taoAccount(Account tk) {
         return AccountRepository.save(tk);
@@ -58,27 +62,11 @@ public class AccountService {
         return NhanVienRepository.save(nv);
     }
 
+    public List<PhongKham> getAllPhongKham(){
+        return phongKhamRepository.findAll();
+    }
 
-
-    // public Account timAccount(String tenDN) {
-    //     return AccountRepository.findByTenDN(tenDN);
-    // }
-
-    // public boolean Login(String username, String password){
-    //     return AccountRepository.findByTenDNAndMatKhau(username, password).isPresent();
-    // }
-
-    // public void xoaAccount(int maTK) {
-    //     AccountRepository.deleteById(maTK);
-    // }
-
-    // public Account suaAccount(int maTK, Account AccountMoi) {
-    //     Optional<Account> optional = AccountRepository.findById(maTK);
-    //     if (optional.isPresent()) {
-    //         Account tk = optional.get();
-    //         tk.setMatKhau(AccountMoi.getMatKhau());
-    //         return AccountRepository.save(tk); 
-    //     }
-    //     return null;
-    // }
+    public PhongKham addPhongKham(PhongKham phongKham){
+        return phongKhamRepository.save(phongKham);
+    }
 }

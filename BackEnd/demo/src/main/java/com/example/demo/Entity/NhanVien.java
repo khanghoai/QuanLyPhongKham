@@ -3,6 +3,8 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class NhanVien {
     @Id
@@ -16,6 +18,19 @@ public class NhanVien {
     private LocalDate ngaySinhNV;
     private String chucVuNV;
     private boolean nghiViec;
+
+    @ManyToOne
+    @JoinColumn(name = "maPhongBan")
+    @JsonIgnore
+    private PhongKham phongKham;
+
+    public PhongKham getPhongKham() {
+        return phongKham;
+    }
+
+    public void setPhongBan(PhongKham phongKham) {
+        this.phongKham = phongKham;
+    }
 
     public int getMaNV() {
         return maNV;

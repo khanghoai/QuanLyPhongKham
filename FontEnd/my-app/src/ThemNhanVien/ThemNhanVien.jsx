@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./ThemNhanVien.css";
-import { postData } from "../api/api";
+import { postData } from "../api/apiMethod";
 
 export default function AddEmployee() {
   const [employee, setEmployee] = useState({

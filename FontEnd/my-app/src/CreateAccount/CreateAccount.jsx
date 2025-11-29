@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./CreateAccount.css";
-import "../api/api.js"
-import { getData, postData } from "../api/api.js";
+import "../api/apiMethod.js"
+import { getData, postData } from "../api/apiMethod.js";
 import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 
 export default function CreateAccount() {
