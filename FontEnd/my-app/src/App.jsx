@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg'
 import Login from'./Login/Login'
 import QuanLyNhanVien from './QuanLyNhanVien/QuanLyNhanVien'
 import './App.css'
-import ThemNhanVien from './ThemNhanVien/ThemNhanVien'
+import EmployeeDetail from './EmployeeDetail/EmployeeDetail'
 import QuanLyLichHen from './QuanLyLichHen/QuanLyLichHen'
 import { BrowserRouter , Routes, Route, useLocation } from "react-router-dom";
 import ThemThuoc from './ThemThuoc/ThemThuoc'
@@ -16,6 +16,7 @@ import QuanLyThuoc from './QuanLyThuoc/QuanLyThuoc'
 import ThanhToan from './ThanhToan/ThanhToan'
 import UpdateMedicine from './UpdateMedicine/UpdateMedicine'
 import QuanLyPhongKham from './QuanLyPhongKham/QuanLyPhongKham'
+import AdminPage from './AdminPage/AdminPage'
 
 function App() {
   const location = useLocation();
@@ -31,9 +32,9 @@ function App() {
       )}
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/EmployeeDetail" element={<EmployeeDetail />} />
         <Route path="/quanLyNhanVien" element={<QuanLyNhanVien />} />
         <Route path="/QuanLyLichHen" element={<QuanLyLichHen />} />
-        <Route path="/ThemNhanVien" element={<ThemNhanVien />} />
         <Route path="/ThemThuoc" element={<ThemThuoc />} />
         <Route path="/ThemBenhNhan" element={<ThemBenhNhan />} />
         <Route path="/BenhAn" element={<BenhAn />} />
@@ -43,6 +44,7 @@ function App() {
         <Route path='/ThanhToan' element={<ThanhToan />} />
         <Route path='/UpdateMedicine' element={<UpdateMedicine/>} />
         <Route path='/QuanLyPhongKham' element={<QuanLyPhongKham/>} />
+        <Route path='/AdminPage' element={<AdminPage/>} />
       </Routes>
     </>
     

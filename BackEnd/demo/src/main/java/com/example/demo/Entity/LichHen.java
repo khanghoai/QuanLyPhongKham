@@ -31,5 +31,5 @@ public class LichHen {
 
     @ManyToOne
     @JoinColumn(name = "MaNV")
-    private NhanVien nhanVien;
+    private Employee nhanVien;
 }

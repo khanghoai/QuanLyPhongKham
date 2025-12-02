@@ -3,6 +3,7 @@ import "../api/apiMethod.js"
 import "./Login.css"
 import { getData, postData } from "../api/apiMethod.js";
 import { useLocation, useNavigate } from "react-router-dom";
+import { LOGIN } from "../api/api.js";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -16,18 +17,15 @@ export default function Login() {
       username: username,
       password: password
     };
-    const res = await postData("http://localhost:8080/api/Account/login",body);
-    if(res.chucVuNV == 'quanLy'){
-      navigate("/quanLyNhanVien");
-    }
-    else if(res.chucVuNV == 'leTan'){
-      navigate("/QuanLyLichHen");
-    }
-    else if(res.chucVuNV == 'nhaThuoc'){
-      navigate("/QuanLyThuoc")
-    }
-    else{
-      console.log("Sai tài khoản hoặc mật khẩu")
+    const res = await postData(LOGIN,body);
+    console.log(res);
+    switch(res.employeePosition){
+      case 'admin':
+        navigate("/AdminPage", {state : res.employeePosition});
+        break;
+      default :
+        alert("Sai tài khoản hoặc mật khẩu");
+        break;
     }
   };
 

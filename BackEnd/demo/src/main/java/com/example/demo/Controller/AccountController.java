@@ -10,10 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.DTO.AccountDTO;
 import com.example.demo.Entity.Account;
-import com.example.demo.Entity.NhanVien;
-import com.example.demo.Entity.PhongKham;
+import com.example.demo.Entity.Employee;
 import com.example.demo.Service.AccountService;
 
 
@@ -26,52 +24,39 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @PostMapping("/createAccount")
-    public Account createAccount(@RequestBody Account tk) {
-        return accountService.taoAccount(tk);
-    }
+    // @PostMapping("/createAccount")
+    // public Account createAccount(@RequestBody Account tk) {
+    //     return accountService.addAccount(tk);
+    // }
 
     @PostMapping("/login")
-    public NhanVien login(@RequestBody AccountDTO tk) {
-        return accountService.Login(tk.getUsername(), tk.getPassword());
+    public Employee login(@RequestBody Account account) {
+        return accountService.login(account.getUsername(), account.getPassword());
     }
 
-    @GetMapping("/getAllNhanVien")
-    public List<NhanVien> getAllNhanViens() {
-        return accountService.getAllNhanVien();
+    @GetMapping("/getEmployees")
+    public List<Employee> getEmployees() {
+        return accountService.getEmployees();
     }
 
-    @PostMapping("/AddNhanVien")
-    public NhanVien AddNhanVien(@RequestBody NhanVien nhanVien) {
-        accountService.AddNhanVien(nhanVien);
-        return new NhanVien();
+    @PostMapping("/addEmployee")
+    public Employee addEmployee(@RequestBody Employee employee) {
+        return accountService.addEmployee(employee);
     }
 
-    @PostMapping("/fireEmployee")
-    public NhanVien fireEmployee(@RequestBody NhanVien nv) {
-        accountService.fireEmployee(nv);
-        return new NhanVien();
+    @PostMapping("/setEmployeeQuit")
+    public Employee setEmployeeQuit(@RequestBody Employee employee) {
+        return accountService.setEmployeeQuit(employee);
     }
     
-    @PostMapping("/checkAccount")
-    public Boolean checkAccount(@RequestBody NhanVien nhanVien) {
-        return accountService.checkAccount(nhanVien);
-    }
+    // @PostMapping("/checkAccount")
+    // public Boolean checkAccount(@RequestBody Employee nhanVien) {
+    //     return accountService.checkAccount(nhanVien);
+    // }
     
     @PostMapping("/updateEmployee")
-    public NhanVien updateEmployee(@RequestBody NhanVien nv) {
-        return accountService.updateEmployee(nv);
+    public Employee updateEmployee(@RequestBody Employee employee) {
+        return accountService.updateEmployee(employee);
     }
-
-    @GetMapping("/getAllPhongKham")
-    public List<PhongKham> getAllPhongKham() {
-        return accountService.getAllPhongKham();
-    }
-
-    @PostMapping("/themPhongKham")
-    public PhongKham themPhongKham(@RequestBody PhongKham phongKham) {
-        return accountService.addPhongKham(phongKham);
-    }
-    
     
 }

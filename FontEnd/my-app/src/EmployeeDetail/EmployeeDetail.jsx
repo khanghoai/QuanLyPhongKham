@@ -1,18 +1,30 @@
-import React, { useState } from "react";
-import "./ThemNhanVien.css";
+import React, { useEffect, useState } from "react";
+import './EmployeeDetail.css'
 import { postData } from "../api/apiMethod";
-import { useNavigate } from "react-router-dom";
+import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
+import { ADD_EMPLOYEE } from "../api/api";
 
 export default function AddEmployee() {
   const [employee, setEmployee] = useState({
-    hoTenNV: "",
-    sdtNV: "",
-    cccdNV: "",
-    gioiTinhNV: "",
-    ngaySinhNV: "",
-    chucVuNV: "",
+    employeeName: "",
+    employeePhone: "",
+    employeeCCCD: "",
+    employeeSex: "",
+    employeeBirth: "",
+    employeePosition: "",
   });
   const navigate = useNavigate();
+  const location = useLocation();
+  const {position, emp, fun} = location.state || {};
+
+  useEffect(() => {
+    if(position != 'admin' && position != 'nhanSu'){
+      navigate("/");
+    }
+    if(fun == "update"){
+      setEmployee(emp);
+    }
+  },[])
 
   const handleChange = (e) => {
     setEmployee({ ...employee, [e.target.name]: e.target.value });
@@ -20,7 +32,7 @@ export default function AddEmployee() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await postData("http://localhost:8080/api/Account/AddNhanVien",employee)
+    const res = await postData(ADD_EMPLOYEE,employee)
     navigate("/quanLyNhanVien");
   };
 
@@ -33,8 +45,8 @@ export default function AddEmployee() {
           <input
             class="add-emp-input"
             type="text"
-            name="hoTenNV"
-            value={employee.hoTenNV}
+            name="employeeName"
+            value={employee.employeeName}
             onChange={handleChange}
           />
         </div>
@@ -43,9 +55,9 @@ export default function AddEmployee() {
           <label className="add-emp-lable">Số điện thoại</label>
           <input
             class="add-emp-input"
-            type="text"
-            name="sdtNV"
-            value={employee.sdtNV}
+            type="number"
+            name="employeePhone"
+            value={employee.employeePhone}
             onChange={handleChange}
           />
         </div>
@@ -55,8 +67,8 @@ export default function AddEmployee() {
           <input
             class="add-emp-input"
             type="text"
-            name="cccdNV"
-            value={employee.cccdNV}
+            name="employeeCCCD"
+            value={employee.employeeCCCD}
             onChange={handleChange}
           />
         </div>
@@ -66,8 +78,8 @@ export default function AddEmployee() {
           <input
             class="add-emp-input"
             type="text"
-            name="gioiTinhNV"
-            value={employee.gioiTinhNV}
+            name="employeeSex"
+            value={employee.employeeSex}
             onChange={handleChange}
           />
         </div>
@@ -77,8 +89,8 @@ export default function AddEmployee() {
           <input
             class="add-emp-input"
             type="date"
-            name="ngaySinhNV"
-            value={employee.ngaySinhNV}
+            name="employeeBirth"
+            value={employee.employeeBirth}
             onChange={handleChange}
           />
         </div>
@@ -87,8 +99,8 @@ export default function AddEmployee() {
           <label className="add-emp-lable">Chức vụ</label>
           <select
             className="add-emp-input"
-            name="chucVuNV"
-            value={employee.chucVuNV}
+            name="employeePosition"
+            value={employee.employeePosition}
             onChange={handleChange}>
             <option value="">Chọn chức vụ</option>
             <option value="bacSi">Bác sĩ</option>
