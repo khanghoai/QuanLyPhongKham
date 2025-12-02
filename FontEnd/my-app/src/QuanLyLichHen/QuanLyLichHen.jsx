@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./QuanLyLichHen.css";
 import { Navigate, useNavigate } from "react-router-dom";
-import { postData } from "../api/api";
+import { postData } from "../api/apiMethod";
 
 export default function QuanLyLichHen() {
   const [benhNhans, setBenhNhans] = useState([]);

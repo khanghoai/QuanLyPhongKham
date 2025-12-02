@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./CreateAccount.css";
-import "../api/api.js"
-import { getData, postData } from "../api/api.js";
+import "../api/apiMethod.js"
+import { getData, postData } from "../api/apiMethod.js";
 import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 
 export default function CreateAccount() {
@@ -36,7 +36,7 @@ export default function CreateAccount() {
             />
           </div>
 
-          <div className="form-group">
+          <div className="create-account-form-group">
             <label className="create-account-label" htmlFor="password">Mật khẩu</label>
             <input
               className="create-account-input"

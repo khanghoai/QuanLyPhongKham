@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.DTO.AccountDTO;
 import com.example.demo.Entity.Account;
 import com.example.demo.Entity.NhanVien;
+import com.example.demo.Entity.PhongKham;
 import com.example.demo.Service.AccountService;
+
 
 
 @RestController
@@ -22,65 +24,54 @@ import com.example.demo.Service.AccountService;
 public class AccountController {
 
     @Autowired
-    private AccountService AccountService;
+    private AccountService accountService;
 
     @PostMapping("/createAccount")
     public Account createAccount(@RequestBody Account tk) {
-        return AccountService.taoAccount(tk);
+        return accountService.taoAccount(tk);
     }
 
     @PostMapping("/login")
     public NhanVien login(@RequestBody AccountDTO tk) {
-        return AccountService.Login(tk.getUsername(), tk.getPassword());
+        return accountService.Login(tk.getUsername(), tk.getPassword());
     }
 
     @GetMapping("/getAllNhanVien")
     public List<NhanVien> getAllNhanViens() {
-        return AccountService.getAllNhanVien();
+        return accountService.getAllNhanVien();
     }
 
     @PostMapping("/AddNhanVien")
-    public void AddNhanVien(@RequestBody NhanVien nhanVien) {
-        AccountService.AddNhanVien(nhanVien);
+    public NhanVien AddNhanVien(@RequestBody NhanVien nhanVien) {
+        accountService.AddNhanVien(nhanVien);
+        return new NhanVien();
     }
 
     @PostMapping("/fireEmployee")
     public NhanVien fireEmployee(@RequestBody NhanVien nv) {
-        AccountService.fireEmployee(nv);
+        accountService.fireEmployee(nv);
         return new NhanVien();
     }
     
     @PostMapping("/checkAccount")
     public Boolean checkAccount(@RequestBody NhanVien nhanVien) {
-        return AccountService.checkAccount(nhanVien);
+        return accountService.checkAccount(nhanVien);
     }
     
     @PostMapping("/updateEmployee")
     public NhanVien updateEmployee(@RequestBody NhanVien nv) {
-        return AccountService.updateEmployee(nv);
+        return accountService.updateEmployee(nv);
+    }
+
+    @GetMapping("/getAllPhongKham")
+    public List<PhongKham> getAllPhongKham() {
+        return accountService.getAllPhongKham();
+    }
+
+    @PostMapping("/themPhongKham")
+    public PhongKham themPhongKham(@RequestBody PhongKham phongKham) {
+        return accountService.addPhongKham(phongKham);
     }
     
     
-
-    // @GetMapping("/test")
-    // public Account getMethodName() {
-    //     return AccountService.timAccount("admin");
-    // }
-    
-    
-
-    // @DeleteMapping("/{id}")
-    // public void xoaAccount(@PathVariable int id) {
-    //     AccountService.xoaAccount(id);
-    // }
-
-    // @PutMapping("/{id}")
-    // public ResponseEntity<?> suaAccount(@PathVariable int id, @RequestBody Account AccountMoi) {
-    //     Account tk = AccountService.suaAccount(id, AccountMoi);
-    //     if (tk != null) {
-    //         return ResponseEntity.ok(tk);
-    //     } else {
-    //         return ResponseEntity.status(404).body("Không tìm thấy tài khoản!");
-    //     }
-    // }
 }

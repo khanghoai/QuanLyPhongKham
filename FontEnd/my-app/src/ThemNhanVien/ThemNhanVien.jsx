@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./ThemNhanVien.css";
-import { postData } from "../api/api";
+import { postData } from "../api/apiMethod";
+import { useNavigate } from "react-router-dom";
 
 export default function AddEmployee() {
   const [employee, setEmployee] = useState({
@@ -11,6 +12,7 @@ export default function AddEmployee() {
     ngaySinhNV: "",
     chucVuNV: "",
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setEmployee({ ...employee, [e.target.name]: e.target.value });
@@ -18,7 +20,8 @@ export default function AddEmployee() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await postData("http://localhost:8080/api/Account/AddNhanVien",employee)
+    const res = await postData("http://localhost:8080/api/Account/AddNhanVien",employee)
+    navigate("/quanLyNhanVien");
   };
 
   return (

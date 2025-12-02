@@ -1,8 +1,6 @@
 package com.example.demo.Service;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,7 +63,7 @@ public class HoaDonService {
                 ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon();
                 chiTietHoaDon.setThuoc(thuoc);
                 chiTietHoaDon.setSoLuong(Integer.parseInt(med[1].trim()));
-                chiTietHoaDon.setTien(thuoc.getGiaNhap()*1.2*chiTietHoaDon.getSoLuong());
+                chiTietHoaDon.setTien(thuoc.getGiaBan()*chiTietHoaDon.getSoLuong());
                 hoaDon.setTongTien(hoaDon.getTongTien()+chiTietHoaDon.getTien());
                 chiTietHoaDon.setHoaDon(hoaDon);
                 chiTietHoaDons.add(chiTietHoaDon);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./updateMedicine.css";
-import { postData } from "../api/api";
+import { postData } from "../api/apiMethod";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export default function UpdateMedicine() {
