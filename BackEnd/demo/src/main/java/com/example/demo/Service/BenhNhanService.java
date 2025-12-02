@@ -18,12 +18,13 @@ public class BenhNhanService {
     @Autowired
     BenhAnRepository benhAnRepository;
 
-    public void taoBenhNhan(BenhNhan benhNhan) {
+    public BenhNhan taoBenhNhan(BenhNhan benhNhan) {
         benhNhan.setXuatVien(false);
         BenhNhan result = benhNhanRepository.save(benhNhan);
         BenhAn benhAn = new BenhAn();
         benhAn.setBenhNhan(result);
         benhAnRepository.save(benhAn);
+        return benhNhan;
     }
 
     public BenhAn updatePatient(BenhAn benhAn){

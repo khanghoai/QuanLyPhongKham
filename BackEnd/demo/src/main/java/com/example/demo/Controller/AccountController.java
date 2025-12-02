@@ -42,8 +42,9 @@ public class AccountController {
     }
 
     @PostMapping("/AddNhanVien")
-    public void AddNhanVien(@RequestBody NhanVien nhanVien) {
+    public NhanVien AddNhanVien(@RequestBody NhanVien nhanVien) {
         accountService.AddNhanVien(nhanVien);
+        return new NhanVien();
     }
 
     @PostMapping("/fireEmployee")

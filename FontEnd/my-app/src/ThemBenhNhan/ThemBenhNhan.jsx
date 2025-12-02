@@ -19,7 +19,7 @@ export default function ThemBenhNhan() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await postData("http://localhost:8080/api/benhVien/themBenhNhan",benhNhan)
+    const res = await postData("http://localhost:8080/api/benhVien/themBenhNhan",benhNhan)
     navigate("/QuanLyLichHen");
   };
 

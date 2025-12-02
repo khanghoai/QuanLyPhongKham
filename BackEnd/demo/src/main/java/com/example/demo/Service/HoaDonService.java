@@ -63,7 +63,7 @@ public class HoaDonService {
                 ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon();
                 chiTietHoaDon.setThuoc(thuoc);
                 chiTietHoaDon.setSoLuong(Integer.parseInt(med[1].trim()));
-                chiTietHoaDon.setTien(thuoc.getGiaNhap()*1.2*chiTietHoaDon.getSoLuong());
+                chiTietHoaDon.setTien(thuoc.getGiaBan()*chiTietHoaDon.getSoLuong());
                 hoaDon.setTongTien(hoaDon.getTongTien()+chiTietHoaDon.getTien());
                 chiTietHoaDon.setHoaDon(hoaDon);
                 chiTietHoaDons.add(chiTietHoaDon);

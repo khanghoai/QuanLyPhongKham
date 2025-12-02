@@ -24,8 +24,8 @@ public class BenhVienController {
     BenhNhanService benhNhanService;
 
     @PostMapping("/themBenhNhan")
-    public void themBenhNhan(@RequestBody BenhNhan benhNhan) {
-        benhNhanService.taoBenhNhan(benhNhan);
+    public BenhNhan themBenhNhan(@RequestBody BenhNhan benhNhan) {
+        return benhNhanService.taoBenhNhan(benhNhan);
     }
 
     @GetMapping("/getAllBenhNhan")
