@@ -5,20 +5,21 @@ import jakarta.persistence.*;
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idAccount;
+    private int accountID;
 
     private String username;
     private String password;
+    
     @OneToOne
-    @JoinColumn(name = "MaNV")
-    private NhanVien nhanVien;
+    @JoinColumn(name = "employeeID")
+    private Employee employee;
 
-    public int getIdAccount() {
-        return idAccount;
+    public int getAccountID() {
+        return accountID;
     }
 
-    public void setIdAccount(int idAccount) {
-        this.idAccount = idAccount;
+    public void setAccountID(int accountID) {
+        this.accountID = accountID;
     }
 
     public String getUsername() {
@@ -37,12 +38,13 @@ public class Account {
         this.password = password;
     }
 
-      public NhanVien getNhanVien() {
-        return nhanVien;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setNhanVien(NhanVien nhanVien) {
-        this.nhanVien = nhanVien;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
+
 }
 

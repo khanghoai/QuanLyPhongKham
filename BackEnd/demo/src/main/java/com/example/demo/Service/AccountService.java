@@ -1,72 +1,64 @@
 package com.example.demo.Service;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.example.demo.Entity.Account;
-import com.example.demo.Entity.NhanVien;
-import com.example.demo.Entity.PhongKham;
+import com.example.demo.Entity.Employee;
 import com.example.demo.Repository.AccountRepository;
-import com.example.demo.Repository.NhanVienRepository;
-import com.example.demo.Repository.PhongKhamRepository;
+import com.example.demo.Repository.EmployeeRepository;
 
 @Service
 public class AccountService {
 
     @Autowired
-    private AccountRepository AccountRepository;
+    private AccountRepository accountRepository;
     @Autowired
-    private NhanVienRepository NhanVienRepository;
-    @Autowired
-    private PhongKhamRepository phongKhamRepository;
-
-    public Account taoAccount(Account tk) {
-        return AccountRepository.save(tk);
-    }
-
-    public NhanVien Login(String username, String password){
-        if(AccountRepository.findByUsernameAndPassword(username, password).isPresent()){
-            return NhanVienRepository.findById(AccountRepository.findByUsernameAndPassword(username, password).get().getNhanVien().getMaNV()).get();
+    private EmployeeRepository employeeRepository;
+    
+    public Employee login(String username, String password){
+        if(accountRepository.findByUsernameAndPassword(username, password).isPresent()){
+            return employeeRepository.findById(accountRepository.findByUsernameAndPassword(username, password).get().getEmployee().getEmployeeID()).get();
         }
-        return new NhanVien() ;
+        return new Employee() ;
     }
     
-    public List<NhanVien> getAllNhanVien(){
-        return NhanVienRepository.findByNghiViecFalse();
+    public List<Employee> getEmployees(){
+        return employeeRepository.findByEmployeeQuitFalse();
     }
 
-    public void AddNhanVien(NhanVien nhanVien){
-        nhanVien.setNghiViec(false);
-        NhanVienRepository.save(nhanVien);
+    public Employee addEmployee(Employee employee){
+        employee.setEmployeeQuit(false);
+        employee = employeeRepository.save(employee);
+        Account account = new Account();
+        account.setUsername(employee.getEmployeeCCCD());
+        account.setPassword(employee.getEmployeeBirth().format(DateTimeFormatter.ofPattern("d/M/yyyy")).toString().replace("/",""));
+        account.setEmployee(employee);
+        accountRepository.save(account);
+        return employee;
     }
 
-    public void fireEmployee(NhanVien nhanVien){
-        Optional<Account> account = AccountRepository.findByNhanVien(nhanVien);
-        if(account.isPresent()){
-            AccountRepository.delete(account.get());
-        }
-        nhanVien.setNghiViec(true);
-        NhanVienRepository.save(nhanVien);
+    public Employee setEmployeeQuit(Employee employee){
+        employee.setAccount(null);
+        employee.setEmployeeQuit(true);
+        return employeeRepository.save(employee);
     }
 
-    public boolean checkAccount(NhanVien nv){
-        if(AccountRepository.findByNhanVien(nv).isPresent()){
-            return true;
-        }
-        return false;
-    }
+    // public Account addAccount(Account account){
+    //     return accountRepository.save(account);
+    // }
 
-    public NhanVien updateEmployee(NhanVien nv){
-        return NhanVienRepository.save(nv);
-    }
+    // public boolean checkAccount(Employee nv){
+    //     if(AccountRepository.findByNhanVien(nv).isPresent()){
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
-    public List<PhongKham> getAllPhongKham(){
-        return phongKhamRepository.findAll();
-    }
-
-    public PhongKham addPhongKham(PhongKham phongKham){
-        return phongKhamRepository.save(phongKham);
+    public Employee updateEmployee(Employee employee){
+        return employeeRepository.save(employee);
     }
 }

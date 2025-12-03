@@ -14,7 +14,7 @@ public class BenhAn {
 
     @ManyToOne
     @JoinColumn(name = "maNV")
-    private NhanVien nhanVien;
+    private Employee nhanVien;
 
     @Lob
     private String benhAn;
@@ -32,8 +32,8 @@ public class BenhAn {
     public BenhNhan getBenhNhan() { return benhNhan; }
     public void setBenhNhan(BenhNhan benhNhan) { this.benhNhan = benhNhan; }
 
-    public NhanVien getNhanVien() { return nhanVien; }
-    public void setNhanVien(NhanVien nhanVien) { this.nhanVien = nhanVien; }
+    public Employee getNhanVien() { return nhanVien; }
+    public void setNhanVien(Employee nhanVien) { this.nhanVien = nhanVien; }
 
     public String getBenhAn() { return benhAn; }
     public void setBenhAn(String benhAn) { this.benhAn = benhAn; }
