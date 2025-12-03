@@ -21,7 +21,14 @@ export default function Login() {
     console.log(res);
     switch(res.employeePosition){
       case 'admin':
-        navigate("/AdminPage", {state : res.employeePosition});
+        navigate("/AdminPage", {state : 'admin'});
+        break;
+      case 'nhanSu':
+        navigate("/Employee", {
+          state : {
+            position : 'nhanSu'
+          }
+        })
         break;
       default :
         alert("Sai tài khoản hoặc mật khẩu");

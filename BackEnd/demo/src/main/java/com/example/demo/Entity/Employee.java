@@ -24,7 +24,7 @@ public class Employee {
     @JsonIgnore
     private Room room;
 
-    @OneToOne(mappedBy = "employee")
+    @OneToOne(mappedBy = "employee",cascade = CascadeType.ALL,orphanRemoval = true)
     @JsonIgnore
     private Account account;
 

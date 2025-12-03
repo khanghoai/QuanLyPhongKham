@@ -24,11 +24,6 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    // @PostMapping("/createAccount")
-    // public Account createAccount(@RequestBody Account tk) {
-    //     return accountService.addAccount(tk);
-    // }
-
     @PostMapping("/login")
     public Employee login(@RequestBody Account account) {
         return accountService.login(account.getUsername(), account.getPassword());
@@ -48,11 +43,6 @@ public class AccountController {
     public Employee setEmployeeQuit(@RequestBody Employee employee) {
         return accountService.setEmployeeQuit(employee);
     }
-    
-    // @PostMapping("/checkAccount")
-    // public Boolean checkAccount(@RequestBody Employee nhanVien) {
-    //     return accountService.checkAccount(nhanVien);
-    // }
     
     @PostMapping("/updateEmployee")
     public Employee updateEmployee(@RequestBody Employee employee) {

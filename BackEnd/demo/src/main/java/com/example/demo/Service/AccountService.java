@@ -1,5 +1,6 @@
 package com.example.demo.Service;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,15 +35,14 @@ public class AccountService {
         employee = employeeRepository.save(employee);
         Account account = new Account();
         account.setUsername(employee.getEmployeeCCCD());
-        account.setPassword(employee.getEmployeeBirth().toString());
+        account.setPassword(employee.getEmployeeBirth().format(DateTimeFormatter.ofPattern("d/M/yyyy")).toString().replace("/",""));
         account.setEmployee(employee);
         accountRepository.save(account);
         return employee;
     }
 
     public Employee setEmployeeQuit(Employee employee){
-        Account account = accountRepository.findByEmployee(employee);
-        accountRepository.delete(account);
+        employee.setAccount(null);
         employee.setEmployeeQuit(true);
         return employeeRepository.save(employee);
     }
