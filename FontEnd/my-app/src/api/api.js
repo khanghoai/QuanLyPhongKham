@@ -14,3 +14,4 @@ export const CREATE_ACCOUNT = ACCOUNT + "/createAccount"
 const ROOM = LINK + "/Room"
 
 export const ADD_ROOM = ROOM + "/addRoom"
+export const GET_ROOMS = ROOM + "/getRooms"

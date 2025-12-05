@@ -1,3 +1,9 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .quan-ly-header {
   width: 100%;
   background: #2a9df4;
@@ -6,11 +12,11 @@
   gap: 30px;
   align-items: center;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
+  height: 56px;
 }
 
-.quan-ly-header a {
+
+.quan-ly-header button {
   color: white;
   font-size: 17px;
   text-decoration: none;
@@ -19,13 +25,30 @@
   padding: 6px 14px;
   border-radius: 8px;
   transition: 0.25s ease;
+  background-color: #2a9df4;
+  border: none;
+  cursor: pointer;
 }
 
-.quan-ly-header a:hover {
+.quan-ly-header button:hover {
   background: rgba(255, 255, 255, 0.25);
   transform: translateY(-2px);
 }
 
 .quan-ly-header a:active {
   transform: scale(0.94);
+}
+
+.employee-log-out{
+    position: fixed;
+    right: 20px;
+}
+
+.employee-log-out-btn {
+    background-color: #ff4d4d !important;
+}
+
+.employee-log-out-btn:hover {
+  background-color: #d93636 !important;
+  transform: scale(1.05) !important;
 }

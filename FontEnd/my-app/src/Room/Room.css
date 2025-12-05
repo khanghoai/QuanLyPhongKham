@@ -1,0 +1,157 @@
+.room-page {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  background: #f5f6fa;
+}
+
+.room-side-bar {
+  width: 250px;
+  background: #1e1f26;
+  padding: 20px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  border-right: 2px solid #2c2d36;
+}
+
+.room-side-bar button {
+  width: 100%;
+  padding: 12px 10px;
+  background: #2c2d36;
+  color: #fff;
+  text-align: left;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.room-side-bar button:hover {
+  background: #4e92ff;
+  color: white;
+  transform: translateX(4px);
+}
+
+.room-side-bar button:active {
+  background: #3c7be0;
+}
+
+.room-emp-container {
+  flex: 1;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.room-emp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.room-emp-search-input {
+  width: 260px;
+  padding: 10px 12px;
+  border: 1px solid #bbdefb;
+  border-radius: 6px;
+  outline: none;
+  font-size: 15px;
+  color: #1e3d59;
+  background: #f7fbff;
+  transition: 0.25s ease;
+  margin-right: 12px;
+}
+
+.room-emp-search-input:focus {
+  border-color: #42a5f5;
+  box-shadow: 0 0 6px rgba(66, 165, 245, 0.4);
+}
+
+.room-emp-search-btn {
+  padding: 10px 16px;
+  background: #0288d1;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  margin-right: 10px;
+  font-weight: 600;
+  transition: 0.25s ease;
+}
+
+.room-emp-search-btn:hover {
+  background: #0277bd;
+}
+
+.room-emp-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e3d59;
+}
+
+.room-emp-add-btn {
+  padding: 10px 16px;
+  background: #1e88e5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.25s ease;
+  font-weight: 600;
+}
+
+.room-emp-add-btn:hover {
+  background: #1565c0;
+}
+
+
+/* v */
+
+
+.medicine-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.medicine-table th {
+  background: #e3f2fd;
+  color: #1e3d59;
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid #bbdefb;
+}
+
+.medicine-table td {
+  padding: 12px;
+  border-bottom: 1px solid #e0e0e0;
+  color: #333;
+}
+
+.medicine-table tbody tr:hover {
+  background: #f5faff;
+}
+
+.medicine-edit-btn {
+  padding: 6px 12px;
+  background: #43a047;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.25s ease;
+}
+
+.medicine-edit-btn:hover {
+  background: #2e7d32;
+}

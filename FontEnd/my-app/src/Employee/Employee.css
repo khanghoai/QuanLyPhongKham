@@ -15,30 +15,6 @@
     margin-bottom: 20px;
 }
 
-.employee-log-out{
-    position: fixed;
-    top: 20px; 
-    right: 20px;
-    z-index: 1000;
-}
-
-.employee-log-out-btn {
-    background-color: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-    transition: 0.2s;
-}
-
-.employee-log-out-btn:hover {
-  background-color: #d93636;
-  transform: scale(1.05);
-}
-
 .emp-search-input {
     width: 260px;
     padding: 10px 12px;
