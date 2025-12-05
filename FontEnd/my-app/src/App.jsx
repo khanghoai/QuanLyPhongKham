@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from "react-router-dom"
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom"
 import AdminPage from './AdminPage/AdminPage'
 import './App.css'
 import BenhAn from './BenhAn/BenhAn'
@@ -7,44 +7,66 @@ import Employee from './Employee/Employee'
 import EmployeeDetail from './EmployeeDetail/EmployeeDetail'
 import Login from './Login/Login'
 import QuanLyLichHen from './QuanLyLichHen/QuanLyLichHen'
-import QuanLyPhongKham from './QuanLyPhongKham/QuanLyPhongKham'
 import QuanLyThuoc from './QuanLyThuoc/QuanLyThuoc'
+import Room from "./Room/Room"
 import ThanhToan from './ThanhToan/ThanhToan'
 import ThemBenhNhan from './ThemBenhNhan/ThemBenhNhan'
 import ThemThuoc from './ThemThuoc/ThemThuoc'
-import UpdateEmployee from './UpdateEmployee/UpdateEmployee'
 import UpdateMedicine from './UpdateMedicine/UpdateMedicine'
 
 function App() {
   const location = useLocation();
+  const navigate = useNavigate();
 
-  const allowedHeaderQuanLy = ["/quanLyNhanVien","/QuanLyPhongKham"]
+  const logOut = () => {
+    navigate("/");
+  }
+
+  const allowedHeaderQuanLy = ["/Employee","/Room"]
   return (
     <>
-      {allowedHeaderQuanLy.includes(location.pathname) && (
+      {location.pathname != "/" &&
         <header className="quan-ly-header">
-          <a href="/quanLyNhanVien">Nhân Viên</a>
-          <a href="/QuanLyPhongKham">Phòng khám</a>
+          {allowedHeaderQuanLy.includes(location.pathname) &&
+            <div className="nhanSu"> 
+              <button onClick={() => {
+                navigate("/Employee", {
+                  state : {
+                    position : 'nhanSu'
+                  }
+                })
+              }}>Nhân viên</button>
+              <button onClick={() => {
+                navigate("/Room", {
+                  state : {
+                    position : 'nhanSu'
+                  }
+                })
+              }}>Phòng</button>
+            </div>
+          }
+          <div className="employee-log-out">
+            <button className="employee-log-out-btn" onClick={logOut}>Đăng xuất</button>
+          </div>
         </header>
-      )}
+      }
+      
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path='/AdminPage' element={<AdminPage/>} />
         <Route path="/Employee" element={<Employee />} />
         <Route path="/EmployeeDetail" element={<EmployeeDetail />} />
+        <Route path='/Room' element={<Room/>} />
         <Route path="/QuanLyLichHen" element={<QuanLyLichHen />} />
         <Route path="/ThemThuoc" element={<ThemThuoc />} />
         <Route path="/ThemBenhNhan" element={<ThemBenhNhan />} />
         <Route path="/BenhAn" element={<BenhAn />} />
-        <Route path="/UpdateEmployee" element={<UpdateEmployee />} />
         <Route path="/CreateAccount" element={<CreateAccount />} />
         <Route path='/QuanLyThuoc' element={<QuanLyThuoc />} />
         <Route path='/ThanhToan' element={<ThanhToan />} />
         <Route path='/UpdateMedicine' element={<UpdateMedicine/>} />
-        <Route path='/QuanLyPhongKham' element={<QuanLyPhongKham/>} />
-        <Route path='/AdminPage' element={<AdminPage/>} />
       </Routes>
     </>
-    
   )
 }
 

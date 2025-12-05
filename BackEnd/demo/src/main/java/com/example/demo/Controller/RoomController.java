@@ -3,6 +3,7 @@ package com.example.demo.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.Entity.Calendar;
 import com.example.demo.Entity.Room;
 import com.example.demo.Service.RoomService;
 
@@ -30,6 +31,16 @@ public class RoomController {
     @GetMapping("/getRooms")
     public List<Room> getRooms() {
         return roomService.getRooms();
+    }
+
+    @PostMapping("/addCalendar")
+    public Calendar addCalendar(@RequestBody Calendar calendar) {
+        return roomService.addCalendar(calendar);
+    }
+
+    @PostMapping("/getCalendarByRoom")
+    public List<Calendar> getCalendarByRoom(@RequestBody Room room) {
+        return roomService.getCalendars(room);
     }
     
 }

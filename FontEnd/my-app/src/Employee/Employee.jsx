@@ -14,7 +14,6 @@ export default function Employee() {
 
 
   useEffect(() => {
-    console.log(location.state)
     if(position != "nhanSu"){
       navigate("/");
     }
@@ -72,15 +71,8 @@ export default function Employee() {
     })
   }
 
-  const logOut = () => {
-    navigate("/")
-  }
-
   return (
     <div className="employee-container">
-      <div className="employee-log-out">
-        <button className="employee-log-out-btn" onClick={logOut}>Đăng xuất</button>
-      </div>
       <div className="employee-header">
         <h2 className="employee-title">Danh Sách Nhân Viên</h2>
         <input

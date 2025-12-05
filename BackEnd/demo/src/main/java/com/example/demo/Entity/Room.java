@@ -15,8 +15,8 @@ public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int roomID;
-    private int roomName;
-    private int roomNum;
+    private String roomName;
+    private String roomNum;
     
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private List<Employee> employees;
@@ -28,21 +28,21 @@ public class Room {
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
     }
-
-    public int getRoomName() {
+    
+    public String getRoomName() {
         return roomName;
     }
 
-    public void setRoomName(int roomName) {
+    public void setRoomName(String roomName) {
         this.roomName = roomName;
     }
 
-    public int getRoomNum() {
+    public String getRoomNum() {
         return roomNum;
     }
 
-    public void setRoomNum(int roomNum) {
+    public void setRoomNum(String roomNum) {
         this.roomNum = roomNum;
     }
-    
+
 }

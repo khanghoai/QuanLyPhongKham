@@ -47,9 +47,6 @@ export default function QuanLyThuoc() {
     }
   };
 
-  if (loading) return <p>Đang tải dữ liệu...</p>;
-  if (error) return <p style={{ color: "red" }}>Lỗi: {error}</p>;
-
   return (
     <div className="medicine-container">
       <div className="medicine-header">
