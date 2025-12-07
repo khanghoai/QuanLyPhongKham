@@ -14,14 +14,19 @@ public class Calendar {
     private int calendarID;
     
     private String shift;
+    private String day;
 
     @ManyToOne
     @JoinColumn(name = "employeeID")
     private Employee employee;
 
-    @ManyToOne
-    @JoinColumn(name = "roomID")
-    private Room room;
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
 
     public int getCalendarID() {
         return calendarID;
@@ -37,14 +42,6 @@ public class Calendar {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
-    }
-
-    public Room getRoom() {
-        return room;
-    }
-
-    public void setRoom(Room room) {
-        this.room = room;
     }
 
     public String getShift() {

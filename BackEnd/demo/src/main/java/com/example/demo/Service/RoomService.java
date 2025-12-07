@@ -6,31 +6,41 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Entity.Calendar;
+import com.example.demo.Entity.Employee;
 import com.example.demo.Entity.Room;
 import com.example.demo.Repository.CalendarRepository;
+import com.example.demo.Repository.EmployeeRepository;
 import com.example.demo.Repository.RoomRepository;
 
 @Service
 public class RoomService {
     @Autowired
-    RoomRepository phongKhamRepository;
+    RoomRepository roomRepository;
 
     @Autowired
     CalendarRepository calendarRepository;
 
+    @Autowired
+    EmployeeRepository employeeRepository;
+
     public Room addRoom(Room room){
-        return phongKhamRepository.save(room);
+        return roomRepository.save(room);
     }
 
     public List<Room> getRooms(){
-        return phongKhamRepository.findAll();
+        return roomRepository.findAll();
     }
 
-    public Calendar addCalendar(Calendar calendar){
-        return calendarRepository.save(calendar);
+    public Calendar addCalendars(List<Calendar> calendars){
+        Employee employee = calendars.get(0).getEmployee();
+        employeeRepository.save(employee);
+        for (Calendar calendar : calendars) {
+            calendarRepository.save(calendar);
+        }
+        return new Calendar();
     }
 
-    public List<Calendar> getCalendars(Room room){
-        return calendarRepository.findByRoom(room);
+    public List<Calendar> getCalendars(Employee employee){
+        return calendarRepository.findByEmployee(employee);
     }
 }
