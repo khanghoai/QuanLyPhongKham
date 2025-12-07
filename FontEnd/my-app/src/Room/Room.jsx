@@ -40,7 +40,7 @@ export default function Room() {
   };
 
   const addEmp = () => {
-    navigate("/ThemThuoc");
+    navigate("/Calendar");
   };
 
   return (

@@ -2,10 +2,11 @@ import { Route, Routes, useLocation, useNavigate } from "react-router-dom"
 import AdminPage from './AdminPage/AdminPage'
 import './App.css'
 import BenhAn from './BenhAn/BenhAn'
-import CreateAccount from './CreateAccount/CreateAccount'
+import Calendar from "./Calendar/Calendar"
 import Employee from './Employee/Employee'
 import EmployeeDetail from './EmployeeDetail/EmployeeDetail'
 import Login from './Login/Login'
+import NotFound from "./NotFound/NotFound"
 import QuanLyLichHen from './QuanLyLichHen/QuanLyLichHen'
 import QuanLyThuoc from './QuanLyThuoc/QuanLyThuoc'
 import Room from "./Room/Room"
@@ -23,9 +24,10 @@ function App() {
   }
 
   const allowedHeaderQuanLy = ["/Employee","/Room"]
+  const notAllowedHeader = ["/","/Calendar","/EmployeeDetail"]
   return (
     <>
-      {location.pathname != "/" &&
+      {(!notAllowedHeader.includes(location.pathname)) &&
         <header className="quan-ly-header">
           {allowedHeaderQuanLy.includes(location.pathname) &&
             <div className="nhanSu"> 
@@ -61,10 +63,11 @@ function App() {
         <Route path="/ThemThuoc" element={<ThemThuoc />} />
         <Route path="/ThemBenhNhan" element={<ThemBenhNhan />} />
         <Route path="/BenhAn" element={<BenhAn />} />
-        <Route path="/CreateAccount" element={<CreateAccount />} />
         <Route path='/QuanLyThuoc' element={<QuanLyThuoc />} />
         <Route path='/ThanhToan' element={<ThanhToan />} />
         <Route path='/UpdateMedicine' element={<UpdateMedicine/>} />
+        <Route path='/Calendar' element={<Calendar/>} />
+        <Route path='*' element={<NotFound/>} />
       </Routes>
     </>
   )

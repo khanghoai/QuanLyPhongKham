@@ -15,3 +15,6 @@ const ROOM = LINK + "/Room"
 
 export const ADD_ROOM = ROOM + "/addRoom"
 export const GET_ROOMS = ROOM + "/getRooms"
+export const ADD_CALENDARS = ROOM + "/addCalendars"
+export const GET_CALENDAR_BY_ROOM = ROOM + "/getCalendarByRoom"
+export const GET_CALENDAR_BY_EMPLOYEE = ROOM + "/getCalendarByEmployee"

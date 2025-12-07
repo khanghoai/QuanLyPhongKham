@@ -21,6 +21,14 @@ public class Room {
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private List<Employee> employees;
 
+    public int getRoomID() {
+        return roomID;
+    }
+
+    public void setRoomID(int roomID) {
+        this.roomID = roomID;
+    }
+    
     public List<Employee> getEmployees() {
         return employees;
     }

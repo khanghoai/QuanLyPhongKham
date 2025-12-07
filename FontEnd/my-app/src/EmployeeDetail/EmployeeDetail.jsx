@@ -36,7 +36,18 @@ export default function EmployeeDetail() {
     e.preventDefault();
     setIsSubmitForm(true);
     const res = await postData(ADD_EMPLOYEE,employee);
+    setEmployee(res);
   };
+
+  const addCalendar = () => {
+    navigate("/Calendar", {
+      state : {
+        position : "nhanSu",
+        emp : employee,
+        fun : 'add'
+      }
+    })
+  }
 
   const update = async (e) => {
     e.preventDefault();
@@ -162,9 +173,18 @@ export default function EmployeeDetail() {
       {isSubmitform == true && 
       <div className="emp-detail-notify-container">
         <div className="emp-detail-notify">
-          {fun == 'add' && <p>Thêm thành công</p> }
-          {fun == 'update' && <p>Cập nhật thành công</p> }
-          <button onClick={exit} className="emp-detail-button">Thoát</button>
+          {fun == 'add' &&
+          <>
+            <p>Thêm thành công</p>
+            <button onClick={addCalendar} className="emp-detail-button">Thoát</button>
+          </>
+          }
+          {fun == 'update' &&
+          <>
+            <p>Cập nhật thành công</p>
+            <button onClick={exit} className="emp-detail-button">Thoát</button>
+          </>
+          }
         </div>
       </div>
       }
@@ -180,7 +200,6 @@ export default function EmployeeDetail() {
         </div>
       </div>
       }
-      
     </div>
   );
 }

@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.Entity.Calendar;
+import com.example.demo.Entity.Employee;
 import com.example.demo.Entity.Room;
 import com.example.demo.Service.RoomService;
 
@@ -33,14 +34,14 @@ public class RoomController {
         return roomService.getRooms();
     }
 
-    @PostMapping("/addCalendar")
-    public Calendar addCalendar(@RequestBody Calendar calendar) {
-        return roomService.addCalendar(calendar);
+    @PostMapping("/addCalendars")
+    public Calendar addCalendars(@RequestBody List<Calendar> calendar) {
+        return roomService.addCalendars(calendar);
     }
 
-    @PostMapping("/getCalendarByRoom")
-    public List<Calendar> getCalendarByRoom(@RequestBody Room room) {
-        return roomService.getCalendars(room);
+    @PostMapping("/getCalendarByEmployee")
+    public List<Calendar> getCalendarByEmployee(@RequestBody Employee employee) {
+        return roomService.getCalendars(employee);
     }
     
 }

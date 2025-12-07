@@ -20,12 +20,10 @@ public class Employee {
     private boolean employeeQuit;
 
     @ManyToOne
-    @JoinColumn(name = "RoomID")
-    @JsonIgnore
+    @JoinColumn(name = "roomID")
     private Room room;
 
     @OneToOne(mappedBy = "employee",cascade = CascadeType.ALL,orphanRemoval = true)
-    @JsonIgnore
     private Account account;
 
     public int getEmployeeID() {
