@@ -11,7 +11,7 @@ export default function EmployeeDetail() {
     employeeCCCD: "",
     employeeSex: "",
     employeeBirth: "",
-    employeePosition: "",
+    employeePosition: "bacSi",
   });
   const navigate = useNavigate();
   const location = useLocation();
@@ -145,7 +145,6 @@ export default function EmployeeDetail() {
             name="employeePosition"
             value={employee.employeePosition}
             onChange={handleChange}>
-            <option value="">Chọn chức vụ</option>
             <option value="bacSi">Bác sĩ</option>
             <option value="leTan">Lễ Tân</option>
             <option value="nhaThuoc">Nhà thuốc</option>

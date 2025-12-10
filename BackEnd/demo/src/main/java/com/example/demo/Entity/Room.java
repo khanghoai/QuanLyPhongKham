@@ -2,6 +2,8 @@ package com.example.demo.Entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,6 +22,18 @@ public class Room {
     
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private List<Employee> employees;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "room")
+    private List<Disease> diseases;
+
+    public List<Disease> getDiseases() {
+        return diseases;
+    }
+
+    public void setDiseases(List<Disease> diseases) {
+        this.diseases = diseases;
+    }
 
     public int getRoomID() {
         return roomID;
@@ -51,6 +65,15 @@ public class Room {
 
     public void setRoomNum(String roomNum) {
         this.roomNum = roomNum;
+    }
+
+    public void fixDuplicate(){
+        if(this.employees != null){
+            for (Employee employee : employees) {
+                employee.setRoom(null);
+                employee.fixDuplicate();
+            }
+        }
     }
 
 }

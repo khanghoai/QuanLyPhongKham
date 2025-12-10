@@ -10,4 +10,10 @@ import java.util.List;
 public interface EmployeeRepository extends JpaRepository<Employee,Integer> {
 
     List<Employee> findByEmployeeQuitFalse();
+
+    Employee findByEmployeeCCCDAndEmployeeQuitFalse(String employeeCCCD);
+
+    List<Employee> findByEmployeePosition(String employeePosition);
+
+    Employee findByEmployeeCCCD(String employeeCCCD);
 }   

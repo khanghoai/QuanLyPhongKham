@@ -10,6 +10,7 @@ export const SET_EMPLOYEE_QUIT = ACCOUNT + "/setEmployeeQuit"
 export const GET_ALL_PHONG_KHAM = ACCOUNT + "/getAllPhongKham"
 export const THEM_PHONG_KHAM = ACCOUNT + "/themPhongKham"
 export const CREATE_ACCOUNT = ACCOUNT + "/createAccount"
+export const GET_DOCTOR_EMPLOYEE = ACCOUNT + "/getDoctorEmployee"
 
 const ROOM = LINK + "/Room"
 
@@ -18,3 +19,8 @@ export const GET_ROOMS = ROOM + "/getRooms"
 export const ADD_CALENDARS = ROOM + "/addCalendars"
 export const GET_CALENDAR_BY_ROOM = ROOM + "/getCalendarByRoom"
 export const GET_CALENDAR_BY_EMPLOYEE = ROOM + "/getCalendarByEmployee"
+
+const PATIENT = LINK + "/Patient"
+
+export const FIND_PATIENT = PATIENT + "/findPatient"
+export const ADD_PATIENT = PATIENT + "/addPatient"

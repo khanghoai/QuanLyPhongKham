@@ -9,27 +9,55 @@ public class LichHen {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int maLH;
 
-    private LocalDate ngay;
-    private LocalTime gio;
-
-    public LocalDate getNgay() {
-        return ngay;
-    }
-    public void setNgay(LocalDate ngay) {
-        this.ngay = ngay;
-    }
-    public LocalTime getGio() {
-        return gio;
-    }
-    public void setGio(LocalTime gio) {
-        this.gio = gio;
-    }
-    // Quan hệ n-1
-    @ManyToOne
-    @JoinColumn(name = "MaBN")
-    private BenhNhan benhNhan;
+    private LocalDate day;
+    private LocalTime time;
 
     @ManyToOne
-    @JoinColumn(name = "MaNV")
-    private Employee nhanVien;
+    @JoinColumn(name = "patientID")
+    private Patient patient;
+
+    @ManyToOne
+    @JoinColumn(name = "employeeID")
+    private Employee employee;
+
+    public int getMaLH() {
+        return maLH;
+    }
+
+    public void setMaLH(int maLH) {
+        this.maLH = maLH;
+    }
+
+    public LocalDate getDay() {
+        return day;
+    }
+
+    public void setDay(LocalDate day) {
+        this.day = day;
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalTime time) {
+        this.time = time;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
 }

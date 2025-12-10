@@ -30,6 +30,13 @@ export default function Login() {
           }
         })
         break;
+      case 'leTan':
+        navigate("/Patient", {
+          state : {
+            position : 'leTan'
+          }
+        })
+        break;
       default :
         alert("Sai tài khoản hoặc mật khẩu");
         break;

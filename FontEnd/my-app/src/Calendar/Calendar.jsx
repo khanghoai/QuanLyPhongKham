@@ -42,6 +42,7 @@ export default function Calendar() {
   const getRooms = async () =>{
     const res = await getData(GET_ROOMS)
     setRooms(res);
+    setRoomChose(res[0]);
   }
 
   const getCalendar = async () => {

@@ -14,6 +14,7 @@ import ThanhToan from './ThanhToan/ThanhToan'
 import ThemBenhNhan from './ThemBenhNhan/ThemBenhNhan'
 import ThemThuoc from './ThemThuoc/ThemThuoc'
 import UpdateMedicine from './UpdateMedicine/UpdateMedicine'
+import Patient from "./Patient/Patient"
 
 function App() {
   const location = useLocation();
@@ -59,6 +60,9 @@ function App() {
         <Route path="/Employee" element={<Employee />} />
         <Route path="/EmployeeDetail" element={<EmployeeDetail />} />
         <Route path='/Room' element={<Room/>} />
+        <Route path='/Calendar' element={<Calendar/>} />
+        <Route path='/Patient' element={<Patient/>} />
+        <Route path='*' element={<NotFound/>} />
         <Route path="/QuanLyLichHen" element={<QuanLyLichHen />} />
         <Route path="/ThemThuoc" element={<ThemThuoc />} />
         <Route path="/ThemBenhNhan" element={<ThemBenhNhan />} />
@@ -66,8 +70,6 @@ function App() {
         <Route path='/QuanLyThuoc' element={<QuanLyThuoc />} />
         <Route path='/ThanhToan' element={<ThanhToan />} />
         <Route path='/UpdateMedicine' element={<UpdateMedicine/>} />
-        <Route path='/Calendar' element={<Calendar/>} />
-        <Route path='*' element={<NotFound/>} />
       </Routes>
     </>
   )

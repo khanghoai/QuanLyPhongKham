@@ -1,7 +1,10 @@
 package com.example.demo.Entity;
-import jakarta.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class BenhNhan {
@@ -71,14 +74,4 @@ public class BenhNhan {
     public void setXuatVien(boolean xuatVien) {
         this.xuatVien = xuatVien;
     }
-
-    // Quan hệ 1-n
-    @OneToMany(mappedBy = "benhNhan", cascade = CascadeType.ALL)
-    private List<LichHen> lichHens;
-
-    @OneToMany(mappedBy = "benhNhan", cascade = CascadeType.ALL)
-    private List<BenhAn> benhAns;
-
-    @OneToMany(mappedBy = "benhNhan", cascade = CascadeType.ALL)
-    private List<HoaDon> hoaDons;
 }

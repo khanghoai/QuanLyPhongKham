@@ -18,10 +18,10 @@ public class HoaDonController {
     @Autowired
     HoaDonService hoaDonService;
 
-    @PostMapping("/thanhToan")
-    public HoaDon thanhToan(@RequestBody BenhAn benhAn) {
-        return hoaDonService.thanhToan(benhAn);
-    }
+    // @PostMapping("/thanhToan")
+    // public HoaDon thanhToan(@RequestBody BenhAn benhAn) {
+    //     return hoaDonService.thanhToan(benhAn);
+    // }
     
     @PostMapping("/xuatVien")
     public BenhNhan thanhToan(@RequestBody BenhNhan benhNhan) {

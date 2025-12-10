@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import "./Employee.css";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getData, postData } from "../api/apiMethod";
 import { GET_EMPLOYEES } from "../api/api";
+import { getData } from "../api/apiMethod";
+import "./Employee.css";
 
 export default function Employee() {
   const [employees, setEmployees] = useState([]);
@@ -20,6 +20,7 @@ export default function Employee() {
     else{
       const fun = async () =>{
         const res = await getData(GET_EMPLOYEES);
+        console.log(res);
         setEmployees(res);
         setfilterEmp(res);
       }
@@ -33,6 +34,8 @@ export default function Employee() {
         return 'Nhân Sự'
       case 'bacSi' :
         return 'Bác Sĩ'
+      case 'leTan' :
+        return "Lễ Tân"
     }
   }
 
@@ -107,7 +110,7 @@ export default function Employee() {
           </thead>
           <tbody>
             {filterEmp.map((emp) => (
-              <tr key={emp.employeeID}>
+              <tr key={emp.employeeCCCD}>
                 <td>{emp.employeeName}</td>
                 <td>{getPosition(emp.employeePosition)}</td>
                 <td>{emp.employeePhone}</td>

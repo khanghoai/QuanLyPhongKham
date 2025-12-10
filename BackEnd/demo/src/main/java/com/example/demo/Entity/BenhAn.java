@@ -9,15 +9,11 @@ public class BenhAn {
     private int maBA;
 
     @ManyToOne
-    @JoinColumn(name = "maBN")
-    private BenhNhan benhNhan;
-
-    @ManyToOne
-    @JoinColumn(name = "maNV")
-    private Employee nhanVien;
+    @JoinColumn(name = "patientID")
+    private Patient patient;
 
     @Lob
-    private String benhAn;
+    private String benh;
 
     @Temporal(TemporalType.DATE)
     private Date ngayKham;
@@ -25,22 +21,45 @@ public class BenhAn {
     @Lob
     private String triBenh;
 
-    // Getter & Setter
-    public int getMaBA() { return maBA; }
-    public void setMaBA(int maBA) { this.maBA = maBA; }
+    public int getMaBA() {
+        return maBA;
+    }
 
-    public BenhNhan getBenhNhan() { return benhNhan; }
-    public void setBenhNhan(BenhNhan benhNhan) { this.benhNhan = benhNhan; }
+    public void setMaBA(int maBA) {
+        this.maBA = maBA;
+    }
 
-    public Employee getNhanVien() { return nhanVien; }
-    public void setNhanVien(Employee nhanVien) { this.nhanVien = nhanVien; }
+    public Patient getPatient() {
+        return patient;
+    }
 
-    public String getBenhAn() { return benhAn; }
-    public void setBenhAn(String benhAn) { this.benhAn = benhAn; }
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
 
-    public Date getNgayKham() { return ngayKham; }
-    public void setNgayKham(Date ngayKham) { this.ngayKham = ngayKham; }
+    public String getBenh() {
+        return benh;
+    }
 
-    public String getTriBenh() { return triBenh; }
-    public void setTriBenh(String triBenh) { this.triBenh = triBenh; }
+    public void setBenh(String benh) {
+        this.benh = benh;
+    }
+
+    public Date getNgayKham() {
+        return ngayKham;
+    }
+
+    public void setNgayKham(Date ngayKham) {
+        this.ngayKham = ngayKham;
+    }
+
+    public String getTriBenh() {
+        return triBenh;
+    }
+
+    public void setTriBenh(String triBenh) {
+        this.triBenh = triBenh;
+    }
+
+
 }
