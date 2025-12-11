@@ -29,6 +29,12 @@ public class AccountController {
         return accountService.login(account.getUsername(), account.getPassword());
     }
 
+    @PostMapping("/logout")
+    public Account logout(@RequestBody String cccd) {
+        return accountService.logout(cccd);
+    }
+    
+
     @GetMapping("/getEmployees")
     public List<EmployeeDTO> getEmployees() {
         return accountService.getEmployees();
@@ -53,4 +59,5 @@ public class AccountController {
     public DoctorDTO getDoctorEmployee(@RequestBody String disease) throws IOException, InterruptedException {
         return accountService.getDoctorEmployee(disease);
     }
+
 }

@@ -1,0 +1,81 @@
+.medical-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  font-family: Arial, sans-serif;
+}
+
+.medical-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.medical-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.medical-lable {
+  font-size: 15px;
+  color: #333;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.medical-input {
+  padding: 10px 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.medical-input:focus {
+  border: 1px solid #4A90E2;
+  outline: none;
+  box-shadow: 0 0 4px rgba(74, 144, 226, 0.6);
+}
+
+.medical-input:disabled {
+  background: #f2f2f2;
+}
+
+.appointment-popup {
+  position: fixed;
+  top: 70px;             
+  right: 20px;  
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  width: 260px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.3s ease;
+  z-index: 9999;
+}
+
+.appointment-popup p {
+  font-size: 17px;
+  margin-bottom: 12px;
+}
+
+.appointment-popup button {
+  padding: 10px 20px;
+  background: #4A90E2;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+
+.appointment-popup button:hover {
+  background: #357ABD;
+}

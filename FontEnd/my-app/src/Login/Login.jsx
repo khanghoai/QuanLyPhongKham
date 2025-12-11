@@ -1,14 +1,13 @@
-import React, { useState } from "react";
-import "../api/apiMethod.js"
-import "./Login.css"
-import { getData, postData } from "../api/apiMethod.js";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { LOGIN } from "../api/api.js";
+import "../api/apiMethod.js";
+import { postData } from "../api/apiMethod.js";
+import "./Login.css";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [result, setResult] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -18,22 +17,35 @@ export default function Login() {
       password: password
     };
     const res = await postData(LOGIN,body);
-    console.log(res);
     switch(res.employeePosition){
       case 'admin':
-        navigate("/AdminPage", {state : 'admin'});
+        navigate("/AdminPage", {
+          state : {
+            position : 'admin',
+            cccd : "1"
+          }});
         break;
       case 'nhanSu':
         navigate("/Employee", {
           state : {
-            position : 'nhanSu'
+            position : 'nhanSu',
+            cccd : res.employeeCCCD,
           }
         })
         break;
       case 'leTan':
         navigate("/Patient", {
           state : {
-            position : 'leTan'
+            position : 'leTan',
+            cccd : res.employeeCCCD,
+          }
+        })
+        break;
+      case 'bacSi':
+        navigate(`/Doctor/${res.employeeID}`, {
+          state : {
+            position : 'bacSi',
+            cccd : res.employeeCCCD,
           }
         })
         break;
@@ -66,7 +78,6 @@ export default function Login() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-
           <button type="submit" className="login-button">
             Đăng nhập
           </button>

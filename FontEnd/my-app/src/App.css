@@ -9,17 +9,22 @@
   background: #2a9df4;
   padding: 12px 30px;
   display: flex;
-  gap: 30px;
   align-items: center;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   height: 56px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
 
+.nhanSu {
+  display: flex;
+  gap: 20px;
+}
 
 .quan-ly-header button {
   color: white;
   font-size: 17px;
-  text-decoration: none;
   font-weight: 600;
   letter-spacing: 0.5px;
   padding: 6px 14px;
@@ -35,17 +40,12 @@
   transform: translateY(-2px);
 }
 
-.quan-ly-header a:active {
-  transform: scale(0.94);
-}
-
 .employee-log-out{
-    position: fixed;
-    right: 20px;
+  margin-left: auto
 }
 
 .employee-log-out-btn {
-    background-color: #ff4d4d !important;
+  background-color: #ff4d4d !important;
 }
 
 .employee-log-out-btn:hover {

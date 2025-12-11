@@ -60,6 +60,4 @@ public class BenhAn {
     public void setTriBenh(String triBenh) {
         this.triBenh = triBenh;
     }
-
-
 }

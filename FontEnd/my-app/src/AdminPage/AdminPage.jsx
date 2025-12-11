@@ -7,12 +7,13 @@ import "./AdminPage.css";
 export default function AdminPage() {
   const navigate = useNavigate();
   const location = useLocation();
+  const {position, cccd} = location.state;
   const [roomName, setRoomName] = useState("");
   const [roomNum, setRoomNum] = useState("");
   const [disease, setDisease] = useState("");
 
   useEffect(() => {
-    if(location.state != "admin"){
+    if(position != "admin"){
         navigate("/");
     }
   },[])

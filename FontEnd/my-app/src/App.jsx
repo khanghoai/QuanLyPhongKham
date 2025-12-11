@@ -15,12 +15,19 @@ import ThemBenhNhan from './ThemBenhNhan/ThemBenhNhan'
 import ThemThuoc from './ThemThuoc/ThemThuoc'
 import UpdateMedicine from './UpdateMedicine/UpdateMedicine'
 import Patient from "./Patient/Patient"
+import Doctor from "./Doctor/Doctor"
+import { postData } from "./api/apiMethod"
+import { LOGOUT } from "./api/api"
 
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
+  const {position, cccd} = location.state || {}
 
-  const logOut = () => {
+  const logOut = async () => {
+    if(cccd != "1"){
+      await postData(LOGOUT,cccd)
+    }
     navigate("/");
   }
 
@@ -62,6 +69,7 @@ function App() {
         <Route path='/Room' element={<Room/>} />
         <Route path='/Calendar' element={<Calendar/>} />
         <Route path='/Patient' element={<Patient/>} />
+        <Route path='/Doctor/:doctorID' element={<Doctor/>} />
         <Route path='*' element={<NotFound/>} />
         <Route path="/QuanLyLichHen" element={<QuanLyLichHen />} />
         <Route path="/ThemThuoc" element={<ThemThuoc />} />

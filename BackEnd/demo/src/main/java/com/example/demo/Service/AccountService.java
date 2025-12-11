@@ -63,13 +63,15 @@ public class AccountService {
             loginDTO.setEmployeeCCCD(employee.getEmployeeCCCD());
             loginDTO.setEmployeeName(employee.getEmployeeName());
             loginDTO.setEmployeePosition(employee.getEmployeePosition());
+            loginDTO.setEmployeeID(employee.getEmployeeID());
             return loginDTO;
         }
         return new LoginDTO();
     }
 
-    public Account logOut(EmployeeDTO employeeDTO){
-        Employee employee = employeeRepository.findByEmployeeCCCD(employeeDTO.getEmployeeCCCD());
+    public Account logout(String cccd){
+        cccd = cccd.replace("\"", "");
+        Employee employee = employeeRepository.findByEmployeeCCCDAndEmployeeQuitFalse(cccd);
         employee.setEmployeeStatus("vắng");
         employeeRepository.save(employee);
         return new Account();
@@ -92,6 +94,7 @@ public class AccountService {
     }
 
     public Employee addEmployee(Employee employee){
+        employee.setEmployeeStatus("vắng");
         employee.setEmployeeQuit(false);
         employee = employeeRepository.save(employee);
         Account account = new Account();
@@ -118,7 +121,6 @@ public class AccountService {
         List<Room> rooms = roomRepository.findAll();
         List<Map<String, Object>> result = new ArrayList<>();
         for (Room room : rooms) {
-            room.setEmployees(null);
             if(!room.getDiseases().isEmpty()){
                 List<String> diseasesData = new ArrayList<>();
                 for (Disease d : room.getDiseases()) {
@@ -132,7 +134,6 @@ public class AccountService {
             }
         }
 
-        System.out.println(diseases);
         ObjectMapper mapper = new ObjectMapper();
 
         ObjectNode assistantContent = mapper.createObjectNode();
@@ -180,8 +181,22 @@ public class AccountService {
             .get(0)
             .get("message")
             .get("content")
-            .asText();  
-        System.out.println(roomName); 
+            .asText();
+        DoctorDTO doctor = new DoctorDTO();
+
+        Room room = roomRepository.findByRoomName(roomName).get();
+        List<Employee> employees = room.getEmployees();
+        
+        if(!employees.isEmpty()){
+            for (Employee employee : employees) {
+                if(employee.getEmployeeStatus().equals("có mặt")){
+                    doctor.setEmployeeName(employee.getEmployeeName());
+                    doctor.setRoomName(roomName);
+                    doctor.setEmployeeCCCD(employee.getEmployeeCCCD());
+                    return doctor;
+                }
+            }
+        }
         return new DoctorDTO();
     }
 

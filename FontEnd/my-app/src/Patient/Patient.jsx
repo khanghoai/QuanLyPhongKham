@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ADD_PATIENT, FIND_PATIENT, GET_DOCTOR_EMPLOYEE } from "../api/api";
+import { ADD_APPOINTMENT, ADD_PATIENT, FIND_PATIENT, GET_DOCTOR_EMPLOYEE } from "../api/api";
 import { postData } from "../api/apiMethod";
 import "./Patient.css";
 
@@ -13,13 +13,20 @@ export default function Patient() {
     patientBirth : ""
   })
   const [appointment, setAppointment] = useState({
-    disease : "",
-    employee : ""
+    patientCCCD : "",
+    employeeCCCD : "",
+    status: "",
+    disease : ""
   })
   const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
   const {position} = location.state || {};
+  const [doctor, setDoctor] = useState({
+    employeeName : "",
+    roomName : "",
+    employeeCCCD : ""
+  });
 
   useEffect(() => {
     if(position != "leTan"){
@@ -47,12 +54,25 @@ export default function Patient() {
   }
 
   const findDoctor = async () => {
-    await postData(GET_DOCTOR_EMPLOYEE,appointment.disease)
+    const res = await postData(GET_DOCTOR_EMPLOYEE,appointment.disease)
+    setDoctor(res);
   }
 
   const addPatient = async () => {
     const res = await postData(ADD_PATIENT,patient)
     console.log(res);
+  }
+
+  const addAppointment = async () => {
+    const newValue = {
+      ...appointment,
+      patientCCCD: patient.patientCCCD,
+      employeeCCCD: doctor.employeeCCCD,
+      status: "Đang chờ"
+    }
+    console.log(newValue)
+    setAppointment(newValue)
+    await postData(ADD_APPOINTMENT,newValue);
   }
 
   return (
@@ -77,77 +97,90 @@ export default function Patient() {
       </div>
       <div className="add-patient-container">
         <form className="add-patient-form">
-          <h3 className="add-patient-title">Thêm bệnh nhân</h3>
           <div className="add-patient-form-group">
-            <label className="add-patient-lable">Họ Tên</label>
+          <label className="add-patient-lable">Họ Tên</label>
+          <input
+            className="add-patient-input"
+            type="text"
+            name="patientName"
+            value={patient.patientName}
+            onChange={handleChange}
+          />
+          </div>
+          <div className="add-patient-form-group">
+            <label className="add-patient-lable">Số điện thoại</label>
             <input
               className="add-patient-input"
               type="text"
-              name="patientName"
-              value={patient.patientName}
+              name="patientPhone"
+              value={patient.patientPhone}
               onChange={handleChange}
             />
+          </div>
+          <div className="add-patient-form-group">
+            <label className="add-patient-lable">CCCD</label>
+            <input
+              className="add-patient-input"
+              type="text"
+              name="patientCCCD"
+              value={patient.patientCCCD}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="add-patient-form-group">
+            <label className="add-patient-lable">Giới tính</label>
+            <input
+              className="add-patient-input"
+              type="text"
+              name="patientSex"
+              value={patient.patientSex}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="add-patient-form-group">
+            <label className="add-patient-lable">Ngày sinh</label>
+            <input
+              className="add-patient-input"
+              type="date"
+              name="patientBirth"
+              value={patient.patientBirth}
+              onChange={handleChange}
+            />
+          </div>
+          <button type="button" className="add-patient-button" onClick={addPatient}>
+            Thêm
+          </button>
+        </form>
+      </div>
+      <div>
+        <h3>Lịch Hẹn</h3>
+        {appointment.employeeCCCD == "" &&
+        <div className="add-patient-form-group">
+          <label className="add-patient-lable">Tình trạng</label>
+          <input
+            className="add-patient-input"
+            type="text"
+            name="disease"
+            value={appointment.disease}
+            onChange={ChangeAppointment}
+          />
+          {doctor.employeeName == "" && <button type="button" onClick={findDoctor}>Tìm bác sĩ</button>}
+          {doctor.employeeName != "" && 
+            <div>
+              <p>{doctor.employeeName}</p>
+              <p>{doctor.roomName}</p>
+              <button type="button" onClick={addAppointment}>Tạo lịch hẹn</button>
             </div>
-            <div className="add-patient-form-group">
-              <label className="add-patient-lable">Số điện thoại</label>
-              <input
-                className="add-patient-input"
-                type="text"
-                name="patientPhone"
-                value={patient.patientPhone}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="add-patient-form-group">
-              <label className="add-patient-lable">CCCD</label>
-              <input
-                className="add-patient-input"
-                type="text"
-                name="patientCCCD"
-                value={patient.patientCCCD}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="add-patient-form-group">
-              <label className="add-patient-lable">Giới tính</label>
-              <input
-                className="add-patient-input"
-                type="text"
-                name="patientSex"
-                value={patient.patientSex}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="add-patient-form-group">
-              <label className="add-patient-lable">Ngày sinh</label>
-              <input
-                className="add-patient-input"
-                type="date"
-                name="patientBirth"
-                value={patient.patientBirth}
-                onChange={handleChange}
-              />
-            </div>
-            <button type="button" className="add-patient-button" onClick={addPatient}>
-              Thêm
-            </button>
-          </form>
-        <div>
-          <h3>Lịch Hẹn</h3>
-          <form action="">
-            <div className="add-patient-form-group">
-              <label className="add-patient-lable">Tình trạng</label>
-              <input
-                className="add-patient-input"
-                type="text"
-                name="disease"
-                value={appointment.disease}
-                onChange={ChangeAppointment}
-              />
-              <button type="button" onClick={findDoctor}>Tìm bác sĩ</button>
-            </div>
-          </form>
+          }
         </div>
+        }
+        {appointment.employeeCCCD != "" &&
+          <div>
+            <p>{doctor.employeeName}</p>
+            <p>{doctor.roomName}</p>
+            <p>{appointment.status}</p>
+          </div>
+        }
       </div>
     </div>
   );

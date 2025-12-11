@@ -59,14 +59,5 @@ public class Account {
         this.employee = employee;
     }
 
-    public void fixDuplicate(){
-        if(this.employee != null) this.employee.setAccount(null);
-        if(this.logins != null){
-            for (Login login : logins) {
-                login.setAccount(null);
-            }
-        }
-    }
-
 }
 

@@ -4,6 +4,15 @@ public class LoginDTO {
     private String employeePosition;
     private String employeeCCCD;
     private String employeeName;
+    private int employeeID;
+
+    public int getEmployeeID() {
+        return employeeID;
+    }
+
+    public void setEmployeeID(int employeeID) {
+        this.employeeID = employeeID;
+    }
 
     public String getEmployeeCCCD() {
         return employeeCCCD;

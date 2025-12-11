@@ -66,14 +66,4 @@ public class Room {
     public void setRoomNum(String roomNum) {
         this.roomNum = roomNum;
     }
-
-    public void fixDuplicate(){
-        if(this.employees != null){
-            for (Employee employee : employees) {
-                employee.setRoom(null);
-                employee.fixDuplicate();
-            }
-        }
-    }
-
 }

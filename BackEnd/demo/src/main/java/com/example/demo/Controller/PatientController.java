@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.DTO.AppointmentDTO;
+import com.example.demo.Entity.Appointment;
 import com.example.demo.Entity.Patient;
 import com.example.demo.Service.PatientService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,4 +29,10 @@ public class PatientController {
     public Patient findPatient(@RequestBody String CCCD) {
         return patientService.findPatiend(CCCD);
     }
+
+    @PostMapping("/addAppointment")
+    public Appointment addAppointment(@RequestBody AppointmentDTO appointmentDTO) {
+        return patientService.addAppointment(appointmentDTO);
+    }
+
 }

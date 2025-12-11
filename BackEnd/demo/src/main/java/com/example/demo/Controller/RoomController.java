@@ -16,6 +16,7 @@ import com.example.demo.Entity.Employee;
 import com.example.demo.Entity.Room;
 import com.example.demo.Service.RoomService;
 
+
 @RestController
 @RequestMapping("/api/Room")
 public class RoomController {
@@ -42,5 +43,4 @@ public class RoomController {
     public List<Calendar> getCalendarByEmployee(@RequestBody Employee employee) {
         return roomService.getCalendars(employee);
     }
-    
 }

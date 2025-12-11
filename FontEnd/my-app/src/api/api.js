@@ -11,6 +11,7 @@ export const GET_ALL_PHONG_KHAM = ACCOUNT + "/getAllPhongKham"
 export const THEM_PHONG_KHAM = ACCOUNT + "/themPhongKham"
 export const CREATE_ACCOUNT = ACCOUNT + "/createAccount"
 export const GET_DOCTOR_EMPLOYEE = ACCOUNT + "/getDoctorEmployee"
+export const LOGOUT = ACCOUNT + "/logout"
 
 const ROOM = LINK + "/Room"
 
@@ -24,3 +25,4 @@ const PATIENT = LINK + "/Patient"
 
 export const FIND_PATIENT = PATIENT + "/findPatient"
 export const ADD_PATIENT = PATIENT + "/addPatient"
+export const ADD_APPOINTMENT = PATIENT + "/addAppointment"

@@ -132,14 +132,4 @@ public class Employee {
     public void setRoom(Room room) {
         this.room = room;
     }
-
-    public void fixDuplicate(){
-        if(this.account != null) this.account.setEmployee(null);
-        if(this.room != null) this.room.setEmployees(null);
-        if(this.calendars != null){
-            for (Calendar calendar : calendars) {
-                calendar.setEmployee(null);
-            }
-        }
-    }
 }
