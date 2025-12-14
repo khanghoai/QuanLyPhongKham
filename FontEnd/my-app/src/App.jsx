@@ -1,23 +1,19 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom"
 import AdminPage from './AdminPage/AdminPage'
+import { LOGOUT } from "./api/api"
+import { postData } from "./api/apiMethod"
 import './App.css'
-import BenhAn from './BenhAn/BenhAn'
+import Bill from "./Bill/Bill"
 import Calendar from "./Calendar/Calendar"
+import Doctor from "./Doctor/Doctor"
 import Employee from './Employee/Employee'
 import EmployeeDetail from './EmployeeDetail/EmployeeDetail'
 import Login from './Login/Login'
+import Medicine from "./Medicine/Medicine"
+import MedicineDetail from "./MedicineDetail/MedicineDetail"
 import NotFound from "./NotFound/NotFound"
-import QuanLyLichHen from './QuanLyLichHen/QuanLyLichHen'
-import QuanLyThuoc from './QuanLyThuoc/QuanLyThuoc'
-import Room from "./Room/Room"
-import ThanhToan from './ThanhToan/ThanhToan'
-import ThemBenhNhan from './ThemBenhNhan/ThemBenhNhan'
-import ThemThuoc from './ThemThuoc/ThemThuoc'
-import UpdateMedicine from './UpdateMedicine/UpdateMedicine'
 import Patient from "./Patient/Patient"
-import Doctor from "./Doctor/Doctor"
-import { postData } from "./api/apiMethod"
-import { LOGOUT } from "./api/api"
+import Room from "./Room/Room"
 
 function App() {
   const location = useLocation();
@@ -70,14 +66,10 @@ function App() {
         <Route path='/Calendar' element={<Calendar/>} />
         <Route path='/Patient' element={<Patient/>} />
         <Route path='/Doctor/:doctorID' element={<Doctor/>} />
+        <Route path='/Medicine' element={<Medicine/>} />
+        <Route path='/MedicineDetail' element={<MedicineDetail/>} />
+        <Route path='/Bill' element={<Bill/>} />
         <Route path='*' element={<NotFound/>} />
-        <Route path="/QuanLyLichHen" element={<QuanLyLichHen />} />
-        <Route path="/ThemThuoc" element={<ThemThuoc />} />
-        <Route path="/ThemBenhNhan" element={<ThemBenhNhan />} />
-        <Route path="/BenhAn" element={<BenhAn />} />
-        <Route path='/QuanLyThuoc' element={<QuanLyThuoc />} />
-        <Route path='/ThanhToan' element={<ThanhToan />} />
-        <Route path='/UpdateMedicine' element={<UpdateMedicine/>} />
       </Routes>
     </>
   )

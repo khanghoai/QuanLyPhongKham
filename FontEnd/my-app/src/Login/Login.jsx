@@ -25,26 +25,42 @@ export default function Login() {
             cccd : "1"
           }});
         break;
-      case 'nhanSu':
+      case 'Nhân sự':
         navigate("/Employee", {
           state : {
-            position : 'nhanSu',
+            position : 'Nhân sự',
             cccd : res.employeeCCCD,
           }
         })
         break;
-      case 'leTan':
+      case 'Lễ tân':
         navigate("/Patient", {
           state : {
-            position : 'leTan',
+            position : 'Lễ tân',
             cccd : res.employeeCCCD,
           }
         })
         break;
-      case 'bacSi':
+      case 'Bác sĩ':
         navigate(`/Doctor/${res.employeeID}`, {
           state : {
-            position : 'bacSi',
+            position : 'Bác sĩ',
+            cccd : res.employeeCCCD,
+          }
+        })
+        break;
+      case 'Nhà thuốc':
+        navigate("/Medicine", {
+          state : {
+            position : 'Nhà thuốc',
+            cccd : res.employeeCCCD,
+          }
+        })
+        break;
+      case 'Thu ngân':
+        navigate("/ThanhToan", {
+          state : {
+            position : 'Thu ngân',
             cccd : res.employeeCCCD,
           }
         })

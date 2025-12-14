@@ -1,0 +1,140 @@
+.patient-container {
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #f9fbfd;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  font-family: Arial, sans-serif;
+}
+
+.patient-header {
+  margin-bottom: 20px;
+}
+
+.patient-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+
+.patient-search-input {
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.patient-search-input:focus {
+  border-color: #3498db;
+}
+
+.patient-search-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  margin-top: 5px;
+}
+
+.patient-search-btn:hover {
+  background-color: #2980b9;
+}
+
+.add-patient-container {
+  margin-top: 25px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.add-patient-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.add-patient-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-patient-lable {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #34495e;
+}
+
+.add-patient-input {
+  padding: 8px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.add-patient-input:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+/* Nút thêm bệnh nhân */
+.add-patient-button {
+  grid-column: span 2;
+  padding: 10px;
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.add-patient-button:hover {
+  background-color: #27ae60;
+}
+
+.appointment-header {
+  margin-top: 30px;
+  color: #2c3e50;
+}
+
+.appointment-form-group button {
+  margin-top: 8px;
+  padding: 8px;
+  background-color: #8e44ad;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.appointment-form-group button:hover {
+  background-color: #732d91;
+}
+
+/* Thông tin bác sĩ & lịch hẹn */
+.appointment-form-group p,
+.appointment-doctor > p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #2c3e50;
+}
+
+.appointment-doctor > button {
+  margin-top: 8px;
+  padding: 8px 12px;
+  background-color: #e67e22;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.appointment-doctor > button:hover {
+  background-color: #d35400;
+}

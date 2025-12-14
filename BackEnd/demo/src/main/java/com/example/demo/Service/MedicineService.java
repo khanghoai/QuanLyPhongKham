@@ -5,28 +5,28 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.Entity.Thuoc;
-import com.example.demo.Repository.ThuocRepository;
+import com.example.demo.Entity.Medicine;
+import com.example.demo.Repository.MedicineRepository;
 
 @Service
 public class MedicineService {
     @Autowired
-    ThuocRepository medicineRepository;
+    MedicineRepository medicineRepository;
 
-    public List<Thuoc> getAllMedicine(){
+    public List<Medicine> getAllMedicine(){
         return medicineRepository.findAll();
     }
 
-    public Thuoc addMedicine(Thuoc medicine){
+    public Medicine addMedicine(Medicine medicine){
         return medicineRepository.save(medicine);
     }
 
-    public Thuoc updateMedicine(Thuoc medicine){
+    public Medicine updateMedicine(Medicine medicine){
         return medicineRepository.save(medicine);
     }
 
-    public Thuoc deleteMedicine(Thuoc medicine){
+    public Medicine deleteMedicine(Medicine medicine){
         medicineRepository.delete(medicine);
-        return new Thuoc();
+        return new Medicine();
     }
 }

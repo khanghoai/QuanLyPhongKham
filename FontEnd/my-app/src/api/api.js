@@ -26,3 +26,15 @@ const PATIENT = LINK + "/Patient"
 export const FIND_PATIENT = PATIENT + "/findPatient"
 export const ADD_PATIENT = PATIENT + "/addPatient"
 export const ADD_APPOINTMENT = PATIENT + "/addAppointment"
+export const ACCEPT_APPOINTMENT = PATIENT + "/acceptAppointment"
+export const UPDATE_MEDICAL = PATIENT + "/updateMedical"
+
+const MEDICINE = LINK + "/Medicine"
+
+export const GET_MEDICINES = MEDICINE + "/getMedicines"
+export const ADD_MEDICINE = MEDICINE + "/addMedicine"
+export const UPDATE_MEDICINE = MEDICINE + "/updateMedicine"
+
+const BILL = LINK + "/Bill"
+
+export const GET_BILL_DETAILS  = BILL + "/getBillDetails"

@@ -5,7 +5,14 @@ public class AppointmentDTO {
     private String employeeCCCD;
     private String status;
     private String disease;
+    private int appointmentID;
 
+    public int getAppointmentID() {
+        return appointmentID;
+    }
+    public void setAppointmentID(int appointmentID) {
+        this.appointmentID = appointmentID;
+    }
     public String getStatus() {
         return status;
     }

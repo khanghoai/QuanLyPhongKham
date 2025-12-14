@@ -20,7 +20,6 @@ public class Patient {
     private String patientSex;
     private LocalDate patientBirth;
 
-    
     public int getPatientID() {
         return patientID;
     }

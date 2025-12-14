@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.DTO.AppointmentDTO;
+import com.example.demo.DTO.MedicalDTO;
 import com.example.demo.Entity.Appointment;
 import com.example.demo.Entity.Patient;
 import com.example.demo.Service.PatientService;
@@ -35,4 +36,14 @@ public class PatientController {
         return patientService.addAppointment(appointmentDTO);
     }
 
+    @PostMapping("/acceptAppointment")
+    public MedicalDTO acceptAppointment(@RequestBody AppointmentDTO appointmentDTO) {
+        return patientService.acceptAppointment(appointmentDTO);
+    }
+
+    @PostMapping("/updateMedical")
+    public MedicalDTO updateMedical(@RequestBody MedicalDTO medicalDTO) {
+        return patientService.updateMedical(medicalDTO);
+    }
+    
 }

@@ -56,13 +56,13 @@ console.log(days[today.getDay()]);
 
   const getShiftNow = () => {
     if(checkShift(MORINGSHIFT)){
-      return "0"
+      return "Sáng"
     }
     else if(checkShift(NOONSHIFT)){
-      return "1"
+      return "Chiều"
     }
     else if(checkShift(EVENINGSHIFT)){
-      return "2"
+      return "Tối"
     }
     return "3"
   }
@@ -122,7 +122,7 @@ console.log(days[today.getDay()]);
             </tr>
           </thead>
           <tbody>
-            {filterEmployees.map((emp) => (
+            {filterEmployees?.map((emp) => (
               <tr key={emp.employeeName}>
                 <td>{emp.employeeName}</td>
                 <td>{getShiftNow()}</td>

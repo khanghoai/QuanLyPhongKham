@@ -29,7 +29,7 @@ export default function Patient() {
   });
 
   useEffect(() => {
-    if(position != "leTan"){
+    if(position != "Lễ tân"){
       navigate("/");
     }
   }, []);
@@ -39,6 +39,17 @@ export default function Patient() {
     const res = await postData(FIND_PATIENT,CCCD);
     if(res.patientCCCD != null){
       setPatient(res);
+      setAppointment({
+        patientCCCD : "",
+        employeeCCCD : "",
+        status: "",
+        disease : ""
+      })
+      setDoctor({
+        employeeName : "",
+        roomName : "",
+        employeeCCCD : ""
+      })
     }
     else{
       alert("Không tìm thấy bệnh nhân")
@@ -70,17 +81,16 @@ export default function Patient() {
       employeeCCCD: doctor.employeeCCCD,
       status: "Đang chờ"
     }
-    console.log(newValue)
     setAppointment(newValue)
     await postData(ADD_APPOINTMENT,newValue);
   }
 
   return (
-    <div className="employee-container">
-      <div className="employee-header">
-        <h2 className="employee-title">Bệnh nhân</h2>
+    <div className="patient-container">
+      <div className="patient-header">
+        <h2 className="patient-title">Bệnh nhân</h2>
         <input
-          className="emp-search-input"
+          className="patient-search-input"
           type="text"
           placeholder="Nhập tên cần tìm..."
           value={searchText}
@@ -91,7 +101,7 @@ export default function Patient() {
             marginBottom: "10px",
             borderRadius: "4px",
           }}/>
-        <button className="emp-search-btn" onClick={findPatient}>
+        <button className="patient-search-btn" onClick={findPatient}>
           Tìm kiếm
         </button>
       </div>
@@ -153,9 +163,9 @@ export default function Patient() {
         </form>
       </div>
       <div>
-        <h3>Lịch Hẹn</h3>
+        <h3 className="appointment-header">Lịch Hẹn</h3>
         {appointment.employeeCCCD == "" &&
-        <div className="add-patient-form-group">
+        <div className="appointment-form-group">
           <label className="add-patient-lable">Tình trạng</label>
           <input
             className="add-patient-input"
@@ -166,7 +176,7 @@ export default function Patient() {
           />
           {doctor.employeeName == "" && <button type="button" onClick={findDoctor}>Tìm bác sĩ</button>}
           {doctor.employeeName != "" && 
-            <div>
+            <div className="appointment-doctor">
               <p>{doctor.employeeName}</p>
               <p>{doctor.roomName}</p>
               <button type="button" onClick={addAppointment}>Tạo lịch hẹn</button>

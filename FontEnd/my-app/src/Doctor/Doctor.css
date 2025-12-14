@@ -79,3 +79,78 @@
 .appointment-popup button:hover {
   background: #357ABD;
 }
+
+.medical-form button {
+  margin-top: 20px;
+  padding: 12px 0;
+  width: 100%;
+  background: #2ecc71;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s, transform 0.15s, box-shadow 0.15s;
+}
+
+.medical-form button:hover:not(:disabled) {
+  background: #27ae60;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.medical-form button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+.medical-form button:disabled {
+  background: #bdbdbd;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.doctor-notify-container {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: fadeInBg 0.3s ease;
+}
+
+.doctor-notify {
+  background: #ffffff;
+  padding: 25px 30px;
+  border-radius: 14px;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  animation: scaleIn 0.3s ease;
+}
+
+.doctor-notify p {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2ecc71;
+  margin-bottom: 20px;
+}
+
+.emp-detail-button {
+  padding: 10px 22px;
+  background: #4A90E2;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.25s, transform 0.15s;
+}
+
+.emp-detail-button:hover {
+  background: #357ABD;
+  transform: translateY(-1px);
+}

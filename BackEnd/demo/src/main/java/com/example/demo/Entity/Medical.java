@@ -25,6 +25,14 @@ public class Medical {
     @JoinColumn(name = "employeeID")
     private Employee employee;
 
+    public int getMedicalID() {
+        return medicalID;
+    }
+
+    public void setMedicalID(int medicalID) {
+        this.medicalID = medicalID;
+    }
+
     public Patient getPatient() {
         return patient;
     }

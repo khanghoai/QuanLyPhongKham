@@ -14,7 +14,7 @@ export default function Employee() {
 
 
   useEffect(() => {
-    if(position != "nhanSu"){
+    if(position != "Nhân sự"){
       navigate("/");
     }
     else{
@@ -27,17 +27,6 @@ export default function Employee() {
     fun();
     }
   }, []);
-
-  const getPosition = (position) => {
-    switch(position){
-      case 'nhanSu':
-        return 'Nhân Sự'
-      case 'bacSi' :
-        return 'Bác Sĩ'
-      case 'leTan' :
-        return "Lễ Tân"
-    }
-  }
 
   const handleSearch = () => {
     if(searchText == ""){
@@ -112,7 +101,7 @@ export default function Employee() {
             {filterEmp.map((emp) => (
               <tr key={emp.employeeCCCD}>
                 <td>{emp.employeeName}</td>
-                <td>{getPosition(emp.employeePosition)}</td>
+                <td>{emp.employeePosition}</td>
                 <td>{emp.employeePhone}</td>
                 <td>{emp.employeeCCCD}</td>
                 <td>

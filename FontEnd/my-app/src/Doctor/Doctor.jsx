@@ -3,11 +3,15 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import SockJS from "sockjs-client";
 import * as Stomp from "stompjs";
 import "./Doctor.css";
+import { postData } from "../api/apiMethod";
+import { ACCEPT_APPOINTMENT, UPDATE_MEDICAL } from "../api/api";
 
 export default function Doctor() {
   const [haveAppointment,setHaveAppointment] = useState(false);
+  const [appointment,setAppointment] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
+  const [isSubmitform,setIsSubmitForm] = useState(false);
   const {position} = location.state || {};
   const {doctorID} = useParams();
   const [medical, setMedical] = useState({
@@ -19,7 +23,7 @@ export default function Doctor() {
   })
 
   useEffect(() => {
-    if(position != "bacSi"){
+    if(position != "Bác sĩ"){
       navigate("/");
     }
   }, []);
@@ -30,8 +34,10 @@ export default function Doctor() {
     stompClient.connect({}, () => {
       stompClient.subscribe(`/topic/appointment/${doctorID}`, (message) => {
         const appointment = JSON.parse(message.body);
+        setAppointment(appointment);
         setHaveAppointment(true);
       });
+      
     });
     
     return () => {
@@ -43,8 +49,26 @@ export default function Doctor() {
     setMedical({...medical, [e.target.name] : e.target.value})
   }
 
-  const updateMedical = () => {
+  const acceptAppointment = async () => {
+    const res = await postData(ACCEPT_APPOINTMENT,appointment);
+    setMedical(res);
+    setHaveAppointment(false);
+  }
 
+  const updateMedical = async () => {
+    await postData(UPDATE_MEDICAL,medical)
+    setIsSubmitForm(true);
+  }
+
+  const exit = () => {
+    setMedical({
+      patientName : "",
+      patientSex : "",
+      patientAge : "",
+      diagnosis : "",
+      treatment : ""
+    })
+    setIsSubmitForm(false);
   }
 
   return (
@@ -95,20 +119,30 @@ export default function Doctor() {
           </div>
           <div className="medical-form-group">
             <label className="medical-lable">Điều trị</label>
-            <input
+            <textarea
               className="medical-input"
-              type="text"
               name="treatment"
               value={medical.treatment}
               onChange={handleChange}
+              rows={4}
+              style={{ resize: "vertical" }}
             />
           </div>
+          <button type="button" onClick={updateMedical} disabled= {medical.patientName == ""}>Cập nhật</button>
       </form>
-      {!haveAppointment &&
+      {haveAppointment &&
         <div className="appointment-popup">
           <p>Có lịch hẹn</p>
-          <button type="button">Chấp nhận</button>
+          <button type="button" onClick={acceptAppointment}>Chấp nhận</button>
         </div>
+      }
+      {isSubmitform && 
+      <div className="doctor-notify-container">
+        <div className="doctor-notify">
+          <p>Cập nhật thành công</p>
+          <button onClick={exit} className="emp-detail-button">Thoát</button>
+        </div>
+      </div>
       }
     </div>
   );

@@ -26,7 +26,7 @@ export default function Calendar() {
   ];
 
   useEffect(() => {
-    if(position != 'nhanSu'){
+    if(position != 'Nhân sự'){
       navigate("/");
     }
     else{
