@@ -1,4 +1,6 @@
 package com.example.demo.Entity;
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +15,17 @@ public class Account {
     @OneToOne
     @JoinColumn(name = "employeeID")
     private Employee employee;
+
+    @OneToMany(mappedBy = "account")
+    private List<Login> logins;
+
+    public List<Login> getLogins() {
+        return logins;
+    }
+
+    public void setLogins(List<Login> logins) {
+        this.logins = logins;
+    }
 
     public int getAccountID() {
         return accountID;

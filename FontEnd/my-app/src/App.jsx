@@ -1,25 +1,29 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom"
 import AdminPage from './AdminPage/AdminPage'
+import { LOGOUT } from "./api/api"
+import { postData } from "./api/apiMethod"
 import './App.css'
-import BenhAn from './BenhAn/BenhAn'
+import Bill from "./Bill/Bill"
 import Calendar from "./Calendar/Calendar"
+import Doctor from "./Doctor/Doctor"
 import Employee from './Employee/Employee'
 import EmployeeDetail from './EmployeeDetail/EmployeeDetail'
 import Login from './Login/Login'
+import Medicine from "./Medicine/Medicine"
+import MedicineDetail from "./MedicineDetail/MedicineDetail"
 import NotFound from "./NotFound/NotFound"
-import QuanLyLichHen from './QuanLyLichHen/QuanLyLichHen'
-import QuanLyThuoc from './QuanLyThuoc/QuanLyThuoc'
+import Patient from "./Patient/Patient"
 import Room from "./Room/Room"
-import ThanhToan from './ThanhToan/ThanhToan'
-import ThemBenhNhan from './ThemBenhNhan/ThemBenhNhan'
-import ThemThuoc from './ThemThuoc/ThemThuoc'
-import UpdateMedicine from './UpdateMedicine/UpdateMedicine'
 
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
+  const {position, cccd} = location.state || {}
 
-  const logOut = () => {
+  const logOut = async () => {
+    if(cccd != "1"){
+      await postData(LOGOUT,cccd)
+    }
     navigate("/");
   }
 
@@ -31,17 +35,21 @@ function App() {
         <header className="quan-ly-header">
           {allowedHeaderQuanLy.includes(location.pathname) &&
             <div className="nhanSu"> 
-              <button onClick={() => {
+              <button
+                className={location.pathname == "/Employee" ? "page-chose" : ""}
+                onClick={() => {
                 navigate("/Employee", {
                   state : {
-                    position : 'nhanSu'
+                    position : 'Nhân sự'
                   }
                 })
               }}>Nhân viên</button>
-              <button onClick={() => {
+              <button
+                className={location.pathname == "/Room" ? "page-chose" : ""}
+                onClick={() => {
                 navigate("/Room", {
                   state : {
-                    position : 'nhanSu'
+                    position : 'Nhân sự'
                   }
                 })
               }}>Phòng</button>
@@ -59,14 +67,12 @@ function App() {
         <Route path="/Employee" element={<Employee />} />
         <Route path="/EmployeeDetail" element={<EmployeeDetail />} />
         <Route path='/Room' element={<Room/>} />
-        <Route path="/QuanLyLichHen" element={<QuanLyLichHen />} />
-        <Route path="/ThemThuoc" element={<ThemThuoc />} />
-        <Route path="/ThemBenhNhan" element={<ThemBenhNhan />} />
-        <Route path="/BenhAn" element={<BenhAn />} />
-        <Route path='/QuanLyThuoc' element={<QuanLyThuoc />} />
-        <Route path='/ThanhToan' element={<ThanhToan />} />
-        <Route path='/UpdateMedicine' element={<UpdateMedicine/>} />
         <Route path='/Calendar' element={<Calendar/>} />
+        <Route path='/Patient' element={<Patient/>} />
+        <Route path='/Doctor/:doctorID' element={<Doctor/>} />
+        <Route path='/Medicine' element={<Medicine/>} />
+        <Route path='/MedicineDetail' element={<MedicineDetail/>} />
+        <Route path='/Bill' element={<Bill/>} />
         <Route path='*' element={<NotFound/>} />
       </Routes>
     </>

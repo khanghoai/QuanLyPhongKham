@@ -11,7 +11,7 @@ export default function EmployeeDetail() {
     employeeCCCD: "",
     employeeSex: "",
     employeeBirth: "",
-    employeePosition: "",
+    employeePosition: "Bác sĩ",
   });
   const navigate = useNavigate();
   const location = useLocation();
@@ -20,7 +20,7 @@ export default function EmployeeDetail() {
   const [isDelete , SetIsDelete] = useState(false);
 
   useEffect(() => {
-    if(position != 'admin' && position != 'nhanSu'){
+    if(position != 'admin' && position != 'Nhân sự'){
       navigate("/");
     }
     if(fun == "update"){
@@ -42,7 +42,7 @@ export default function EmployeeDetail() {
   const addCalendar = () => {
     navigate("/Calendar", {
       state : {
-        position : "nhanSu",
+        position : "Nhân sự",
         emp : employee,
         fun : 'add'
       }
@@ -76,7 +76,7 @@ export default function EmployeeDetail() {
     e.preventDefault();
     navigate("/Employee",{
       state : {
-        position : 'nhanSu',
+        position : 'Nhân sự',
       }
     })
   }
@@ -145,11 +145,11 @@ export default function EmployeeDetail() {
             name="employeePosition"
             value={employee.employeePosition}
             onChange={handleChange}>
-            <option value="">Chọn chức vụ</option>
-            <option value="bacSi">Bác sĩ</option>
-            <option value="leTan">Lễ Tân</option>
-            <option value="nhaThuoc">Nhà thuốc</option>
-            <option value="nhanSu">Nhân sự</option>
+            <option value="Bác sĩ">Bác sĩ</option>
+            <option value="Lễ tân">Lễ Tân</option>
+            <option value="Nhà thuốc">Nhà thuốc</option>
+            <option value="Nhân sự">Nhân sự</option>
+            <option value="Thu ngân">Thu ngân</option>
           </select>
         </div>
         {fun == "add" &&

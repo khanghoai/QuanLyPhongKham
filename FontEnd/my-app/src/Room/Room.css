@@ -31,12 +31,16 @@
 
 .room-side-bar button:hover {
   background: #4e92ff;
-  color: white;
   transform: translateX(4px);
 }
 
 .room-side-bar button:active {
   background: #3c7be0;
+}
+
+.room-side-bar-button-active{
+  background: #4e92ff !important;
+  transform: translateX(4px);
 }
 
 .room-emp-container {
@@ -71,6 +75,14 @@
 .room-emp-search-input:focus {
   border-color: #42a5f5;
   box-shadow: 0 0 6px rgba(66, 165, 245, 0.4);
+}
+
+.calendar-edit{
+  width: 150px;
+}
+
+.calendar-name{
+  width: 300px;
 }
 
 .room-emp-search-btn {
@@ -111,6 +123,7 @@
 .room-emp-add-btn:hover {
   background: #1565c0;
 }
+
 
 
 /* v */

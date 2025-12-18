@@ -2,10 +2,13 @@ package com.example.demo.Repository;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.Entity.Account;
 import com.example.demo.Entity.Employee;
+
+import jakarta.transaction.Transactional;
 
 import java.util.Optional;
 
@@ -16,4 +19,8 @@ public interface AccountRepository extends JpaRepository<Account,Integer> {
     Optional<Account> findByUsernameAndPassword(String username, String password);
 
     Account findByEmployee(Employee employee);
+
+    @Transactional
+    @Modifying
+    void deleteByEmployee(Employee employee);
 }

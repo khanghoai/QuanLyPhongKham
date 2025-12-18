@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import "./Employee.css";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getData, postData } from "../api/apiMethod";
 import { GET_EMPLOYEES } from "../api/api";
+import { getData } from "../api/apiMethod";
+import "./Employee.css";
 
 export default function Employee() {
   const [employees, setEmployees] = useState([]);
@@ -14,27 +14,19 @@ export default function Employee() {
 
 
   useEffect(() => {
-    if(position != "nhanSu"){
+    if(position != "Nhân sự"){
       navigate("/");
     }
     else{
       const fun = async () =>{
         const res = await getData(GET_EMPLOYEES);
+        console.log(res);
         setEmployees(res);
         setfilterEmp(res);
       }
     fun();
     }
   }, []);
-
-  const getPosition = (position) => {
-    switch(position){
-      case 'nhanSu':
-        return 'Nhân Sự'
-      case 'bacSi' :
-        return 'Bác Sĩ'
-    }
-  }
 
   const handleSearch = () => {
     if(searchText == ""){
@@ -51,7 +43,7 @@ export default function Employee() {
   const add = () => {
     navigate("/EmployeeDetail", {
       state : {
-        position : 'nhanSu',
+        position : 'Nhân sự',
         emp : null,
         fun : 'add'
         //fun chỉ có thể là add hoặc update. Nếu fun là update thì emp phải có giá trị
@@ -63,7 +55,7 @@ export default function Employee() {
   const edit = (employee) => {
     navigate("/EmployeeDetail", {
       state : {
-        position : 'nhanSu',
+        position : 'Nhân sự',
         emp : employee,
         fun : 'update'
         //fun chỉ có thể là add hoặc update. Nếu fun là update thì emp phải có giá trị
@@ -75,21 +67,18 @@ export default function Employee() {
     <div className="employee-container">
       <div className="employee-header">
         <h2 className="employee-title">Danh Sách Nhân Viên</h2>
-        <input
-          className="emp-search-input"
-          type="text"
-          placeholder="Nhập tên cần tìm..."
-          value={searchText}
-          onChange={e => setSearchText(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "8px",
-            marginBottom: "10px",
-            borderRadius: "4px",
-          }}/>
-        <button className="emp-search-btn" onClick={handleSearch}>
-          Tìm kiếm
-        </button>
+        <div>
+            <input
+              className="room-emp-search-input"
+              type="text"
+              placeholder="Nhập CCCD cần tìm..."
+              value={searchText}
+              onChange={e => setSearchText(e.target.value)}
+            />
+            <button className="room-emp-search-btn" onClick={handleSearch}>
+              Tìm kiếm
+            </button>
+          </div>
         <button className="add-employee-btn" onClick={add}>
           Thêm nhân viên
         </button>
@@ -107,9 +96,9 @@ export default function Employee() {
           </thead>
           <tbody>
             {filterEmp.map((emp) => (
-              <tr key={emp.employeeID}>
+              <tr key={emp.employeeCCCD}>
                 <td>{emp.employeeName}</td>
-                <td>{getPosition(emp.employeePosition)}</td>
+                <td>{emp.employeePosition}</td>
                 <td>{emp.employeePhone}</td>
                 <td>{emp.employeeCCCD}</td>
                 <td>

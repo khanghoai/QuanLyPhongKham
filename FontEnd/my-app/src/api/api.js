@@ -10,6 +10,8 @@ export const SET_EMPLOYEE_QUIT = ACCOUNT + "/setEmployeeQuit"
 export const GET_ALL_PHONG_KHAM = ACCOUNT + "/getAllPhongKham"
 export const THEM_PHONG_KHAM = ACCOUNT + "/themPhongKham"
 export const CREATE_ACCOUNT = ACCOUNT + "/createAccount"
+export const GET_DOCTOR_EMPLOYEE = ACCOUNT + "/getDoctorEmployee"
+export const LOGOUT = ACCOUNT + "/logout"
 
 const ROOM = LINK + "/Room"
 
@@ -18,3 +20,21 @@ export const GET_ROOMS = ROOM + "/getRooms"
 export const ADD_CALENDARS = ROOM + "/addCalendars"
 export const GET_CALENDAR_BY_ROOM = ROOM + "/getCalendarByRoom"
 export const GET_CALENDAR_BY_EMPLOYEE = ROOM + "/getCalendarByEmployee"
+
+const PATIENT = LINK + "/Patient"
+
+export const FIND_PATIENT = PATIENT + "/findPatient"
+export const ADD_PATIENT = PATIENT + "/addPatient"
+export const ADD_APPOINTMENT = PATIENT + "/addAppointment"
+export const ACCEPT_APPOINTMENT = PATIENT + "/acceptAppointment"
+export const UPDATE_MEDICAL = PATIENT + "/updateMedical"
+
+const MEDICINE = LINK + "/Medicine"
+
+export const GET_MEDICINES = MEDICINE + "/getMedicines"
+export const ADD_MEDICINE = MEDICINE + "/addMedicine"
+export const UPDATE_MEDICINE = MEDICINE + "/updateMedicine"
+
+const BILL = LINK + "/Bill"
+
+export const GET_BILL_DETAILS  = BILL + "/getBillDetails"

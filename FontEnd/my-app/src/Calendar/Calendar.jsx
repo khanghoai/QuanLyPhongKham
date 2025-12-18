@@ -26,7 +26,7 @@ export default function Calendar() {
   ];
 
   useEffect(() => {
-    if(position != 'nhanSu'){
+    if(position != 'Nhân sự'){
       navigate("/");
     }
     else{
@@ -42,6 +42,7 @@ export default function Calendar() {
   const getRooms = async () =>{
     const res = await getData(GET_ROOMS)
     setRooms(res);
+    setRoomChose(res[0]);
   }
 
   const getCalendar = async () => {
@@ -93,9 +94,9 @@ export default function Calendar() {
 
   const exit = (e) => {
     e.preventDefault();
-    navigate("/Employee",{
+    navigate("/Room",{
       state : {
-        position : 'nhanSu',
+        position : 'Nhân sự',
       }
     })
   }

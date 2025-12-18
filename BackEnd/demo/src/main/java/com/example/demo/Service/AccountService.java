@@ -1,15 +1,39 @@
 package com.example.demo.Service;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.DTO.DoctorDTO;
+import com.example.demo.DTO.EmployeeDTO;
+import com.example.demo.DTO.LoginDTO;
 import com.example.demo.Entity.Account;
+import com.example.demo.Entity.Disease;
 import com.example.demo.Entity.Employee;
+import com.example.demo.Entity.Login;
+import com.example.demo.Entity.Room;
 import com.example.demo.Repository.AccountRepository;
+import com.example.demo.Repository.CalendarRepository;
 import com.example.demo.Repository.EmployeeRepository;
+import com.example.demo.Repository.LoginRepository;
+import com.example.demo.Repository.RoomRepository;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @Service
 public class AccountService {
@@ -18,19 +42,63 @@ public class AccountService {
     private AccountRepository accountRepository;
     @Autowired
     private EmployeeRepository employeeRepository;
+    @Autowired
+    private CalendarRepository calendarRepository;
+    @Autowired
+    private LoginRepository loginRepository;
+    @Autowired
+    private RoomRepository roomRepository;
+    @Value("${openai.api.key}")
+    private String openAIKey;
     
-    public Employee login(String username, String password){
-        if(accountRepository.findByUsernameAndPassword(username, password).isPresent()){
-            return employeeRepository.findById(accountRepository.findByUsernameAndPassword(username, password).get().getEmployee().getEmployeeID()).get();
+    public LoginDTO login(String username, String password){
+        Optional<Account> account = accountRepository.findByUsernameAndPassword(username,password);
+        if(account.isPresent()){
+            Login login = new Login();
+            Date date = new Date();
+            login.setTimeLogin(new SimpleDateFormat("HH:mm").format(date));
+            login.setDateLogin(new SimpleDateFormat("d/M/yyyy").format(date));
+            login.setAccount(account.get());
+            loginRepository.save(login);
+            Employee employee = employeeRepository.findById(accountRepository.findByUsernameAndPassword(username, password).get().getEmployee().getEmployeeID()).get();
+            employee.setEmployeeStatus("có mặt");
+            employeeRepository.save(employee);
+            LoginDTO loginDTO = new LoginDTO();
+            loginDTO.setEmployeeCCCD(employee.getEmployeeCCCD());
+            loginDTO.setEmployeeName(employee.getEmployeeName());
+            loginDTO.setEmployeePosition(employee.getEmployeePosition());
+            loginDTO.setEmployeeID(employee.getEmployeeID());
+            return loginDTO;
         }
-        return new Employee() ;
+        return new LoginDTO();
+    }
+
+    public Account logout(String cccd){
+        cccd = cccd.replace("\"", "");
+        Employee employee = employeeRepository.findByEmployeeCCCDAndEmployeeQuitFalse(cccd);
+        employee.setEmployeeStatus("vắng");
+        employeeRepository.save(employee);
+        return new Account();
     }
     
-    public List<Employee> getEmployees(){
-        return employeeRepository.findByEmployeeQuitFalse();
+    public List<EmployeeDTO> getEmployees(){
+        List<Employee> employees = employeeRepository.findByEmployeeQuitFalse();
+        List<EmployeeDTO> employeeDTOs = new ArrayList<EmployeeDTO>();
+        for (Employee employee : employees) {
+            EmployeeDTO employeeDTO = new EmployeeDTO();
+            employeeDTO.setEmployeeName(employee.getEmployeeName());
+            employeeDTO.setEmployeeBirth(employee.getEmployeeBirth());
+            employeeDTO.setEmployeeCCCD(employee.getEmployeeCCCD());
+            employeeDTO.setEmployeePhone(employee.getEmployeePhone());
+            employeeDTO.setEmployeePosition(employee.getEmployeePosition());
+            employeeDTO.setEmployeeSex(employee.getEmployeeSex());
+            employeeDTOs.add(employeeDTO);
+        }
+        return employeeDTOs;
     }
 
     public Employee addEmployee(Employee employee){
+        employee.setEmployeeStatus("vắng");
         employee.setEmployeeQuit(false);
         employee = employeeRepository.save(employee);
         Account account = new Account();
@@ -42,21 +110,141 @@ public class AccountService {
     }
 
     public Employee setEmployeeQuit(Employee employee){
-        employee.setAccount(null);
-        employee.setEmployeeQuit(true);
-        return employeeRepository.save(employee);
+        Employee e = employeeRepository.findByEmployeeCCCDAndEmployeeQuitFalse(employee.getEmployeeCCCD());
+        e.setEmployeeQuit(true);
+        e.setAccount(null);
+        e.setRoom(null);
+        employeeRepository.save(e);
+        accountRepository.deleteByEmployee(e);
+        calendarRepository.deleteByEmployee(e);
+        return new Employee();
     }
 
-    // public Account addAccount(Account account){
-    //     return accountRepository.save(account);
-    // }
+    public List<DoctorDTO> getDoctorEmployee(String diseases) throws IOException, InterruptedException{
+        diseases = diseases.replace("\"", "");
+        List<Room> rooms = roomRepository.findAll();
+        List<String> roomNames = new ArrayList<>();
+        for (Room room : rooms) {
+            roomNames.add(room.getRoomName());
+        }
 
-    // public boolean checkAccount(Employee nv){
-    //     if(AccountRepository.findByNhanVien(nv).isPresent()){
-    //         return true;
-    //     }
-    //     return false;
-    // }
+        JsonNode suggest = RoomSugget(diseases,roomNames);
+        JsonNode roomName = suggest.get("possibleClinic");
+        List<DoctorDTO> doctors = new ArrayList<>();
+        for (JsonNode room : roomName) {
+            String name = room.asText();
+            Room getRoom = roomRepository.findByRoomName(name).get();
+            List<Employee> employees = getRoom.getEmployees();
+            for(Employee employee: employees){
+                if(employee.getEmployeeStatus().equals("có mặt")){
+                    DoctorDTO doctor = new DoctorDTO();
+                    doctor.setEmployeeName(employee.getEmployeeName());
+                    doctor.setRoomName(name);
+                    doctor.setEmployeeCCCD(employee.getEmployeeCCCD());
+                    doctors.add(doctor);
+                }
+            }
+        }
+        System.out.println(suggest);
+        
+        // Room room = roomRepository.findByRoomName(roomName).get();
+        // Room room = roomRepository.findByRoomName(roomName).get();
+        // List<Employee> employees = room.getEmployees();
+        
+        // if(!employees.isEmpty()){
+        //     for (Employee employee : employees) {
+        //         if(employee.getEmployeeStatus().equals("có mặt")){
+        //             doctor.setEmployeeName(employee.getEmployeeName());
+        //             doctor.setRoomName(roomName);
+        //             doctor.setEmployeeCCCD(employee.getEmployeeCCCD());
+        //             return doctor;`
+        //         }
+        //     }
+        // }
+        
+        return doctors;
+    }
+
+    public JsonNode RoomSugget(String disease, List<String> roomNames) throws IOException, InterruptedException{
+        ObjectMapper mapper = new ObjectMapper();
+
+        ObjectNode system = mapper.createObjectNode();
+        system.put("role", "system");
+        system.put(
+            "content",
+            """
+            Bạn là trợ lý y tế cho một phòng khám.
+            CHỈ được đề xuất phòng khám phù hợp dựa trên triệu chứng.
+            KHÔNG đưa ra chẩn đoán cuối cùng.
+            KHÔNG giải thích.
+            LUÔN trả lời CHỈ DƯỚI DẠNG JSON.
+
+            Nếu không có phòng phù hợp, trả về:
+            {
+            "possibleClinic": []
+            }
+            """
+        );
+
+        ObjectNode assistant = mapper.createObjectNode();
+        assistant.put("role", "assistant");
+        assistant.put(
+            "content",
+            mapper.writeValueAsString(
+                Map.of("roomName", roomNames)
+            )
+        );
+
+        ObjectNode user = mapper.createObjectNode();
+        user.put("role", "user");
+        user.put(
+            "content",
+            """
+            Triệu chứng bệnh nhân:
+            %s
+
+            Hãy chọn phòng khám phù hợp NHẤT từ danh sách trên.
+            """
+            .formatted(disease)
+        );
+
+        ArrayNode messages = mapper.createArrayNode();
+        messages.add(system);
+        messages.add(assistant);
+        messages.add(user);
+
+        ObjectNode jsonBody = mapper.createObjectNode();
+        jsonBody.put("model", "gpt-4o-mini");
+        jsonBody.set("messages", messages);
+        jsonBody.put("temperature", 0); 
+
+        HttpClient client = HttpClient.newHttpClient();
+
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create("https://api.openai.com/v1/chat/completions"))
+            .header("Content-Type", "application/json")
+            .header("Authorization", "Bearer " + openAIKey)
+            .POST(HttpRequest.BodyPublishers.ofString(
+                mapper.writeValueAsString(jsonBody)
+            ))
+            .build();
+
+        HttpResponse<String> response =
+            client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        ObjectNode json =
+            (ObjectNode) mapper.readTree(response.body());
+
+        String content =
+            json.withArray("choices")
+                .get(0)
+                .get("message")
+                .get("content")
+                .asText()
+                .trim();
+
+        return mapper.readTree(content);
+    } 
 
     public Employee updateEmployee(Employee employee){
         return employeeRepository.save(employee);
