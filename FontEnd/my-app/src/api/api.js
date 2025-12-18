@@ -20,6 +20,7 @@ export const GET_ROOMS = ROOM + "/getRooms"
 export const ADD_CALENDARS = ROOM + "/addCalendars"
 export const GET_CALENDAR_BY_ROOM = ROOM + "/getCalendarByRoom"
 export const GET_CALENDAR_BY_EMPLOYEE = ROOM + "/getCalendarByEmployee"
+export const UPDATE_CALENDAR = ROOM + "/updateCalendar"
 
 const PATIENT = LINK + "/Patient"
 

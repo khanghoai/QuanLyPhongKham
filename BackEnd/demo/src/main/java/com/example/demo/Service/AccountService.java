@@ -21,7 +21,6 @@ import com.example.demo.DTO.DoctorDTO;
 import com.example.demo.DTO.EmployeeDTO;
 import com.example.demo.DTO.LoginDTO;
 import com.example.demo.Entity.Account;
-import com.example.demo.Entity.Disease;
 import com.example.demo.Entity.Employee;
 import com.example.demo.Entity.Login;
 import com.example.demo.Entity.Room;
@@ -119,7 +118,7 @@ public class AccountService {
         calendarRepository.deleteByEmployee(e);
         return new Employee();
     }
-
+    
     public List<DoctorDTO> getDoctorEmployee(String diseases) throws IOException, InterruptedException{
         diseases = diseases.replace("\"", "");
         List<Room> rooms = roomRepository.findAll();
@@ -145,22 +144,6 @@ public class AccountService {
                 }
             }
         }
-        System.out.println(suggest);
-        
-        // Room room = roomRepository.findByRoomName(roomName).get();
-        // Room room = roomRepository.findByRoomName(roomName).get();
-        // List<Employee> employees = room.getEmployees();
-        
-        // if(!employees.isEmpty()){
-        //     for (Employee employee : employees) {
-        //         if(employee.getEmployeeStatus().equals("có mặt")){
-        //             doctor.setEmployeeName(employee.getEmployeeName());
-        //             doctor.setRoomName(roomName);
-        //             doctor.setEmployeeCCCD(employee.getEmployeeCCCD());
-        //             return doctor;`
-        //         }
-        //     }
-        // }
         
         return doctors;
     }

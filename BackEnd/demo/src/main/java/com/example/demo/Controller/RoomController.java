@@ -44,4 +44,10 @@ public class RoomController {
     public List<CalendarDTO> getCalendarByEmployee(@RequestBody Employee employee) {
         return roomService.getCalendars(employee);
     }
+
+    @PostMapping("/updateCalendar")
+    public CalendarDTO updateCalendar(@RequestBody List<CalendarDTO> calendarDTOs) {
+        return roomService.updateCalendar(calendarDTOs);
+    }
+    
 }

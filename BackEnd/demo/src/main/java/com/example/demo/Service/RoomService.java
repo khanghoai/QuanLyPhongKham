@@ -76,13 +76,11 @@ public class RoomService {
             if(!room.getEmployees().isEmpty()){
                 List<RoomEmployeeDTO> roomEmployeeDTOs = new ArrayList<RoomEmployeeDTO>();
                 for (Employee employee : room.getEmployees()){
-                    if(checkCalendar(employee)){
-                        RoomEmployeeDTO roomEmployeeDTO = new RoomEmployeeDTO();
-                        roomEmployeeDTO.setEmployeeID(employee.getEmployeeID());
-                        roomEmployeeDTO.setEmployeeName(employee.getEmployeeName());
-                        roomEmployeeDTO.setEmployeeStatus(employee.getEmployeeStatus());
-                        roomEmployeeDTOs.add(roomEmployeeDTO);
-                    }
+                    RoomEmployeeDTO roomEmployeeDTO = new RoomEmployeeDTO();
+                    roomEmployeeDTO.setEmployeeID(employee.getEmployeeID());
+                    roomEmployeeDTO.setEmployeeName(employee.getEmployeeName());
+                    roomEmployeeDTO.setEmployeeStatus(employee.getEmployeeStatus());
+                    roomEmployeeDTOs.add(roomEmployeeDTO);
                 }
                 roomDTO.setEmployees(roomEmployeeDTOs);
             }
@@ -90,18 +88,6 @@ public class RoomService {
         }
         return roomDTOs;
     }
-
-    // private boolean checkLogin(Account account){
-    //     List<Login> logins =  account.getLogins();
-    //     if(!logins.isEmpty()){
-    //         Login lastLogin = logins.get(logins.size()-1);
-    //         if(lastLogin.getTimeLogout() == null){
-    //             return true;
-    //         }
-    //         return false;
-    //     }
-    //     return false;
-    // }
 
     private boolean checkCalendar(Employee employee){
         Date now = new Date();
@@ -129,7 +115,7 @@ public class RoomService {
         LocalTime noonShiftStart = LocalTime.of(14, 0);
         LocalTime noonShiftEnd = LocalTime.of(17, 0);
         LocalTime eveningShiftStart = LocalTime.of(19, 0);
-        LocalTime eveningShiftEnd = LocalTime.of(22, 0);
+        LocalTime eveningShiftEnd = LocalTime.of(24, 0);
         if(now.isAfter(morningShiftStart) && now.isBefore(morningShiftEnd)){
             return "0";
         }
@@ -144,7 +130,6 @@ public class RoomService {
 
     public Calendar addCalendars(List<Calendar> calendars){
         Employee employee = calendars.get(0).getEmployee();
-        System.out.println(employee.getRoom().getRoomName());
         employeeRepository.save(employee);
         for (Calendar calendar : calendars) {
             calendarRepository.save(calendar);
@@ -158,6 +143,7 @@ public class RoomService {
         List<CalendarDTO> calendarDTOs = new ArrayList<>();
         for (Calendar calendar : calendars) {
             CalendarDTO calendarDTO = new CalendarDTO();
+            calendarDTO.setCalendarID(calendar.getCalendarID());
             calendarDTO.setShift(calendar.getShift());
             calendarDTO.setDay(calendar.getDay());
             calendarDTO.setEmployeeName(emp.getEmployeeName());
@@ -165,5 +151,14 @@ public class RoomService {
             calendarDTOs.add(calendarDTO);
         }
         return calendarDTOs;
+    }
+
+    public CalendarDTO updateCalendar(List<CalendarDTO> calendarDTOs){
+        for (CalendarDTO calendarDTO : calendarDTOs) {
+            Calendar calendar = calendarRepository.findById(calendarDTO.getCalendarID()).get();
+            calendar.setShift(calendarDTO.getShift());
+            calendarRepository.save(calendar);
+        }
+        return new CalendarDTO();
     }
 }

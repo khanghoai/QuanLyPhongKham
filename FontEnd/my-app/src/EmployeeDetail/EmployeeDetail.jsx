@@ -34,9 +34,14 @@ export default function EmployeeDetail() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitForm(true);
     const res = await postData(ADD_EMPLOYEE,employee);
-    setEmployee(res);
+    navigate("/Calendar", {
+      state : {
+        position : "Nhân sự",
+        emp : res,
+        fun : 'add'
+      }
+    })
   };
 
   const addCalendar = () => {

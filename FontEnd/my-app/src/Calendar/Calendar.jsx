@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { ADD_CALENDARS, ADD_EMPLOYEE, GET_CALENDAR_BY_EMPLOYEE, GET_ROOMS, SET_EMPLOYEE_QUIT, UPDATE_EMPLOYEE } from "../api/api";
+import { ADD_CALENDARS, ADD_EMPLOYEE, GET_CALENDAR_BY_EMPLOYEE, GET_ROOMS, SET_EMPLOYEE_QUIT, UPDATE_CALENDAR, UPDATE_EMPLOYEE } from "../api/api";
 import { getData, postData } from "../api/apiMethod";
 import './Calendar.css';
 
@@ -8,7 +8,7 @@ export default function Calendar() {
   const navigate = useNavigate();
   const location = useLocation();
   const {position, emp, fun} = location.state || {};
-  const [calendar, setCalendar] = useState();
+  const [calendar, setCalendar] = useState([]);
   const [rooms, setRooms] = useState([]);
   const [isSubmitform , setIsSubmitForm] = useState(false);
   const [selectedDay , setSelectedDay] = useState([]);
@@ -36,6 +36,7 @@ export default function Calendar() {
       else{
         getRooms();
       }
+
     }
   },[])
 
@@ -46,7 +47,25 @@ export default function Calendar() {
   }
 
   const getCalendar = async () => {
-    setCalendar(await postData(GET_CALENDAR_BY_EMPLOYEE,emp));
+    const res = await postData(GET_CALENDAR_BY_EMPLOYEE,emp);
+    const room_res = await getData(GET_ROOMS)
+    setRooms(room_res);
+    setCalendar(res);
+    room_res.forEach(r => {
+      if(res[0].roomName == r.roomName){
+        setRoomChose(r);
+      }
+    });
+    const shift = [];
+    const newSelectDay = []
+    res.forEach((e) => {
+      if(e.shift != '---'){
+        newSelectDay.push(e.day)
+      }
+      shift.push(e.shift);
+    });
+    setSelectedDay(newSelectDay);
+    setShift(shift);
   }
 
   const addDay = (dayKey,i) => {
@@ -89,7 +108,19 @@ export default function Calendar() {
   const update = async (e) => {
     e.preventDefault();
     setIsSubmitForm(true);
-    const res = await postData(UPDATE_EMPLOYEE,employee);
+    const body = []
+    shift.forEach((s,i) => {
+      const day = {
+        calendarID : calendar[i].calendarID,
+        shift : s,
+        day : WEEK[i].key,
+        employeeName : calendar[i].employeeName,
+        roomName : calendar[i].roomName,
+      }
+      body.push(day)
+    })
+    console.log(body);
+    await postData(UPDATE_CALENDAR,body);
   };
 
   const exit = (e) => {
@@ -111,16 +142,14 @@ export default function Calendar() {
     const body = []
     emp.room = roomChose;
     shift.forEach((s,i) => {
-      if(s != "---"){
-        const day = {
-          shift: s,
-          day : WEEK[i].key,
-          employee : emp,
-        }
-        body.push(day)
+      const day = {
+        shift: s,
+        day : WEEK[i].key,
+        employee : emp,
       }
+      body.push(day)
     });
-    console.log(body)
+    setIsSubmitForm(true);
     await postData(ADD_CALENDARS,body);
   }
 
@@ -137,7 +166,7 @@ export default function Calendar() {
             className="calendar-input"
             type="text"
             name="employeeName"
-            value={emp.employeeName}
+            value={emp?.employeeName}
             disabled
           />
         </div>
