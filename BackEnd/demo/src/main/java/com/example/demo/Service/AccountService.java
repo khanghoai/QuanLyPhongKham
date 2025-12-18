@@ -174,7 +174,7 @@ public class AccountService {
     //     HttpRequest request = HttpRequest.newBuilder()
     //         .uri(URI.create("https://api.openai.com/v1/chat/completions"))
     //         .header("Content-Type", "application/json")
-    //         .header("Authorization", "Bearer " + "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")
+    //         .header("Authorization", "Bearer " + "")
     //         .POST(HttpRequest.BodyPublishers.ofString(body))
     //         .build();
 
