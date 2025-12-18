@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.DTO.DoctorDTO;
@@ -29,6 +30,7 @@ import com.example.demo.Repository.CalendarRepository;
 import com.example.demo.Repository.EmployeeRepository;
 import com.example.demo.Repository.LoginRepository;
 import com.example.demo.Repository.RoomRepository;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -46,6 +48,8 @@ public class AccountService {
     private LoginRepository loginRepository;
     @Autowired
     private RoomRepository roomRepository;
+    @Value("${openai.api.key}")
+    private String openAIKey;
     
     public LoginDTO login(String username, String password){
         Optional<Account> account = accountRepository.findByUsernameAndPassword(username,password);
@@ -116,89 +120,216 @@ public class AccountService {
         return new Employee();
     }
 
-    public DoctorDTO getDoctorEmployee(String diseases) throws IOException, InterruptedException{
+    // public DoctorDTO getDoctorEmployee(String diseases) throws IOException, InterruptedException{
+    //     diseases = diseases.replace("\"", "");
+    //     List<Room> rooms = roomRepository.findAll();
+    //     List<Map<String, Object>> result = new ArrayList<>();
+    //     for (Room room : rooms) {
+    //         if(!room.getDiseases().isEmpty()){
+    //             List<String> diseasesData = new ArrayList<>();
+    //             for (Disease d : room.getDiseases()) {
+    //                 diseasesData.add(d.getDiseaseName());
+    //             }
+    //             result.add(Map.of(
+    //                 "id", room.getRoomID(),
+    //                 "name", room.getRoomName(),
+    //                 "diseases", diseasesData
+    //             ));
+    //         }
+    //     }
+
+    //     ObjectMapper mapper = new ObjectMapper();
+
+    //     ObjectNode assistantContent = mapper.createObjectNode();
+    //     assistantContent.put("roomData", mapper.writeValueAsString(Map.of("rooms", result)));
+
+    //     ArrayNode messages = mapper.createArrayNode();
+
+    //     ObjectNode sys = mapper.createObjectNode();
+    //     sys.put("role", "system");
+    //     sys.put("content",
+    //         "You are an assistant for a clinic. Always answer with ONLY the room name. " +
+    //         "Do not explain. Do not add extra text. If no room matches, reply exactly: \"Không có phòng phù hợp\"."
+    //     );
+    //     messages.add(sys);
+
+    //     ObjectNode assistant = mapper.createObjectNode();
+    //     assistant.put("role", "assistant");
+    //     assistant.put("content", assistantContent.get("roomData").asText());
+    //     messages.add(assistant);
+
+    //     ObjectNode user = mapper.createObjectNode();
+    //     user.put("role", "user");
+    //     user.put("content", diseases);
+    //     messages.add(user);
+
+    //     ObjectNode jsonBody = mapper.createObjectNode();
+    //     jsonBody.put("model", "gpt-4o-mini");
+    //     jsonBody.set("messages", messages);
+
+    //     String body = mapper.writeValueAsString(jsonBody);
+
+    //     HttpClient client = HttpClient.newHttpClient();
+        
+    //     HttpRequest request = HttpRequest.newBuilder()
+    //         .uri(URI.create("https://api.openai.com/v1/chat/completions"))
+    //         .header("Content-Type", "application/json")
+    //         .header("Authorization", "Bearer " + "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")
+    //         .POST(HttpRequest.BodyPublishers.ofString(body))
+    //         .build();
+
+    //     HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+    //     ObjectNode json = (ObjectNode) mapper.readTree(response.body());
+    //     String roomName = json
+    //         .withArray("choices")
+    //         .get(0)
+    //         .get("message")
+    //         .get("content")
+    //         .asText();
+    //     DoctorDTO doctor = new DoctorDTO();
+
+    //     Room room = roomRepository.findByRoomName(roomName).get();
+    //     List<Employee> employees = room.getEmployees();
+        
+    //     if(!employees.isEmpty()){
+    //         for (Employee employee : employees) {
+    //             if(employee.getEmployeeStatus().equals("có mặt")){
+    //                 doctor.setEmployeeName(employee.getEmployeeName());
+    //                 doctor.setRoomName(roomName);
+    //                 doctor.setEmployeeCCCD(employee.getEmployeeCCCD());
+    //                 return doctor;
+    //             }
+    //         }
+    //     }
+        
+    //     return new DoctorDTO();
+    // }
+
+    public List<DoctorDTO> getDoctorEmployee(String diseases) throws IOException, InterruptedException{
         diseases = diseases.replace("\"", "");
         List<Room> rooms = roomRepository.findAll();
-        List<Map<String, Object>> result = new ArrayList<>();
+        List<String> roomNames = new ArrayList<>();
         for (Room room : rooms) {
-            if(!room.getDiseases().isEmpty()){
-                List<String> diseasesData = new ArrayList<>();
-                for (Disease d : room.getDiseases()) {
-                    diseasesData.add(d.getDiseaseName());
-                }
-                result.add(Map.of(
-                    "id", room.getRoomID(),
-                    "name", room.getRoomName(),
-                    "diseases", diseasesData
-                ));
-            }
+            roomNames.add(room.getRoomName());
         }
 
+        JsonNode suggest = RoomSugget(diseases,roomNames);
+        JsonNode roomName = suggest.get("possibleClinic");
+        List<DoctorDTO> doctors = new ArrayList<>();
+        for (JsonNode room : roomName) {
+            String name = room.asText();
+            Room getRoom = roomRepository.findByRoomName(name).get();
+            List<Employee> employees = getRoom.getEmployees();
+            for(Employee employee: employees){
+                if(employee.getEmployeeStatus().equals("có mặt")){
+                    DoctorDTO doctor = new DoctorDTO();
+                    doctor.setEmployeeName(employee.getEmployeeName());
+                    doctor.setRoomName(name);
+                    doctor.setEmployeeCCCD(employee.getEmployeeCCCD());
+                    doctors.add(doctor);
+                }
+            }
+        }
+        System.out.println(suggest);
+        
+        // Room room = roomRepository.findByRoomName(roomName).get();
+        // Room room = roomRepository.findByRoomName(roomName).get();
+        // List<Employee> employees = room.getEmployees();
+        
+        // if(!employees.isEmpty()){
+        //     for (Employee employee : employees) {
+        //         if(employee.getEmployeeStatus().equals("có mặt")){
+        //             doctor.setEmployeeName(employee.getEmployeeName());
+        //             doctor.setRoomName(roomName);
+        //             doctor.setEmployeeCCCD(employee.getEmployeeCCCD());
+        //             return doctor;`
+        //         }
+        //     }
+        // }
+        
+        return doctors;
+    }
+
+    public JsonNode RoomSugget(String disease, List<String> roomNames) throws IOException, InterruptedException{
         ObjectMapper mapper = new ObjectMapper();
 
-        ObjectNode assistantContent = mapper.createObjectNode();
-        assistantContent.put("roomData", mapper.writeValueAsString(Map.of("rooms", result)));
+        ObjectNode system = mapper.createObjectNode();
+        system.put("role", "system");
+        system.put(
+            "content",
+            """
+            Bạn là trợ lý y tế cho một phòng khám.
+            CHỈ được đề xuất phòng khám phù hợp dựa trên triệu chứng.
+            KHÔNG đưa ra chẩn đoán cuối cùng.
+            KHÔNG giải thích.
+            LUÔN trả lời CHỈ DƯỚI DẠNG JSON.
 
-        ArrayNode messages = mapper.createArrayNode();
-
-        ObjectNode sys = mapper.createObjectNode();
-        sys.put("role", "system");
-        sys.put("content",
-            "You are an assistant for a clinic. Always answer with ONLY the room name. " +
-            "Do not explain. Do not add extra text. If no room matches, reply exactly: \"Không có phòng phù hợp\"."
+            Nếu không có phòng phù hợp, trả về:
+            {
+            "possibleClinic": []
+            }
+            """
         );
-        messages.add(sys);
 
         ObjectNode assistant = mapper.createObjectNode();
         assistant.put("role", "assistant");
-        assistant.put("content", assistantContent.get("roomData").asText());
-        messages.add(assistant);
+        assistant.put(
+            "content",
+            mapper.writeValueAsString(
+                Map.of("roomName", roomNames)
+            )
+        );
 
         ObjectNode user = mapper.createObjectNode();
         user.put("role", "user");
-        user.put("content", diseases);
+        user.put(
+            "content",
+            """
+            Triệu chứng bệnh nhân:
+            %s
+
+            Hãy chọn phòng khám phù hợp NHẤT từ danh sách trên.
+            """
+            .formatted(disease)
+        );
+
+        ArrayNode messages = mapper.createArrayNode();
+        messages.add(system);
+        messages.add(assistant);
         messages.add(user);
 
         ObjectNode jsonBody = mapper.createObjectNode();
         jsonBody.put("model", "gpt-4o-mini");
         jsonBody.set("messages", messages);
-
-        String body = mapper.writeValueAsString(jsonBody);
+        jsonBody.put("temperature", 0); 
 
         HttpClient client = HttpClient.newHttpClient();
-        
+
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create("https://api.openai.com/v1/chat/completions"))
             .header("Content-Type", "application/json")
-            .header("Authorization", "Bearer " + "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")
-            .POST(HttpRequest.BodyPublishers.ofString(body))
+            .header("Authorization", "Bearer " + openAIKey)
+            .POST(HttpRequest.BodyPublishers.ofString(
+                mapper.writeValueAsString(jsonBody)
+            ))
             .build();
 
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        ObjectNode json = (ObjectNode) mapper.readTree(response.body());
-        String roomName = json
-            .withArray("choices")
-            .get(0)
-            .get("message")
-            .get("content")
-            .asText();
-        DoctorDTO doctor = new DoctorDTO();
+        HttpResponse<String> response =
+            client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        Room room = roomRepository.findByRoomName(roomName).get();
-        List<Employee> employees = room.getEmployees();
-        
-        if(!employees.isEmpty()){
-            for (Employee employee : employees) {
-                if(employee.getEmployeeStatus().equals("có mặt")){
-                    doctor.setEmployeeName(employee.getEmployeeName());
-                    doctor.setRoomName(roomName);
-                    doctor.setEmployeeCCCD(employee.getEmployeeCCCD());
-                    return doctor;
-                }
-            }
-        }
-        return new DoctorDTO();
-    }
+        ObjectNode json =
+            (ObjectNode) mapper.readTree(response.body());
+
+        String content =
+            json.withArray("choices")
+                .get(0)
+                .get("message")
+                .get("content")
+                .asText()
+                .trim();
+
+        return mapper.readTree(content);
+    } 
 
     public Employee updateEmployee(Employee employee){
         return employeeRepository.save(employee);

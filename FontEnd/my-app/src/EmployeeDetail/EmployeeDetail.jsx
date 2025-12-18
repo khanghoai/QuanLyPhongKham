@@ -11,7 +11,7 @@ export default function EmployeeDetail() {
     employeeCCCD: "",
     employeeSex: "",
     employeeBirth: "",
-    employeePosition: "bacSi",
+    employeePosition: "Bác sĩ",
   });
   const navigate = useNavigate();
   const location = useLocation();

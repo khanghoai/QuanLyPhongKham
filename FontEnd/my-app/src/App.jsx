@@ -35,17 +35,21 @@ function App() {
         <header className="quan-ly-header">
           {allowedHeaderQuanLy.includes(location.pathname) &&
             <div className="nhanSu"> 
-              <button onClick={() => {
+              <button
+                className={location.pathname == "/Employee" ? "page-chose" : ""}
+                onClick={() => {
                 navigate("/Employee", {
                   state : {
-                    position : 'nhanSu'
+                    position : 'Nhân sự'
                   }
                 })
               }}>Nhân viên</button>
-              <button onClick={() => {
+              <button
+                className={location.pathname == "/Room" ? "page-chose" : ""}
+                onClick={() => {
                 navigate("/Room", {
                   state : {
-                    position : 'nhanSu'
+                    position : 'Nhân sự'
                   }
                 })
               }}>Phòng</button>

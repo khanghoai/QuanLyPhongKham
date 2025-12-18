@@ -1,5 +1,7 @@
 package com.example.demo.Controller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,7 +39,7 @@ public class PatientController {
     }
 
     @PostMapping("/acceptAppointment")
-    public MedicalDTO acceptAppointment(@RequestBody AppointmentDTO appointmentDTO) {
+    public MedicalDTO acceptAppointment(@RequestBody AppointmentDTO appointmentDTO) throws IOException, InterruptedException {
         return patientService.acceptAppointment(appointmentDTO);
     }
 

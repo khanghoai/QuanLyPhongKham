@@ -18,11 +18,10 @@ export default function Room() {
   const EVENINGSHIFT = {start: {h: 19, m: 0} , end : {h: 22, m: 0}}
   const days = ["sun","mon","tue","wed","thu","fri","sat"];
 
-const today = new Date();
-console.log(days[today.getDay()]);
+
 
   useEffect(() => {
-    if(position != "nhanSu"){
+    if(position != "Nhân sự"){
       navigate("/");
     }
     else{
@@ -52,6 +51,16 @@ console.log(days[today.getDay()]);
   const choseRoom = (room) => {
     setRoomSelected(room);
     setFilterEmployees(room.employees);
+  }
+
+  const editCalendar = (emp) => {
+    navigate("/Calendar",{
+      state : {
+        position : "Nhân sự",
+        emp : emp,
+        fun : "update"
+      }
+    })
   }
 
   const getShiftNow = () => {
@@ -93,51 +102,46 @@ console.log(days[today.getDay()]);
       <div className="room-emp-container">
         <div className="room-emp-header">
           <h2 className="room-emp-title">Danh sách nhân viên</h2>
+          <div>
             <input
               className="room-emp-search-input"
               type="text"
               placeholder="Nhập tên cần tìm..."
               value={searchText}
               onChange={e => setSearchText(e.target.value)}
-              style={{
-                width: "100%",
-                padding: "8px",
-                marginBottom: "10px",
-                borderRadius: "4px",
-              }}
             />
             <button className="room-emp-search-btn" onClick={searchEmp}>
               Tìm kiếm
             </button>
+          </div>
         </div>
-
-      <div className="medicine-container">
-        <table className="medicine-table ">
-          <thead>
-            <tr>
-              <th>Tên nhân viên</th>
-              <th>Ca làm việc</th>
-              <th>Trạng thái</th>
-              <th>Chỉnh sửa</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filterEmployees?.map((emp) => (
-              <tr key={emp.employeeName}>
-                <td>{emp.employeeName}</td>
-                <td>{getShiftNow()}</td>
-                <td>{emp.employeeStatus}</td>
-                <td>
-                  <button className="medicine-edit-btn" onClick={() => handleEdit(med)}>
-                    Chỉnh sửa
-                  </button>
-                </td>
+        <div className="medicine-container">
+          <table className="medicine-table ">
+            <thead>
+              <tr>
+                <th className="calendar-name">Tên nhân viên</th>
+                <th>Ca làm việc</th>
+                <th>Trạng thái</th>
+                <th className="calendar-edit">Chỉnh sửa</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filterEmployees?.map((emp) => (
+                <tr key={emp.employeeName}>
+                  <td>{emp.employeeName}</td>
+                  <td>{getShiftNow()}</td>
+                  <td>{emp.employeeStatus}</td>
+                  <td>
+                    <button className="medicine-edit-btn" onClick={() => editCalendar(emp)}>
+                      Chỉnh sửa
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
     </div>
   );
 }

@@ -1,5 +1,7 @@
 package com.example.demo.DTO;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 public class MedicalDTO {
     private String patientName;
     private String patientSex;
@@ -7,7 +9,28 @@ public class MedicalDTO {
     private String diagnosis;
     private String treatment;
     private int medicalID;
+    private String disease;
+    private JsonNode possibleDiseases;
+    private JsonNode suggestMedicine;
 
+    public String getDisease() {
+        return disease;
+    }
+    public void setDisease(String disease) {
+        this.disease = disease;
+    }
+    public JsonNode getPossibleDiseases() {
+        return possibleDiseases;
+    }
+    public void setPossibleDiseases(JsonNode possibleDiseases) {
+        this.possibleDiseases = possibleDiseases;
+    }
+    public JsonNode getSuggestMedicine() {
+        return suggestMedicine;
+    }
+    public void setSuggestMedicine(JsonNode suggestMedicine) {
+        this.suggestMedicine = suggestMedicine;
+    }
     public int getMedicalID() {
         return medicalID;
     }

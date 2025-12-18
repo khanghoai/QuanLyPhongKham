@@ -43,7 +43,7 @@ export default function Employee() {
   const add = () => {
     navigate("/EmployeeDetail", {
       state : {
-        position : 'nhanSu',
+        position : 'Nhân sự',
         emp : null,
         fun : 'add'
         //fun chỉ có thể là add hoặc update. Nếu fun là update thì emp phải có giá trị
@@ -55,7 +55,7 @@ export default function Employee() {
   const edit = (employee) => {
     navigate("/EmployeeDetail", {
       state : {
-        position : 'nhanSu',
+        position : 'Nhân sự',
         emp : employee,
         fun : 'update'
         //fun chỉ có thể là add hoặc update. Nếu fun là update thì emp phải có giá trị
@@ -67,21 +67,18 @@ export default function Employee() {
     <div className="employee-container">
       <div className="employee-header">
         <h2 className="employee-title">Danh Sách Nhân Viên</h2>
-        <input
-          className="emp-search-input"
-          type="text"
-          placeholder="Nhập tên cần tìm..."
-          value={searchText}
-          onChange={e => setSearchText(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "8px",
-            marginBottom: "10px",
-            borderRadius: "4px",
-          }}/>
-        <button className="emp-search-btn" onClick={handleSearch}>
-          Tìm kiếm
-        </button>
+        <div>
+            <input
+              className="room-emp-search-input"
+              type="text"
+              placeholder="Nhập CCCD cần tìm..."
+              value={searchText}
+              onChange={e => setSearchText(e.target.value)}
+            />
+            <button className="room-emp-search-btn" onClick={handleSearch}>
+              Tìm kiếm
+            </button>
+          </div>
         <button className="add-employee-btn" onClick={add}>
           Thêm nhân viên
         </button>

@@ -19,7 +19,10 @@ export default function Doctor() {
     patientSex : "",
     patientAge : "",
     diagnosis : "",
-    treatment : ""
+    disease : "",
+    treatment : "",
+    possibleDiseases : [],
+    suggestMedicine : []
   })
 
   useEffect(() => {
@@ -37,7 +40,6 @@ export default function Doctor() {
         setAppointment(appointment);
         setHaveAppointment(true);
       });
-      
     });
     
     return () => {
@@ -51,6 +53,7 @@ export default function Doctor() {
 
   const acceptAppointment = async () => {
     const res = await postData(ACCEPT_APPOINTMENT,appointment);
+    console.log(res);
     setMedical(res);
     setHaveAppointment(false);
   }
@@ -66,55 +69,62 @@ export default function Doctor() {
       patientSex : "",
       patientAge : "",
       diagnosis : "",
-      treatment : ""
+      disease : "",
+      treatment : "",
+      possibleDiseases : [],
+      suggestMedicine : []
     })
     setIsSubmitForm(false);
   }
 
   return (
     <div className="medical-container">
-      <form className="medical-form">
-        <div className="medical-form-group">
-          <label className="medical-lable">Họ Tên</label>
-          <input
-            className="medical-input"
-            type="text"
-            name="patientName"
-            value={medical.patientName}
-            onChange={handleChange}
-            disabled
-          />
-        </div>
-        <div className="medical-form-group">
-          <label className="medical-lable">Giới tính</label>
-          <input
-            className="medical-input"
-            type="text"
-            name="patientSex"
-            value={medical.patientSex}
-            onChange={handleChange}
-            disabled
-          />
-        </div>
-        <div className="medical-form-group">
-          <label className="medical-lable">Tuổi</label>
-          <input
-            className="medical-input"
-            type="text"
-            name="patientAge"
-            value={medical.patientAge}
-            onChange={handleChange}
-            disabled
-          />
-        </div>
+      <div className="medical-content">
+        <form className="medical-form">
           <div className="medical-form-group">
-            <label className="medical-lable">Bệnh</label>
+            <label className="medical-lable">Họ Tên</label>
             <input
               className="medical-input"
               type="text"
+              name="patientName"
+              value={medical.patientName}
+              onChange={handleChange}
+              disabled
+            />
+          </div>
+          <div className="medical-patient-info">
+            <div className="medical-form-group">
+              <label className="medical-lable">Giới tính</label>
+              <input
+                className="medical-input medical-sex"
+                type="text"
+                name="patientSex"
+                value={medical.patientSex}
+                onChange={handleChange}
+                disabled
+              />
+            </div>
+            <div className="medical-form-group">
+              <label className="medical-lable">Tuổi</label>
+              <input
+                className="medical-input medical-age"
+                type="text"
+                name="patientAge"
+                value={medical.patientAge}
+                onChange={handleChange}
+                disabled
+              />
+            </div>
+          </div>
+          <div className="medical-form-group">
+            <label className="medical-lable">Bệnh</label>
+            <textarea
+              className="medical-input"
               name="diagnosis"
               value={medical.diagnosis}
               onChange={handleChange}
+              rows={4}
+              style={{ resize: "vertical" }}
             />
           </div>
           <div className="medical-form-group">
@@ -129,7 +139,22 @@ export default function Doctor() {
             />
           </div>
           <button type="button" onClick={updateMedical} disabled= {medical.patientName == ""}>Cập nhật</button>
-      </form>
+        </form>
+        {medical.disease != "" &&
+          <div className="suggest-medical">
+            <h2>Triệu chứng</h2>
+            <p>{medical.disease}</p>
+            <h2>Đề xuất bệnh</h2>
+            {medical.possibleDiseases.map(dis => (
+              <p>{dis}</p>
+            ))}
+            <h2>Đề xuất thuốc điều trị</h2>
+            {medical.suggestMedicine.map((med) => (
+              <p>{med}</p>
+            ))}
+          </div>
+        }
+      </div>
       {haveAppointment &&
         <div className="appointment-popup">
           <p>Có lịch hẹn</p>

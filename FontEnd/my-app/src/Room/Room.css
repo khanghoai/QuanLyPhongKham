@@ -77,6 +77,14 @@
   box-shadow: 0 0 6px rgba(66, 165, 245, 0.4);
 }
 
+.calendar-edit{
+  width: 150px;
+}
+
+.calendar-name{
+  width: 300px;
+}
+
 .room-emp-search-btn {
   padding: 10px 16px;
   background: #0288d1;

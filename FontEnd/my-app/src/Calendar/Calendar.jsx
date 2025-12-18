@@ -94,9 +94,9 @@ export default function Calendar() {
 
   const exit = (e) => {
     e.preventDefault();
-    navigate("/Employee",{
+    navigate("/Room",{
       state : {
-        position : 'nhanSu',
+        position : 'Nhân sự',
       }
     })
   }

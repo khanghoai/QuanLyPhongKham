@@ -8,6 +8,7 @@ import "./Login.css";
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [wrong, setWrong] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -26,7 +27,7 @@ export default function Login() {
           }});
         break;
       case 'Nhân sự':
-        navigate("/Employee", {
+        navigate("/Room", {
           state : {
             position : 'Nhân sự',
             cccd : res.employeeCCCD,
@@ -66,10 +67,14 @@ export default function Login() {
         })
         break;
       default :
-        alert("Sai tài khoản hoặc mật khẩu");
+        setWrong(true);
         break;
     }
   };
+
+  const wrongComfirm = () => {
+    setWrong(false);
+  }
 
   return (
     <div className="login-wrapper">
@@ -84,7 +89,6 @@ export default function Login() {
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
-
           <div className="login-form-group">
             <label className="login-lable" htmlFor="password">Mật khẩu</label>
             <input
@@ -99,7 +103,17 @@ export default function Login() {
           </button>
         </form>
       </div>
+      {wrong &&
+        <div className="notify-container">
+          <div className="notify">
+            <p>Tài khoản hoặc mật khẩu sai</p>
+            <div className="button-group">
+              <button className="button" onClick={wrongComfirm}>Xác nhận</button>
+            </div>
+          </div>
+        </div>
+      }
+      
     </div>
-    
   );
 }

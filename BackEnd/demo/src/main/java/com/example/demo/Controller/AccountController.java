@@ -34,7 +34,6 @@ public class AccountController {
         return accountService.logout(cccd);
     }
     
-
     @GetMapping("/getEmployees")
     public List<EmployeeDTO> getEmployees() {
         return accountService.getEmployees();
@@ -56,7 +55,7 @@ public class AccountController {
     }
 
     @PostMapping("/getDoctorEmployee")
-    public DoctorDTO getDoctorEmployee(@RequestBody String disease) throws IOException, InterruptedException {
+    public List<DoctorDTO> getDoctorEmployee(@RequestBody String disease) throws IOException, InterruptedException {
         return accountService.getDoctorEmployee(disease);
     }
 

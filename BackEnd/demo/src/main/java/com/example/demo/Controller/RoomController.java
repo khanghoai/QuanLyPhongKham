@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.DTO.AddRoomDTO;
+import com.example.demo.DTO.CalendarDTO;
 import com.example.demo.DTO.RoomDTO;
 import com.example.demo.Entity.Calendar;
 import com.example.demo.Entity.Employee;
@@ -40,7 +41,7 @@ public class RoomController {
     }
 
     @PostMapping("/getCalendarByEmployee")
-    public List<Calendar> getCalendarByEmployee(@RequestBody Employee employee) {
+    public List<CalendarDTO> getCalendarByEmployee(@RequestBody Employee employee) {
         return roomService.getCalendars(employee);
     }
 }

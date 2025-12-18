@@ -11,13 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.DTO.AddRoomDTO;
+import com.example.demo.DTO.CalendarDTO;
 import com.example.demo.DTO.RoomDTO;
 import com.example.demo.DTO.RoomEmployeeDTO;
-import com.example.demo.Entity.Account;
 import com.example.demo.Entity.Calendar;
 import com.example.demo.Entity.Disease;
 import com.example.demo.Entity.Employee;
-import com.example.demo.Entity.Login;
 import com.example.demo.Entity.Room;
 import com.example.demo.Repository.CalendarRepository;
 import com.example.demo.Repository.DiseaseRepository;
@@ -79,13 +78,9 @@ public class RoomService {
                 for (Employee employee : room.getEmployees()){
                     if(checkCalendar(employee)){
                         RoomEmployeeDTO roomEmployeeDTO = new RoomEmployeeDTO();
+                        roomEmployeeDTO.setEmployeeID(employee.getEmployeeID());
                         roomEmployeeDTO.setEmployeeName(employee.getEmployeeName());
-                        if(checkLogin(employee.getAccount())){
-                            roomEmployeeDTO.setEmployeeStatus("present");
-                        }
-                        else{
-                            roomEmployeeDTO.setEmployeeStatus("absent");
-                        }
+                        roomEmployeeDTO.setEmployeeStatus(employee.getEmployeeStatus());
                         roomEmployeeDTOs.add(roomEmployeeDTO);
                     }
                 }
@@ -95,19 +90,18 @@ public class RoomService {
         }
         return roomDTOs;
     }
-    
 
-    private boolean checkLogin(Account account){
-        List<Login> logins =  account.getLogins();
-        if(!logins.isEmpty()){
-            Login lastLogin = logins.get(logins.size()-1);
-            if(lastLogin.getTimeLogout() == null){
-                return true;
-            }
-            return false;
-        }
-        return false;
-    }
+    // private boolean checkLogin(Account account){
+    //     List<Login> logins =  account.getLogins();
+    //     if(!logins.isEmpty()){
+    //         Login lastLogin = logins.get(logins.size()-1);
+    //         if(lastLogin.getTimeLogout() == null){
+    //             return true;
+    //         }
+    //         return false;
+    //     }
+    //     return false;
+    // }
 
     private boolean checkCalendar(Employee employee){
         Date now = new Date();
@@ -130,7 +124,7 @@ public class RoomService {
 
     private String getShiftNow(){
         LocalTime now = LocalTime.now();
-        LocalTime morningShiftStart = LocalTime.of(8, 0);
+        LocalTime morningShiftStart = LocalTime.of(6, 0);
         LocalTime morningShiftEnd = LocalTime.of(11, 0);
         LocalTime noonShiftStart = LocalTime.of(14, 0);
         LocalTime noonShiftEnd = LocalTime.of(17, 0);
@@ -158,7 +152,18 @@ public class RoomService {
         return new Calendar();
     }
 
-    public List<Calendar> getCalendars(Employee employee){
-        return calendarRepository.findByEmployee(employee);
+    public List<CalendarDTO> getCalendars(Employee employee){
+        Employee emp = employeeRepository.findById(employee.getEmployeeID()).get();
+        List<Calendar> calendars = calendarRepository.findByEmployee(emp);
+        List<CalendarDTO> calendarDTOs = new ArrayList<>();
+        for (Calendar calendar : calendars) {
+            CalendarDTO calendarDTO = new CalendarDTO();
+            calendarDTO.setShift(calendar.getShift());
+            calendarDTO.setDay(calendar.getDay());
+            calendarDTO.setEmployeeName(emp.getEmployeeName());
+            calendarDTO.setRoomName(emp.getRoom().getRoomName());
+            calendarDTOs.add(calendarDTO);
+        }
+        return calendarDTOs;
     }
 }

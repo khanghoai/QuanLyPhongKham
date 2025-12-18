@@ -17,4 +17,6 @@ public interface EmployeeRepository extends JpaRepository<Employee,Integer> {
 
     Employee findByEmployeeCCCD(String employeeCCCD);
 
+    List<Employee> findByEmployeePositionAndEmployeeQuit(String employeePosition, boolean employeeQuit);
+
 }   
