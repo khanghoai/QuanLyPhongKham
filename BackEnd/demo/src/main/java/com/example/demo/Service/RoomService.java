@@ -79,7 +79,12 @@ public class RoomService {
                     RoomEmployeeDTO roomEmployeeDTO = new RoomEmployeeDTO();
                     roomEmployeeDTO.setEmployeeID(employee.getEmployeeID());
                     roomEmployeeDTO.setEmployeeName(employee.getEmployeeName());
-                    roomEmployeeDTO.setEmployeeStatus(employee.getEmployeeStatus());
+                    if(checkCalendar(employee)){
+                        roomEmployeeDTO.setEmployeeStatus(employee.getEmployeeStatus());
+                    }
+                    else{
+                        roomEmployeeDTO.setEmployeeStatus("Không có");
+                    }
                     roomEmployeeDTOs.add(roomEmployeeDTO);
                 }
                 roomDTO.setEmployees(roomEmployeeDTOs);
@@ -110,12 +115,12 @@ public class RoomService {
 
     private String getShiftNow(){
         LocalTime now = LocalTime.now();
-        LocalTime morningShiftStart = LocalTime.of(6, 0);
-        LocalTime morningShiftEnd = LocalTime.of(11, 0);
+        LocalTime morningShiftStart = LocalTime.of(5, 0);
+        LocalTime morningShiftEnd = LocalTime.of(10, 0);
         LocalTime noonShiftStart = LocalTime.of(14, 0);
-        LocalTime noonShiftEnd = LocalTime.of(17, 0);
-        LocalTime eveningShiftStart = LocalTime.of(19, 0);
-        LocalTime eveningShiftEnd = LocalTime.of(24, 0);
+        LocalTime noonShiftEnd = LocalTime.of(16, 0);
+        LocalTime eveningShiftStart = LocalTime.of(18, 0);
+        LocalTime eveningShiftEnd = LocalTime.of(21, 0);
         if(now.isAfter(morningShiftStart) && now.isBefore(morningShiftEnd)){
             return "0";
         }

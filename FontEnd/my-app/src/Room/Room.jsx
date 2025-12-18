@@ -72,7 +72,7 @@ export default function Room() {
     else if(checkShift(EVENINGSHIFT)){
       return "Tối"
     }
-    return "3"
+    return "Không có"
   }
 
   const checkShift = (shift) => {
