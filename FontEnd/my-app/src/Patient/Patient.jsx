@@ -28,6 +28,7 @@ export default function Patient() {
     roomName : "",
     employeeCCCD : ""
   });
+  const [isAddPatient, setIsAddPatient] = useState(false);
 
   useEffect(() => {
     if(position != "Lễ tân"){
@@ -54,7 +55,9 @@ export default function Patient() {
       setDoctors([])
     }
     else{
-      alert("Không tìm thấy bệnh nhân")
+      alert("Không tìm thấy bệnh nhân, Thêm bệnh nhân")
+      setIsAddPatient(true);
+      setPatient({ ...patient, patientCCCD : searchText });
     }
   };
 
@@ -73,7 +76,7 @@ export default function Patient() {
 
   const addPatient = async () => {
     const res = await postData(ADD_PATIENT,patient)
-    console.log(res);
+    setIsAddPatient(false);
   }
 
   const addAppointment = async (doctor) => {
@@ -160,9 +163,12 @@ export default function Patient() {
                 onChange={handleChange}
               />
             </div>
-            <button type="button" className="add-patient-button" onClick={addPatient}>
-              Thêm
-            </button>
+            {isAddPatient && 
+              <button type="button" className="add-patient-button" onClick={addPatient}>
+                Thêm
+              </button>
+            }
+            
           </form>
         </div>
         <div className="appointment-container">

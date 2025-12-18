@@ -22,5 +22,4 @@ public class BillController {
     public List<BillDetail> getBillDetails(@RequestBody String cccd) {
         return billService.getBillDetails(cccd);
     }
-
 }

@@ -1,10 +1,18 @@
 package com.example.demo.DTO;
 
 public class CalendarDTO {
+    private int calendarID;
     private String shift;
     private String day;
     private String employeeName;
     private String roomName;
+    
+    public int getCalendarID() {
+        return calendarID;
+    }
+    public void setCalendarID(int calendarID) {
+        this.calendarID = calendarID;
+    }
     public String getShift() {
         return shift;
     }

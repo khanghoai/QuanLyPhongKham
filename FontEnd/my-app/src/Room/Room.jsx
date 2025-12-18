@@ -27,7 +27,6 @@ export default function Room() {
     else{
       const fun = async () =>{
         const res = await getData(GET_ROOMS);
-        console.log(res);
         setRooms(res);
         choseRoom(res[0])
       }
@@ -73,7 +72,7 @@ export default function Room() {
     else if(checkShift(EVENINGSHIFT)){
       return "Tối"
     }
-    return "3"
+    return "Không có"
   }
 
   const checkShift = (shift) => {
